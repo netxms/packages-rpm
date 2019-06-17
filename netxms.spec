@@ -13,6 +13,12 @@ BuildRequires:	libvirt-devel lm_sensors-devel mosquitto-devel openldap-devel ope
 BuildRequires:	readline-devel systemd-devel xen-devel zeromq-devel zlib-devel
 BuildRequires:	postgresql-devel sqlite-devel unixODBC-devel
 
+%if 0%{?suse_version} >= 1210
+BuildRequires: systemd-rpm-macros
+
+%{?systemd_requires}
+%endif
+
 %description
 
 #%%define _unpackaged_files_terminate_build 0
@@ -27,6 +33,9 @@ BuildRequires:	postgresql-devel sqlite-devel unixODBC-devel
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -m 755 -d %{buildroot}%{_unitdir}
+install -m 644 -D contrib/startup/systemd/nxagentd.service %{buildroot}%{_unitdir}
+install -m 644 -D contrib/startup/systemd/netxmsd.service %{buildroot}%{_unitdir}
 
 %make_install
 
@@ -103,6 +112,20 @@ Summary: NetXMS Agent
 Requires: netxms-base = %{version} netxms-dbdrv-sqlite3 = %{version}
 
 %description agent
+ 
+%pre agent
+%if 0%{?suse_version}
+%service_add_pre nxagentd.service
+%endif
+
+%post agent
+%service_add_post nxagentd.service
+
+%preun agent
+%service_del_preun nxagentd.service
+
+%postun agent
+%service_del_postun nxagentd.service
 
 %files agent
 %{_bindir}/nxagentd             
@@ -127,6 +150,7 @@ Requires: netxms-base = %{version} netxms-dbdrv-sqlite3 = %{version}
 %{_libdir}/netxms/sms.nsm
 %{_libdir}/netxms/ssh.nsm
 %{_libdir}/netxms/ups.nsm
+%{_unitdir}/nxagentd.service
 
 ### netxms-base
 %package base
@@ -198,9 +222,20 @@ Requires: netxms-base = %{version} netxms-dbdrv
 
 %description server
 
+%pre server
+%service_add_pre netxmsd.service
+
+%post server
+%service_add_post netxmsd.service
+
+%preun server
+%service_del_preun netxmsd.service
+
+%postun server
+%service_del_postun netxmsd.service
+
 %files server
 %{_bindir}/netxmsd                   
-%{_bindir}/nxminfo
 %{_bindir}/nxaction
 %{_bindir}/nxadm
 %{_bindir}/nxap
@@ -208,6 +243,7 @@ Requires: netxms-base = %{version} netxms-dbdrv
 %{_bindir}/nxdbmgr
 %{_bindir}/nxget
 %{_bindir}/nxmibc
+%{_bindir}/nxminfo
 %{_bindir}/nxscript
 %{_bindir}/nxsnmp*
 %{_bindir}/nxupload
@@ -223,6 +259,7 @@ Requires: netxms-base = %{version} netxms-dbdrv
 %{_libdir}/netxms/redmine.hdlink
 %{_libdir}/netxms/smsdrv/*
 %{_sharedstatedir}/netxms/*
+%{_unitdir}/netxmsd.service
 
 ############################
 
