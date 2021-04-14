@@ -241,6 +241,7 @@ Requires: netxms-base = %{version} netxms-dbdrv
 %{_bindir}/nxap
 %{_bindir}/nx-collect-server-diag
 %{_bindir}/nxdbmgr
+%{_bindir}/nxdownload
 %{_bindir}/nxget
 %{_bindir}/nxmibc
 %{_bindir}/nxminfo
