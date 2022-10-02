@@ -11,15 +11,36 @@ Source1:        netxms-server.service
 Source2:        netxms-agent.service
 Source3:        netxms-reporting.service
 
-BuildRequires: gcc-c++ expat-devel jansson-devel libcurl-devel libssh-devel
-BuildRequires: libvirt-devel lm_sensors-devel mosquitto-devel openldap-devel openssl-devel
-BuildRequires: readline-devel systemd-devel zeromq-devel zlib-devel pcre-devel
-BuildRequires: postgresql-devel sqlite-devel unixODBC-devel
-BuildRequires: mariadb-connector-c-devel oracle-instantclient19.10-devel java-latest-openjdk-headless maven
+BuildRequires: gcc-c++
+BuildRequires: make
+BuildRequires: maven
+BuildRequires: chrpath
+
+BuildRequires: expat-devel
+BuildRequires: jansson-devel
+BuildRequires: java-latest-openjdk-headless
+BuildRequires: libcurl-devel
+BuildRequires: libmicrohttpd-devel
+BuildRequires: libssh-devel
+BuildRequires: libvirt-devel
+BuildRequires: lm_sensors-devel
+BuildRequires: mosquitto-devel
+BuildRequires: openldap-devel
+BuildRequires: openssl-devel
+BuildRequires: pcre-devel
+BuildRequires: readline-devel
+BuildRequires: systemd-devel
+BuildRequires: zeromq-devel
+BuildRequires: zlib-devel
+
+BuildRequires: (oracle-instantclient-basic or oracle-instantclient19.10-devel)
+BuildRequires: mariadb-connector-c-devel
+BuildRequires: postgresql-devel
+BuildRequires: sqlite-devel
+BuildRequires: unixODBC-devel
+
 BuildRequires: jemalloc-devel = 5.3.0-%{release}_netxms
 BuildRequires: libosip2-devel = 5.3.0-%{release}_netxms libexosip2-devel = 5.3.0-%{release}_netxms
-BuildRequires: chrpath
-BuildRequires: libmicrohttpd-devel make
 
 %description
 
