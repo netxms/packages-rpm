@@ -33,7 +33,7 @@ BuildRequires: systemd-devel
 BuildRequires: zeromq-devel
 BuildRequires: zlib-devel
 
-BuildRequires: (oracle-instantclient-basic or oracle-instantclient19.10-devel)
+BuildRequires: (oracle-instantclient-devel or oracle-instantclient19.10-devel)
 BuildRequires: mariadb-connector-c-devel
 BuildRequires: postgresql-devel
 BuildRequires: sqlite-devel
@@ -48,7 +48,10 @@ BuildRequires: libosip2-devel = 5.3.0-%{release}_netxms libexosip2-devel = 5.3.0
 %setup -q
 
 %build
-export ORACLE_CPPFLAGS=-I/usr/include/oracle/19.10/client64 ORACLE_LDFLAGS=-L/usr/lib/oracle/19.10/client64/lib
+[ -r /usr/include/oracle/19.10/client64 ] && export ORACLE_CPPFLAGS=-I/usr/include/oracle/19.10/client64 ORACLE_LDFLAGS=-L/usr/lib/oracle/19.10/client64/lib
+[ -r /usr/include/oracle/19.16/client64 ] && export ORACLE_CPPFLAGS=-I/usr/include/oracle/19.16/client64 ORACLE_LDFLAGS=-L/usr/lib/oracle/19.16/client64/lib
+[ -r /usr/include/oracle/21/client64 ] && export ORACLE_CPPFLAGS=-I/usr/include/oracle/21/client64 ORACLE_LDFLAGS=-L/usr/lib/oracle/21/client64/lib
+
 %configure \
    --enable-release-build \
    --with-server \
