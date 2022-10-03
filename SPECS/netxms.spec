@@ -1,15 +1,21 @@
 # vim: ts=3 sw=3 expandtab
-Summary:        NetXMS meta package
-Name:           netxms
-Version:        4.2.355
-Release:        1%{?dist}
-License:        GPL
-URL:            https://netxms.org
-Group:          Admin
-Source0:        %{name}-%{version}.tar.gz
-Source1:        netxms-server.service
-Source2:        netxms-agent.service
-Source3:        netxms-reporting.service
+Summary:       NetXMS umbrella package
+Name:          netxms
+Version:       4.2.355
+Release:       1%{?dist}
+License:       GPL
+URL:           https://netxms.org
+Group:         Admin
+Source0:       %{name}-%{version}.tar.gz
+
+Source100:     netxms-server.service
+Source101:     netxms-agent.service
+Source102:     netxms-reporting.service
+
+Source200:     netxmsd.conf
+Source201:     nxagentd.conf
+
+Requires:      systemd
 
 BuildRequires: gcc-c++
 BuildRequires: make
@@ -84,9 +90,14 @@ rm -rf %{buildroot}
 %make_install
 
 install -m755 -d %{buildroot}%{_unitdir}
-install -m644 %{SOURCE1} %{buildroot}%{_unitdir}/netxms-server.service
-install -m644 %{SOURCE2} %{buildroot}%{_unitdir}/netxms-agent.service
-install -m644 %{SOURCE3} %{buildroot}%{_unitdir}/netxms-reporting.service
+install -m755 -d %{buildroot}%{_sysconfdir}
+
+install -m644 %{SOURCE100} %{buildroot}%{_unitdir}/netxms-server.service
+install -m644 %{SOURCE101} %{buildroot}%{_unitdir}/netxms-agent.service
+install -m644 %{SOURCE102} %{buildroot}%{_unitdir}/netxms-reporting.service
+
+install -p -m644 %{SOURCE200} %{buildroot}%{_sysconfdir}/netxmsd.conf
+install -p -m644 %{SOURCE201} %{buildroot}%{_sysconfdir}/nxagentd.conf
 
 rm -f %{buildroot}%{_libdir}/*.la
 
@@ -151,10 +162,11 @@ chrpath --delete %{buildroot}%{_libdir}/netxms/pdsdrv/*.pdsd
 
 ### netxms-base
 %package base
-Summary: xxx
+Summary: Common NetXMS libraries and tools
 
 %description base
-...
+This package provides various netxms libraries and tools which are
+shared between other packages.
 
 %files base
 %{_bindir}/nx-collect-server-diag
@@ -169,14 +181,17 @@ Summary: xxx
 
 ### netxms-agent
 %package agent
-Summary: xxx
+Summary: NetXMS agent and extensions (subagents)
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
 Requires(post): systemd
 
 %description agent
-...
+This package provides agent and agent-related diagnostic and integration tools.
+Most of the subagents which does not require additional dependences are included as well.
+
+%pre agent
 
 %post agent
 %systemd_post netxms-agent.service
@@ -188,6 +203,7 @@ Requires(post): systemd
 %systemd_postun netxms-agent.service
 
 %files agent
+%config(noreplace) %{_sysconfdir}/nxagentd.conf
 %{_bindir}/nxaevent
 %{_bindir}/nxagentd
 %{_bindir}/nxagentd-generate-tunnel-config
@@ -220,21 +236,22 @@ Requires(post): systemd
 
 ### netxms-agent-asterisk
 %package agent-asterisk
-Summary: xxx
+Summary: Agent extension (subagent) for monitoring Asterisk
 
 %description agent-asterisk
-...
+This package allows you to collect health metrics and statistics from Asterisk instance.
 
 %files agent-asterisk
-%{_libdir}/netxms/asterisk.nsm    
+%{_libdir}/netxms/asterisk.nsm
 
 
 ### netxms-java-base
 %package java-base
-Summary: xxx
+Summary: Common java libraries used by the NetXMS components
 
 %description java-base
-...
+This package provides java libraries which are shared by various components
+like netxms-reporting and java subagent (netxms-agent-java)
 
 %files java-base
 %{_libdir}/libnxjava.so.*
@@ -253,10 +270,10 @@ Summary: xxx
 
 ### netxms-agent-java
 %package agent-java
-Summary: xxx
+Summary: Agent extension (subagent) for running java-based monitoring providers
 
 %description agent-java
-...
+This pacakge provides bridge to java monitoring plugins like JMX or OPCUA.
 
 %files agent-java
 %{_libdir}/netxms/java.nsm
@@ -268,7 +285,7 @@ Summary: xxx
 
 ### netxms-agent-mysql
 #%package agent-mysql
-#Summary: xxx
+#Summary: ...
 #
 #%description agent-mysql
 #...
@@ -279,10 +296,10 @@ Summary: xxx
 
 ### netxms-agent-oracle
 %package agent-oracle
-Summary: xxx
+Summary: Agent extension (subagent) for monitoring Oracle databases
 
 %description agent-oracle
-...
+This package extends agent to collect health metrics and statistics from one of more Oracle instances.
 
 %files agent-oracle
 %{_libdir}/netxms/oracle.nsm
@@ -290,10 +307,10 @@ Summary: xxx
 
 ### netxms-agent-pgsql
 %package agent-pgsql
-Summary: xxx
+Summary: Agent extension (subagent) for monitoring PostgreSQL databases
 
 %description agent-pgsql
-...
+This package extends agent to collect health metrics and statistics from one of more PostgreSQL instances.
 
 %files agent-pgsql
 %{_libdir}/netxms/pgsql.nsm
@@ -301,10 +318,11 @@ Summary: xxx
 
 ### netxms-agent-mqtt
 %package agent-mqtt
-Summary: xxx
+Summary: Agent extension (subagents) for communicating wiht MQTT brokers
 
 %description agent-mqtt
-...
+This package extends agent to enable communications with MQTT brokers.
+You can both subscribe to topics and publish.
 
 %files agent-mqtt
 %{_libdir}/netxms/mqtt.nsm
@@ -312,10 +330,11 @@ Summary: xxx
 
 ### netxms-agent-vmgr
 %package agent-vmgr
-Summary: xxx
+Summary: Agent extension (subagents) for monitoring virtualization platforms
 
 %description agent-vmgr
-...
+This subagent use libvirt to communicate with any supported virtualization platform -
+KVM, Hypervisor.framework, QEMU, Xen, Virtuozzo, VMWare ESX, LXC, BHyve and more.
 
 %files agent-vmgr
 %{_libdir}/netxms/vmgr.nsm
@@ -323,10 +342,10 @@ Summary: xxx
 
 ### netxms-client
 %package client
-Summary: xxx
+Summary: Integration and diagnostics tools for the NetXMSX server.
 
 %description client
-...
+This package provides various integration tools (e.g. nxshell).
 
 %files client
 %{_bindir}/nxalarm
@@ -340,7 +359,7 @@ Summary: xxx
 
 ### netxms-server
 %package server
-Summary: xxx
+Summary: Monitoring server core
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
@@ -352,6 +371,25 @@ Requires(post): systemd
 %post server
 %systemd_post netxms-server.service
 
+if [ $1 -eq 1 ]; then
+   cat <<__END
+NetXMS server is installed but currently stopped.
+
+Additional steps required:
+
+1. Edit default configuration file (%{_sysconfdir}/netxmsd.conf)
+
+2. Create database schema:
+
+   nxdbmgr init
+
+3. Start daemon and enable autostart:
+
+   systemctl start netxms-server
+   systemctl enable netxms-server
+__END
+fi
+
 %preun server
 %systemd_preun netxms-server.service
 
@@ -359,6 +397,7 @@ Requires(post): systemd
 %systemd_postun netxms-server.service
 
 %files server
+%config(noreplace) %{_sysconfdir}/netxmsd.conf
 %{_bindir}/netxmsd
 %{_bindir}/nxaction
 %{_bindir}/nxadm
@@ -391,7 +430,7 @@ Requires(post): systemd
 
 ### netxms-dbdrv-sqlite3
 %package dbdrv-sqlite3
-Summary: xxx
+Summary: Middleware for interfacing with SQLite3 database engine
 
 %description dbdrv-sqlite3
 ...
@@ -402,7 +441,7 @@ Summary: xxx
 
 ### netxms-dbdrv-pgsql
 %package dbdrv-pgsql
-Summary: xxx
+Summary: Middleware for interfacing with PostgreSQL database engine
 
 %description dbdrv-pgsql
 ...
@@ -413,7 +452,7 @@ Summary: xxx
 
 ### netxms-dbdrv-mariadb
 #%package dbdrv-mariadb
-#Summary: xxx
+#Summary: ...
 #
 #%description dbdrv-mariadb
 #...
@@ -424,7 +463,7 @@ Summary: xxx
 
 ### netxms-dbdrv-odbc
 %package dbdrv-odbc
-Summary: xxx
+Summary: Middleware for interfacing with any compatible database engine via ODBC
 
 %description dbdrv-odbc
 ...
@@ -435,7 +474,7 @@ Summary: xxx
 
 ### netxms-dbdrv-oracle
 %package dbdrv-oracle
-Summary: xxx
+Summary: Middleware for interfacing with Oracle database engine
 
 %description dbdrv-oracle
 ...
@@ -446,7 +485,7 @@ Summary: xxx
 
 ### netxms-reporting
 %package reporting
-Summary: xxx
+Summary: JasperReports-based reporting server integrated into NetXMS
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
@@ -517,5 +556,5 @@ Requires(post): systemd
 %{_datadir}/netxms/radius.dict
 
 %changelog
-* Mon Oct 3 2022 Alex Kirhenshtein <alk@netxms.org>
+* Tue Oct 4 2022 Alex Kirhenshtein <alk@netxms.org>
 - Upstream updated to 4.2.355
