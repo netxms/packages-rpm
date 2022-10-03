@@ -144,7 +144,6 @@ chrpath --delete %{buildroot}%{_libdir}/netxms/pdsdrv/*.pdsd
 %exclude %{_libdir}/*.la
 %exclude %{_libdir}/*.so
 %exclude %{_libdir}/*.so
-%exclude %{_libdir}/libnxmb.so.*
 %exclude %{_libdir}/netxms/spe.nxm
 %exclude %{_datadir}/netxms/lsan-suppressions.txt
 
@@ -200,7 +199,6 @@ Requires(post): systemd
 %{_libdir}/libappagent.so.*
 %{_libdir}/libnxagent.so.*
 %{_libdir}/libnxlp.so.*
-%{_libdir}/netxms/lorawan.nsm
 %{_libdir}/netxms/bind9.nsm
 %{_libdir}/netxms/dbquery.nsm
 %{_libdir}/netxms/devemu.nsm
