@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:        NetXMS meta package
 Name:           netxms
-Version:        4.2.337
+Version:        4.2.355
 Release:        1%{?dist}
 License:        GPL
 URL:            https://netxms.org
@@ -519,5 +519,5 @@ Requires(post): systemd
 %{_datadir}/netxms/radius.dict
 
 %changelog
-* Wed Sep 28 2022 Alex Kirhenshtein <alk@netxms.org>
-- Upstream updated to 4.2.337
+* Mon Oct 3 2022 Alex Kirhenshtein <alk@netxms.org>
+- Upstream updated to 4.2.355
