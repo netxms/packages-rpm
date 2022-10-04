@@ -8,5 +8,5 @@ build_image:
 	docker build -t netxms-rpm-builder docker
 
 clean:
-	rm -f result/*
+	rm -rf result/*
 	docker image rm netxms-rpm-builder || true

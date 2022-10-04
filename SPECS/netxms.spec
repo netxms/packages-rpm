@@ -54,6 +54,11 @@ BuildRequires: libosip2-devel = 5.3.0-%{release}_netxms libexosip2-devel = 5.3.0
 %setup -q
 
 %build
+if [ -a /m2-repo ]; then
+   rm -rf /m2-repo/org/netxms
+   export MAVEN_OPTS='-Dmaven.repo.local=/m2-repo'
+fi
+
 [ -r /usr/include/oracle/19.10/client64 ] && export ORACLE_CPPFLAGS=-I/usr/include/oracle/19.10/client64 ORACLE_LDFLAGS=-L/usr/lib/oracle/19.10/client64/lib
 [ -r /usr/include/oracle/19.16/client64 ] && export ORACLE_CPPFLAGS=-I/usr/include/oracle/19.16/client64 ORACLE_LDFLAGS=-L/usr/lib/oracle/19.16/client64/lib
 [ -r /usr/include/oracle/21/client64 ] && export ORACLE_CPPFLAGS=-I/usr/include/oracle/21/client64 ORACLE_LDFLAGS=-L/usr/lib/oracle/21/client64/lib
@@ -86,6 +91,8 @@ BuildRequires: libosip2-devel = 5.3.0-%{release}_netxms libexosip2-devel = 5.3.0
 make %{?_smp_mflags}
 
 %install
+[ -a /m2-repo ] && export MAVEN_OPTS='-Dmaven.repo.local=/m2-repo'
+
 rm -rf %{buildroot}
 
 %make_install
@@ -99,6 +106,10 @@ install -m644 %{SOURCE102} %{buildroot}%{_unitdir}/netxms-reporting.service
 
 install -p -m644 %{SOURCE200} %{buildroot}%{_sysconfdir}/netxmsd.conf
 install -p -m644 %{SOURCE201} %{buildroot}%{_sysconfdir}/nxagentd.conf
+
+pushd %{buildroot}%{_libdir}/netxms
+   ln -s mysql.nsm mariadb.nsm
+popd
 
 #rm -f %{buildroot}%{_libdir}/*.la
 
@@ -288,17 +299,6 @@ This pacakge provides bridge to java monitoring plugins like JMX or OPCUA.
 %{_libdir}/netxms/java/opcua.jar
 
 
-### netxms-agent-mysql
-#%package agent-mysql
-#Summary: ...
-#
-#%description agent-mysql
-#...
-#
-#%files agent-mysql
-#%XXX{_libdir}/netxms/mysql.nsm
-
-
 ### netxms-agent-oracle
 %package agent-oracle
 Summary: Agent extension (subagent) for monitoring Oracle databases
@@ -310,15 +310,16 @@ This package extends agent to collect health metrics and statistics from one of 
 %files agent-oracle
 %{_libdir}/netxms/oracle.nsm
 
-### netxms-agent-mysql
-%package agent-mysql
+### netxms-agent-mariadb
+%package agent-mariadb
 Summary: Agent extension (subagent) for monitoring MySQL/MariaDB databases
-Requires: netxms-dbdrv-mysql = %{version}-%{release}
+Requires: netxms-dbdrv-mariadb = %{version}-%{release}
 
-%description agent-mysql
+%description agent-mariadb
 This package extends agent to collect health metrics and statistics from one of more MySQL/MariaDB instances.
 
-%files agent-mysql
+%files agent-mariadb
+%{_libdir}/netxms/mariadb.nsm
 %{_libdir}/netxms/mysql.nsm
 
 
@@ -384,6 +385,7 @@ Requires(preun): systemd
 Requires(postun): systemd
 Requires(post): systemd
 Requires: (netxms-dbdrv-pgsql = %{version}-%{release} or netxms-dbdrv-mariadb = %{version}-%{release} or netxms-dbdrv-oracle = %{version}-%{release} or netxms-dbdrv-sqlite3 = %{version}-%{release} or netxms-dbdrv-odbc = %{version}-%{release})
+Requires: netxms-agent = %{version}-%{release}
 
 %description server
 ...
@@ -418,6 +420,7 @@ fi
 
 %files server
 %config(noreplace) %{_sysconfdir}/netxmsd.conf
+
 %{_bindir}/netxmsd
 %{_bindir}/nxaction
 %{_bindir}/nxadm
@@ -444,13 +447,14 @@ fi
 %{_libdir}/libnxsrv.so.*
 %{_libdir}/libstrophe.so.*
 %{_libdir}/netxms/jira.hdlink
+%{_libdir}/netxms/leef.nxm
 %{_libdir}/netxms/ncdrv/anysms.ncd
 %{_libdir}/netxms/ncdrv/dbtable.ncd
 %{_libdir}/netxms/ncdrv/dummy.ncd
 %{_libdir}/netxms/ncdrv/googlechat.ncd
 %{_libdir}/netxms/ncdrv/gsm.ncd
 %{_libdir}/netxms/ncdrv/kannel.ncd
-#% {_libdir}/netxms/ncdrv/mqtt.ncd
+# % {_libdir}/netxms/ncdrv/mqtt.ncd
 %{_libdir}/netxms/ncdrv/msteams.ncd
 %{_libdir}/netxms/ncdrv/mymobile.ncd
 %{_libdir}/netxms/ncdrv/nexmo.ncd
@@ -554,7 +558,6 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 
 %files reporting
 %{_bindir}/nxreportd
-%{_libdir}/netxms/leef.nxm
 %{_libdir}/netxms/java/activation-*.jar
 %{_libdir}/netxms/java/bcprov-jdk15on-*.jar
 %{_libdir}/netxms/java/castor-core-*.jar
