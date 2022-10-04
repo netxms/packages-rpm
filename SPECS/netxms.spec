@@ -24,7 +24,7 @@ BuildRequires: chrpath
 
 BuildRequires: expat-devel
 BuildRequires: jansson-devel
-BuildRequires: java-latest-openjdk-headless
+BuildRequires: (java-17-openjdk-headless or java-11-openjdk-headless)
 BuildRequires: libcurl-devel
 BuildRequires: libmicrohttpd-devel
 BuildRequires: libssh-devel
@@ -71,6 +71,7 @@ BuildRequires: libosip2-devel = 5.3.0-%{release}_netxms libexosip2-devel = 5.3.0
    --without-gui-client \
    --with-vmgr \
    --with-libjq \
+   --with-mariadb \
    --with-mariadb-compat-headers \
    --with-zeromq \
    --with-oracle \
@@ -99,7 +100,7 @@ install -m644 %{SOURCE102} %{buildroot}%{_unitdir}/netxms-reporting.service
 install -p -m644 %{SOURCE200} %{buildroot}%{_sysconfdir}/netxmsd.conf
 install -p -m644 %{SOURCE201} %{buildroot}%{_sysconfdir}/nxagentd.conf
 
-rm -f %{buildroot}%{_libdir}/*.la
+#rm -f %{buildroot}%{_libdir}/*.la
 
 # remove rpath from binaries
 chrpath --delete %{buildroot}%{_bindir}/nddload
@@ -151,12 +152,13 @@ chrpath --delete %{buildroot}%{_libdir}/netxms/pdsdrv/*.pdsd
 %exclude %{_bindir}/nx-run-asan-binary
 %exclude %{_bindir}/nxdevcfg
 %exclude %{_bindir}/nxdevcfg
+%exclude %{_datadir}/netxms/lsan-suppressions.txt
 %exclude %{_includedir}/netxms-build-tag.h
 %exclude %{_libdir}/*.la
 %exclude %{_libdir}/*.so
 %exclude %{_libdir}/*.so
+%exclude %{_libdir}/netxms/ncdrv/mqtt.ncd
 %exclude %{_libdir}/netxms/spe.nxm
-%exclude %{_datadir}/netxms/lsan-suppressions.txt
 
 %doc
 
@@ -186,6 +188,7 @@ Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
 Requires(post): systemd
+Requires: netxms-dbdrv-sqlite3 = %{version}-%{release}
 
 %description agent
 This package provides agent and agent-related diagnostic and integration tools.
@@ -248,6 +251,7 @@ This package allows you to collect health metrics and statistics from Asterisk i
 ### netxms-java-base
 %package java-base
 Summary: Common java libraries used by the NetXMS components
+Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 
 %description java-base
 This package provides java libraries which are shared by various components
@@ -271,6 +275,7 @@ like netxms-reporting and java subagent (netxms-agent-java)
 ### netxms-agent-java
 %package agent-java
 Summary: Agent extension (subagent) for running java-based monitoring providers
+Requires: netxms-java-base = %{version}-%{release}
 
 %description agent-java
 This pacakge provides bridge to java monitoring plugins like JMX or OPCUA.
@@ -297,6 +302,7 @@ This pacakge provides bridge to java monitoring plugins like JMX or OPCUA.
 ### netxms-agent-oracle
 %package agent-oracle
 Summary: Agent extension (subagent) for monitoring Oracle databases
+Requires: netxms-dbdrv-oracle = %{version}-%{release}
 
 %description agent-oracle
 This package extends agent to collect health metrics and statistics from one of more Oracle instances.
@@ -304,10 +310,22 @@ This package extends agent to collect health metrics and statistics from one of 
 %files agent-oracle
 %{_libdir}/netxms/oracle.nsm
 
+### netxms-agent-mysql
+%package agent-mysql
+Summary: Agent extension (subagent) for monitoring MySQL/MariaDB databases
+Requires: netxms-dbdrv-mysql = %{version}-%{release}
+
+%description agent-mysql
+This package extends agent to collect health metrics and statistics from one of more MySQL/MariaDB instances.
+
+%files agent-mysql
+%{_libdir}/netxms/mysql.nsm
+
 
 ### netxms-agent-pgsql
 %package agent-pgsql
 Summary: Agent extension (subagent) for monitoring PostgreSQL databases
+Requires: netxms-dbdrv-pgsql = %{version}-%{release}
 
 %description agent-pgsql
 This package extends agent to collect health metrics and statistics from one of more PostgreSQL instances.
@@ -343,6 +361,7 @@ KVM, Hypervisor.framework, QEMU, Xen, Virtuozzo, VMWare ESX, LXC, BHyve and more
 ### netxms-client
 %package client
 Summary: Integration and diagnostics tools for the NetXMSX server.
+Requires: netxms-java-base = %{version}-%{release}
 
 %description client
 This package provides various integration tools (e.g. nxshell).
@@ -364,6 +383,7 @@ Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
 Requires(post): systemd
+Requires: (netxms-dbdrv-pgsql = %{version}-%{release} or netxms-dbdrv-mariadb = %{version}-%{release} or netxms-dbdrv-oracle = %{version}-%{release} or netxms-dbdrv-sqlite3 = %{version}-%{release} or netxms-dbdrv-odbc = %{version}-%{release})
 
 %description server
 ...
@@ -412,6 +432,11 @@ fi
 %{_bindir}/nxsnmp*
 %{_bindir}/nxupload
 %{_bindir}/nxwsget
+%{_datadir}/netxms/mibs/*.txt
+%{_datadir}/netxms/oui/*.csv
+%{_datadir}/netxms/radius.dict
+%{_datadir}/netxms/sql/*.sql
+%{_datadir}/netxms/templates/*.xml
 %{_libdir}/libethernetip.so.*
 %{_libdir}/libnxcore.so.*
 %{_libdir}/libnxdbmgr.so.*
@@ -419,7 +444,29 @@ fi
 %{_libdir}/libnxsrv.so.*
 %{_libdir}/libstrophe.so.*
 %{_libdir}/netxms/jira.hdlink
-%{_libdir}/netxms/ncdrv/*
+%{_libdir}/netxms/ncdrv/anysms.ncd
+%{_libdir}/netxms/ncdrv/dbtable.ncd
+%{_libdir}/netxms/ncdrv/dummy.ncd
+%{_libdir}/netxms/ncdrv/googlechat.ncd
+%{_libdir}/netxms/ncdrv/gsm.ncd
+%{_libdir}/netxms/ncdrv/kannel.ncd
+#% {_libdir}/netxms/ncdrv/mqtt.ncd
+%{_libdir}/netxms/ncdrv/msteams.ncd
+%{_libdir}/netxms/ncdrv/mymobile.ncd
+%{_libdir}/netxms/ncdrv/nexmo.ncd
+%{_libdir}/netxms/ncdrv/nxagent.ncd
+%{_libdir}/netxms/ncdrv/portech.ncd
+%{_libdir}/netxms/ncdrv/shell.ncd
+%{_libdir}/netxms/ncdrv/slack.ncd
+%{_libdir}/netxms/ncdrv/smseagle.ncd
+%{_libdir}/netxms/ncdrv/smtp.ncd
+%{_libdir}/netxms/ncdrv/snmptrap.ncd
+%{_libdir}/netxms/ncdrv/telegram.ncd
+%{_libdir}/netxms/ncdrv/text2reach.ncd
+%{_libdir}/netxms/ncdrv/textfile.ncd
+%{_libdir}/netxms/ncdrv/twilio.ncd
+%{_libdir}/netxms/ncdrv/websms.ncd
+%{_libdir}/netxms/ncdrv/xmpp.ncd
 %{_libdir}/netxms/ndd/*
 %{_libdir}/netxms/ntcb.nxm
 %{_libdir}/netxms/pdsdrv/*
@@ -450,15 +497,15 @@ Summary: Middleware for interfacing with PostgreSQL database engine
 %{_libdir}/netxms/dbdrv/pgsql.ddr
 
 
-### netxms-dbdrv-mariadb
-#%package dbdrv-mariadb
-#Summary: ...
-#
-#%description dbdrv-mariadb
-#...
-#
-#%files dbdrv-mariadb
-#%XXX{_libdir}/netxms/dbdrv/mariadb.ddr
+## netxms-dbdrv-mariadb
+%package dbdrv-mariadb
+Summary: ...
+
+%description dbdrv-mariadb
+...
+
+%files dbdrv-mariadb
+%{_libdir}/netxms/dbdrv/mariadb.ddr
 
 
 ### netxms-dbdrv-odbc
@@ -475,6 +522,7 @@ Summary: Middleware for interfacing with any compatible database engine via ODBC
 ### netxms-dbdrv-oracle
 %package dbdrv-oracle
 Summary: Middleware for interfacing with Oracle database engine
+Requires: (oracle-instantclient-basic or oracle-instantclient-basiclite or oracle-instantclient19.10-basic or oracle-instantclient19.10-basiclite)
 
 %description dbdrv-oracle
 ...
@@ -490,6 +538,7 @@ Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
 Requires(post): systemd
+Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 
 %description reporting
 ...
@@ -549,12 +598,7 @@ Requires(post): systemd
 %{_libdir}/netxms/java/xercesImpl-*.jar
 %{_libdir}/netxms/java/xml-apis-*.jar
 %{_unitdir}/netxms-reporting.service
-%{_datadir}/netxms/mibs/*.txt
-%{_datadir}/netxms/oui/*.csv
-%{_datadir}/netxms/sql/*.sql
-%{_datadir}/netxms/templates/*.xml
-%{_datadir}/netxms/radius.dict
 
 %changelog
-* Tue Oct 4 2022 Alex Kirhenshtein <alk@netxms.org>
+* Tue Oct 04 2022 Alex Kirhenshtein <alk@netxms.org> - 4.2.355-1
 - Upstream updated to 4.2.355
