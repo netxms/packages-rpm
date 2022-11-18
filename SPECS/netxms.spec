@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.2.432
+Version:       4.2.433
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -603,5 +603,8 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Fri Nov 18 2022 Alex Kirhenshtein <alk@netxms.org> - 4.2.433-1
+- Upstream updated to 4.2.433
+
 * Tue Oct 04 2022 Alex Kirhenshtein <alk@netxms.org> - 4.2.355-1
 - Upstream updated to 4.2.355
