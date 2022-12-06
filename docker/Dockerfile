@@ -5,7 +5,7 @@ RUN dnf install -y mock
 #RUN dnf config-manager --set-enabled powertools
 
 VOLUME /build
-VOLUME /result
+VOLUME /dist
 
 COPY build.sh /
 WORKDIR /build
