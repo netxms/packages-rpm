@@ -233,7 +233,6 @@ Most of the subagents which does not require additional dependences are included
 %{_libdir}/netxms/dbquery.nsm
 %{_libdir}/netxms/devemu.nsm
 %{_libdir}/netxms/ds18x20.nsm
-%{_libdir}/netxms/ecs.nsm
 %{_libdir}/netxms/filemgr.nsm
 %{_libdir}/netxms/gps.nsm
 %{_libdir}/netxms/linux.nsm
@@ -241,7 +240,6 @@ Most of the subagents which does not require additional dependences are included
 %{_libdir}/netxms/logwatch.nsm
 %{_libdir}/netxms/netsvc.nsm
 %{_libdir}/netxms/ping.nsm
-%{_libdir}/netxms/portcheck.nsm
 %{_libdir}/netxms/sms.nsm
 %{_libdir}/netxms/ssh.nsm
 %{_libdir}/netxms/ups.nsm
