@@ -1,7 +1,7 @@
 ---
 kind: pipeline
 type: docker
-name: amd64
+name: build-amd64
 
 platform:
   arch: amd64
@@ -34,7 +34,7 @@ steps:
 ---
 kind: pipeline
 type: docker
-name: arm64
+name: build-arm64
 
 platform:
   arch: arm64
@@ -67,10 +67,10 @@ steps:
 
 ---
 kind: pipeline
-name: notify
+name: notify after
 type: docker
 steps:
-  - name: send telegram notification
+  - name: notify
     image: appleboy/drone-telegram
     settings:
       token:
@@ -78,12 +78,11 @@ steps:
       to:
         from_secret: telegram_channel_id
       disable_web_page_preview: true
-    depends_on:
-      - amd64
-      - arm64
+
+depends_on:
+  - build-amd64
+  - build-arm64
 
 ---
 kind: signature
 hmac: b7c067166256641d5fdf6e3f849538685dddf71802de517ba3578e5ea9b46412
-
-...
