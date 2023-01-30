@@ -64,8 +64,26 @@ steps:
       source: /drone/src/result/*.rpm
       target: /staging/rpm
       delete: true
+
+---
+kind: pipeline
+name: notify
+type: docker
+steps:
+  - name: send telegram notification
+    image: appleboy/drone-telegram
+    settings:
+      token:
+        from_secret: telegram_bot_token
+      to:
+        from_secret: telegram_channel_id
+      disable_web_page_preview: true
+    depends_on:
+      - amd64
+      - arm64
+
 ---
 kind: signature
-hmac: 1e003c2a416f3f94b774f95b4b5cb1e7f397b3dc670103731d8858e27e9593cf
+hmac: b7c067166256641d5fdf6e3f849538685dddf71802de517ba3578e5ea9b46412
 
 ...
