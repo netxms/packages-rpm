@@ -1,4 +1,4 @@
-FROM rockylinux:9.0
+FROM rockylinux:9.1
 
 RUN dnf -y install epel-release dnf-plugins-core
 RUN dnf install -y mock
