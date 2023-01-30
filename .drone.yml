@@ -1,0 +1,71 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+platform:
+  arch: amd64
+
+steps:
+  - name: make dist
+    image: ghcr.io/alkk/netxms-make-dist:latest
+    commands:
+      - V=$(fgrep 'Version:' SPECS/netxms.spec|cut -d':' -f2|tr -d [:space:])
+      - "[ -z $V ] && echo Cannot detect release, check spec file && exit 1"
+      - /build.sh release-$V
+      - cp netxms/netxms-$V.tar.gz SOURCES/
+  - name: build
+    image: ghcr.io/netxms/rpm-builder:latest
+    privileged: true
+    commands:
+      - /build.sh
+      - mkdir -p /drone/src/result
+      - cp /var/lib/mock/rocky+epel-*-aarch64/result/*.rpm /drone/src/result/
+  - name: copy resulting rpm files to staging area
+    image: ghcr.io/alkk/drone-rsync:latest
+    settings:
+      hosts: ["10.3.0.15"]
+      user: rpm-staging
+      key:
+        from_secret: deploy_key
+      source: /drone/src/result/*.rpm
+      target: /staging/rpm
+      delete: true
+---
+kind: pipeline
+type: docker
+name: default
+
+platform:
+  arch: arm64
+
+steps:
+  - name: make dist
+    image: ghcr.io/alkk/netxms-make-dist:latest
+    commands:
+      - V=$(fgrep 'Version:' SPECS/netxms.spec|cut -d':' -f2|tr -d [:space:])
+      - "[ -z $V ] && echo Cannot detect release, check spec file && exit 1"
+      - /build.sh release-$V
+      - cp netxms/netxms-$V.tar.gz SOURCES/
+  - name: build
+    image: ghcr.io/netxms/rpm-builder:latest
+    privileged: true
+    commands:
+      - /build.sh
+      - mkdir -p /drone/src/result
+      - cp /var/lib/mock/rocky+epel-*-aarch64/result/*.rpm /drone/src/result/
+  - name: copy resulting rpm files to staging area
+    image: ghcr.io/alkk/drone-rsync:latest
+    settings:
+      hosts: ["10.3.0.15"]
+      user: rpm-staging
+      key:
+        from_secret: deploy_key
+      source: /drone/src/result/*.rpm
+      target: /staging/rpm
+      delete: true
+---
+kind: signature
+hmac: 1e003c2a416f3f94b774f95b4b5cb1e7f397b3dc670103731d8858e27e9593cf
+
+...
