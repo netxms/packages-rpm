@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.2.461
+Version:       4.3.0
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -83,10 +83,13 @@ fi
    --with-jemalloc \
    --with-asterisk
 
-./build/build_java_components.sh -skip-nxmc-build -no-revert-version
-
 #sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 #sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
+
+cp build/netxms-build-tag.properties src/java-common/netxms-base/src/main/resources/
+mvn -f src/pom.xml versions:set -DnewVersion=$(grep NETXMS_VERSION= build/netxms-build-tag.properties | cut -d = -f 2) -DprocessAllModules=true
+mvn -f src/client/nxmc/java/pom.xml versions:set -DnewVersion=$(grep NETXMS_VERSION= build/netxms-build-tag.properties | cut -d = -f 2)
+mvn -f src/pom.xml install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
 
 make %{?_smp_mflags}
 
