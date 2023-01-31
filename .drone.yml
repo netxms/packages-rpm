@@ -21,7 +21,7 @@ steps:
       - /build.sh
       - mkdir -p /drone/src/result
       - cp /var/lib/mock/rocky+epel-*-aarch64/result/*.rpm /drone/src/result/
-  - name: copy resulting rpm files to staging area
+  - name: uplaod RPMs to staging
     image: ghcr.io/alkk/drone-rsync:latest
     settings:
       hosts: ["10.3.0.15"]
@@ -54,7 +54,7 @@ steps:
       - /build.sh
       - mkdir -p /drone/src/result
       - cp /var/lib/mock/rocky+epel-*-aarch64/result/*.rpm /drone/src/result/
-  - name: copy resulting rpm files to staging area
+  - name: uplaod RPMs to staging
     image: ghcr.io/alkk/drone-rsync:latest
     settings:
       hosts: ["10.3.0.15"]
@@ -85,6 +85,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 597b8d08cc9515e90bb11196b8e7180a8d217b45830dee100b571b73795a1bff
+hmac: 5cafc3b42669200dc92153045614875738551d0b1b67fa38096622f790621187
 
 ...
