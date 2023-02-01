@@ -604,6 +604,10 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Jan 26 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.0-1
+- Upstream updated to 4.3.0
+- Subagents ecs and portcheck are superseded by netsvc and removed
+
 * Tue Dec  6 15:34:28 EET 2022 Alex Kirhenshtein <alk@netxms.org> - 4.2.461-1
 - Upstream updated to 4.2.461
 
@@ -612,7 +616,3 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 
 * Tue Oct 04 2022 Alex Kirhenshtein <alk@netxms.org> - 4.2.355-1
 - Upstream updated to 4.2.355
-
-* Thu Jan 26 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.0-1
-- Upstream updated to 4.3.0
-- Subagents ecs and portcheck are superseded by netsvc and removed
