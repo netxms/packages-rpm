@@ -613,6 +613,6 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 * Tue Oct 04 2022 Alex Kirhenshtein <alk@netxms.org> - 4.2.355-1
 - Upstream updated to 4.2.355
 
-* Thu Jan 26 2022 Alex Kirhenshtein <alk@netxms.org> - 4.3.0-1
+* Thu Jan 26 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.0-1
 - Upstream updated to 4.3.0
 - Subagents ecs and portcheck are superseded by netsvc and removed
