@@ -586,7 +586,6 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_libdir}/netxms/java/jcommon-*.jar
 %{_libdir}/netxms/java/jfreechart-*.jar
 %{_libdir}/netxms/java/jna-*.jar
-%{_libdir}/netxms/java/jna-platform-*.jar
 %{_libdir}/netxms/java/joda-time-*.jar
 %{_libdir}/netxms/java/jpathwatch-*.jar
 %{_libdir}/netxms/java/mail-*.jar
