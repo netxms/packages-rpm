@@ -2,7 +2,7 @@
 Summary:       NetXMS umbrella package
 Name:          netxms
 Version:       4.3.0
-Release:       1%{?dist}
+Release:       2%{?dist}
 License:       GPL
 URL:           https://netxms.org
 Group:         Admin
@@ -604,6 +604,9 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Feb  2 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.0-2
+- Default agent's config fixed - SubAgents moved to correct section
+
 * Thu Jan 26 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.0-1
 - Upstream updated to 4.3.0
 - Subagents ecs and portcheck are superseded by netsvc and removed
