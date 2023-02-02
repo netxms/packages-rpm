@@ -45,8 +45,8 @@ BuildRequires: postgresql-devel
 BuildRequires: sqlite-devel
 BuildRequires: unixODBC-devel
 
-BuildRequires: jemalloc-devel = 5.3.0-%{release}_netxms
-BuildRequires: libosip2-devel = 5.3.0-%{release}_netxms libexosip2-devel = 5.3.0-%{release}_netxms
+BuildRequires: jemalloc-devel = 5.3.0-1%{?dist}_netxms
+BuildRequires: libosip2-devel = 5.3.0-1%{?dist}_netxms libexosip2-devel = 5.3.0-1%{?dist}_netxms
 
 %description
 
