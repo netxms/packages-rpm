@@ -2,15 +2,14 @@
 
 This repository contains scripts for creating rpm packages (netxms-server/netxms-agent).
 
-Packages are built by NetXMS team and published on http://packages.netxms.org/.
+Packages are built by NetXMS team and published on https://packages.netxms.org/.
 
 ## Build
 
 ```sh
-docker build -t netxms-rpm-builder docker
-docker run --cap-add=SYS_ADMIN -it --rm  -v $(pwd):/build -v $(pwd)/result:/result netxms-rpm-builder
-docker image rm netxms-rpm-builder
+# Build RPMs
+docker run --cap-add=SYS_ADMIN -it --rm -v $(pwd):/build -v $(pwd)/result:/result ghcr.io/netxms/builder-rpm:latest
 
-# Cache dependencies between builds
-#docker run --cap-add=SYS_ADMIN -it --rm -v $(pwd)/cache:/var/cache/mock -v $(pwd):/build -v $(pwd)/result:/result netxms-rpm-builder
+# Same, but cache dependencies between builds
+docker run --cap-add=SYS_ADMIN -it --rm -v $(pwd)/cache:/var/cache/mock -v $(pwd):/build -v $(pwd)/result:/result ghcr.io/netxms/builder-rpm:latest
 ```

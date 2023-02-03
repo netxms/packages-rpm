@@ -6,6 +6,13 @@ name: build-amd64
 platform:
   arch: amd64
 
+volumes:
+  - name: result
+    temp: {}
+  - name: cache
+    host:
+      path: /cache/builder-rpm
+
 steps:
   - name: make dist
     image: ghcr.io/alkk/netxms-make-dist:latest
@@ -15,22 +22,32 @@ steps:
       - /build.sh release-$V
       - cp netxms/netxms-$V.tar.gz SOURCES/
   - name: build
-    image: ghcr.io/netxms/rpm-builder:latest
+    image: ghcr.io/netxms/builder-rpm:latest
     privileged: true
+    volumes:
+      - name: result
+        path: /result
+      - name: cache
+        path: /var/cache/mock
     commands:
       - /build.sh
-      - mkdir -p /drone/src/result
-      - cp /var/lib/mock/rocky+epel-*-aarch64/result/*.rpm /drone/src/result/
-  - name: uplaod RPMs to staging
+      - cp /var/lib/mock/*/result/*.rpm /result/
+  - name: upload RPMs to staging
     image: ghcr.io/alkk/drone-rsync:latest
+    volumes:
+      - name: result
+        path: /result
     settings:
-      hosts: ["10.3.0.15"]
-      user: rpm-staging
+      hosts:
+        from_secret: deploy_target
+      user:
+        from_secret: deploy_user
       key:
         from_secret: deploy_key
-      source: /drone/src/result/*.rpm
+      source: /result/*.rpm
       target: /staging/rpm
       delete: true
+
 ---
 kind: pipeline
 type: docker
@@ -39,6 +56,13 @@ name: build-arm64
 platform:
   arch: arm64
 
+volumes:
+  - name: result
+    temp: {}
+  - name: cache
+    host:
+      path: /cache/builder-rpm
+
 steps:
   - name: make dist
     image: ghcr.io/alkk/netxms-make-dist:latest
@@ -48,20 +72,29 @@ steps:
       - /build.sh release-$V
       - cp netxms/netxms-$V.tar.gz SOURCES/
   - name: build
-    image: ghcr.io/netxms/rpm-builder:latest
+    image: ghcr.io/netxms/builder-rpm:latest
     privileged: true
+    volumes:
+      - name: result
+        path: /result
+      - name: cache
+        path: /var/cache/mock
     commands:
       - /build.sh
-      - mkdir -p /drone/src/result
-      - cp /var/lib/mock/rocky+epel-*-aarch64/result/*.rpm /drone/src/result/
-  - name: uplaod RPMs to staging
+      - cp /var/lib/mock/*/result/*.rpm /result/
+  - name: upload RPMs to staging
     image: ghcr.io/alkk/drone-rsync:latest
+    volumes:
+      - name: result
+        path: /result
     settings:
-      hosts: ["10.3.0.15"]
-      user: rpm-staging
+      hosts:
+        from_secret: deploy_target
+      user:
+        from_secret: deploy_user
       key:
         from_secret: deploy_key
-      source: /drone/src/result/*.rpm
+      source: /result/*.rpm
       target: /staging/rpm
       delete: true
 
@@ -85,6 +118,4 @@ depends_on:
 
 ---
 kind: signature
-hmac: 5cafc3b42669200dc92153045614875738551d0b1b67fa38096622f790621187
-
-...
+hmac: d4af39e2d6f72c6696c7a166f767df64b1c81e9035911e24cafc82cdcdc6041c
