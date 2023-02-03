@@ -32,7 +32,7 @@ steps:
     commands:
       - /build.sh
       - cp /var/lib/mock/*/result/*.rpm /result/
-  - name: upload RPMs to staging
+  - name: upload
     image: ghcr.io/alkk/drone-rsync:latest
     volumes:
       - name: result
@@ -40,6 +40,8 @@ steps:
     settings:
       hosts:
         from_secret: deploy_target
+      port:
+        from_secret: deploy_port
       user:
         from_secret: deploy_user
       key:
@@ -82,7 +84,7 @@ steps:
     commands:
       - /build.sh
       - cp /var/lib/mock/*/result/*.rpm /result/
-  - name: upload RPMs to staging
+  - name: upload
     image: ghcr.io/alkk/drone-rsync:latest
     volumes:
       - name: result
@@ -90,6 +92,8 @@ steps:
     settings:
       hosts:
         from_secret: deploy_target
+      port:
+        from_secret: deploy_port
       user:
         from_secret: deploy_user
       key:
@@ -100,7 +104,7 @@ steps:
 
 ---
 kind: pipeline
-name: notify after
+name: notify
 type: docker
 steps:
   - name: notify
@@ -118,6 +122,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: bf3950c9b8d757bdec60a4a0e66e62d79ec1d1bd703a74bae99447e84192b314
+hmac: 0c17b982a5d7ecc7198ee5cc6ed003769f3b138cb037fee6685d9a91e72c550d
 
 ...
