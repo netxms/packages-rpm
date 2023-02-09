@@ -1,8 +1,8 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.3.0
-Release:       2%{?dist}
+Version:       4.3.1
+Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
 Group:         Admin
@@ -603,6 +603,21 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Feb  9 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.1-1
+- Fixed database schema upgrade on Microsoft SQL Server
+- Fixed issues with network service checks using netsvc subagent as a replacement for portcheck subagent
+- Fixed bug in external table provider command execution
+- Dashboard element "Availability Chart" is working again
+- Mikrotik driver correctly handles server settings for using ifXTable and interface aliases
+- Fixed VLAN configuration reading bug in Juniper driver
+- Multiple fixes and improvements in new management client application
+- Cosmetic fixes in Windows agent installer
+- Fixed issues:
+-   NX-808 (NXSL error message should include module name)
+-   NX-2222 (Interface alias duplicated in UI if Objects.Interfaces.UseAliases set to "concatenate name with alias")
+-   NX-2345 (Copy to Clipboard and Save as image... buttons no longer exist in WebUI in line chart window)
+-   NX-2374 (Template auto unbind grace period handled incorrectly)
+
 * Thu Feb  2 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.0-2
 - Default agent's config fixed - SubAgents moved to correct section
 
