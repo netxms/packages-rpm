@@ -2,7 +2,7 @@
 Summary:       NetXMS umbrella package
 Name:          netxms
 Version:       4.3.1
-Release:       1%{?dist}
+Release:       2%{?dist}
 License:       GPL
 URL:           https://netxms.org
 Group:         Admin
@@ -603,6 +603,9 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Feb 10 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.1-2
+- "Execute server command" object tool crash fixed
+
 * Thu Feb  9 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.1-1
 - Fixed database schema upgrade on Microsoft SQL Server
 - Fixed issues with network service checks using netsvc subagent as a replacement for portcheck subagent
