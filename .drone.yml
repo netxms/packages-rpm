@@ -48,7 +48,7 @@ steps:
       key:
         from_secret: deploy_key
       source: /result/*.rpm
-      target: /staging/rpm
+      destination: /staging/rpm
       delete: true
       extra: --verbose --chmod=Dg+w,Fg+w
 
@@ -102,7 +102,7 @@ steps:
       key:
         from_secret: deploy_key
       source: /result/*.rpm
-      target: /staging/rpm
+      destination: /staging/rpm
       delete: true
       extra: --verbose --chmod=Dg+w,Fg+w
 
@@ -126,6 +126,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 121e843c53817cde013929c1971594c1daa5d63b2ab64f5c719d59bd85c6f381
+hmac: dbdd54008a9502165e54106eb050bb34ede988c7a94998a5452cce59f6a4ba1b
 
 ...
