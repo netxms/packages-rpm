@@ -1,8 +1,8 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.3.1
-Release:       2%{?dist}
+Version:       4.3.2
+Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
 Group:         Admin
@@ -603,6 +603,19 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Mar  2 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.2-1
+- Fixed stacked line charts in new UI
+- Fixed timeout inconsistencies in netsvc subagent
+- Added web API calls for managing alarm comments
+- More functionality migrated to new management client
+- Fixed issues:
+-   NX-677 (Dashboard editor: accelerators are duplicated in Line chart -> Data sources)
+-   NX-2377 (Copy-paste of rules not working in EPP editor)
+-   NX-2348 (Show active threshold event name in Last Values)
+-   NX-2376 (Agent restart is not working correctly on RedHat based Linux OS)
+-   NX-2379 (REST API to force poll DCI)
+-   NX-2383 (Ignore systemd synthetic records when resolving node IP address to hostname)
+
 * Thu Feb 10 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.1-2
 - "Execute server command" object tool crash fixed
 
