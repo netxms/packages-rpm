@@ -122,12 +122,17 @@ steps:
         from_secret: telegram_channel_id
       disable_web_page_preview: true
 
+trigger:
+  status:
+    - success
+    - failure
+
 depends_on:
   - build-amd64
   - build-arm64
 
 ---
 kind: signature
-hmac: 99f8641f5aa250dd07aa67be742acf780d4749d55d6b4d84e5c8e67e1e3c5f6e
+hmac: 14e4dc15a9e5b734c425ff8e1563bd0eaa692d8821646025c602aaa44d94d04e
 
 ...
