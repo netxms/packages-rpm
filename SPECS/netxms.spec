@@ -606,7 +606,7 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 * Thu Feb 10 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.1-2
 - "Execute server command" object tool crash fixed
 
-* Thu Feb  9 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.1-1
+* Thu Feb 09 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.1-1
 - Fixed database schema upgrade on Microsoft SQL Server
 - Fixed issues with network service checks using netsvc subagent as a replacement for portcheck subagent
 - Fixed bug in external table provider command execution
@@ -621,14 +621,14 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 -   NX-2345 (Copy to Clipboard and Save as image... buttons no longer exist in WebUI in line chart window)
 -   NX-2374 (Template auto unbind grace period handled incorrectly)
 
-* Thu Feb  2 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.0-2
+* Thu Feb 02 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.0-2
 - Default agent's config fixed - SubAgents moved to correct section
 
 * Thu Jan 26 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.0-1
 - Upstream updated to 4.3.0
 - Subagents ecs and portcheck are superseded by netsvc and removed
 
-* Tue Dec  6 15:34:28 EET 2022 Alex Kirhenshtein <alk@netxms.org> - 4.2.461-1
+* Tue Dec 06 2022 Alex Kirhenshtein <alk@netxms.org> - 4.2.461-1
 - Upstream updated to 4.2.461
 
 * Fri Nov 18 2022 Alex Kirhenshtein <alk@netxms.org> - 4.2.433-1
