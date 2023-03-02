@@ -40,7 +40,8 @@ steps:
     settings:
       host:
         from_secret: deploy_target
-      host_fingerprint: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICEyadn+aPSVLesBCB1CN6mm5x593YFpAu4swBv8er5A
+      host_fingerprint:
+        from_secret: deploy_host_fingerprint
       port:
         from_secret: deploy_port
       user:
@@ -94,7 +95,8 @@ steps:
     settings:
       host:
         from_secret: deploy_target
-      host_fingerprint: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICEyadn+aPSVLesBCB1CN6mm5x593YFpAu4swBv8er5A
+      host_fingerprint:
+        from_secret: deploy_host_fingerprint
       port:
         from_secret: deploy_port
       user:
@@ -126,6 +128,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: dbdd54008a9502165e54106eb050bb34ede988c7a94998a5452cce59f6a4ba1b
+hmac: 99f8641f5aa250dd07aa67be742acf780d4749d55d6b4d84e5c8e67e1e3c5f6e
 
 ...
