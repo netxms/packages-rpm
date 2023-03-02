@@ -38,8 +38,9 @@ steps:
       - name: result
         path: /result
     settings:
-      hosts:
+      host:
         from_secret: deploy_target
+      host_fingerprint: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICEyadn+aPSVLesBCB1CN6mm5x593YFpAu4swBv8er5A
       port:
         from_secret: deploy_port
       user:
@@ -49,6 +50,7 @@ steps:
       source: /result/*.rpm
       target: /staging/rpm
       delete: true
+      extra: --verbose --chmod=Dg+w,Fg+w
 
 ---
 kind: pipeline
@@ -90,8 +92,9 @@ steps:
       - name: result
         path: /result
     settings:
-      hosts:
+      host:
         from_secret: deploy_target
+      host_fingerprint: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICEyadn+aPSVLesBCB1CN6mm5x593YFpAu4swBv8er5A
       port:
         from_secret: deploy_port
       user:
@@ -101,6 +104,7 @@ steps:
       source: /result/*.rpm
       target: /staging/rpm
       delete: true
+      extra: --verbose --chmod=Dg+w,Fg+w
 
 ---
 kind: pipeline
@@ -122,6 +126,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 0c17b982a5d7ecc7198ee5cc6ed003769f3b138cb037fee6685d9a91e72c550d
+hmac: 121e843c53817cde013929c1971594c1daa5d63b2ab64f5c719d59bd85c6f381
 
 ...
