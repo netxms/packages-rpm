@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.3.2
+Version:       4.3.3
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -603,6 +603,25 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Wed Mar 29 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.3-1
+- New format strings in NXSL (Python f-string style)
+- Inline action scripts in EPP
+- Set and delete custom attributes in EPP rule
+- Added agent's metric `File.Type`
+- Column display names in object queries can be set using column metadata
+- Fixed object query result sorting on hidden columns
+- Fixed issues:
+-   NX-2075 (EPP rule to have both IF and IF NOT conditions for objects)
+-   NX-2180 (Clusters cannot change zones)
+-   NX-2311 (Add macros to display DCI values with multipliers and measurement units)
+-   NX-2312 (Named capture groups in log parser)
+-   NX-2320 (Configuration import ends with timeout for large configuration files)
+-   NX-2324 (Telegram notifications should stay in queue if there is no connection to the Internet)
+-   NX-2330 (Add option to set/delete custom attributes from EPP rule)
+-   NX-2331 (Display DCI and policy count for templates in object details)
+-   NX-2332 (Add new EPP action that allows to specify NXSL script inline)
+-   NX-2336 (F-strings in NXSL)
+
 * Thu Mar  2 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.2-1
 - Fixed stacked line charts in new UI
 - Fixed timeout inconsistencies in netsvc subagent
