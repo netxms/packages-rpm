@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.3.3
+Version:       4.3.4
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -603,6 +603,12 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Apr 06 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.4-1
+- Fixed bug in ICMP ping implementation introduced in 4.3.3
+- Added agent configuration option for setting file mode creation mask (umask)
+- Bundled SQLite updated to version 3.41.2
+- Multiple fixes and improvements in new management client application
+
 * Wed Mar 29 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.3-1
 - Improved database migration procedure when TimescaleDB is target (GitHub issue 83)
 - Fixed bug in handling "verify-peer" option for network service metrics
