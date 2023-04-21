@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.3.4
+Version:       4.3.5
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -603,6 +603,19 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Fri Apr 21 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.5-1
+- Fixed bug in X.509 certificate subject and issuer decoding
+- Agent tunnel listener will not start if server certificate is not loaded
+- Fixed WEB service configuration import with multiple headers
+- Fixed login issues in new web UI
+- Small fixes and improvements in new management client application
+- Fixed issues:
+-   NX-2272 (Session is not closed if user cancel 2FA auth initialization)
+-   NX-2276 (Warn user when adding too wide mask to active discovery)
+-   NX-2388 (Modify default templates - filesystem with type "ahafs" should be excluded from discovery)
+-   NX-2404 (Integer division by zero in NXSL crashes server)
+-   NX-2406 (Entering maintenance mode on cluster does not trigger maintenance mode on nodes within cluster)
+
 * Thu Apr 06 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.4-1
 - Fixed bug in ICMP ping implementation introduced in 4.3.3
 - Added agent configuration option for setting file mode creation mask (umask)
