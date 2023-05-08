@@ -658,7 +658,7 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 -   NX-2379 (REST API to force poll DCI)
 -   NX-2383 (Ignore systemd synthetic records when resolving node IP address to hostname)
 
-* Thu Feb 10 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.1-2
+* Fri Feb 10 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.1-2
 - "Execute server command" object tool crash fixed
 
 * Thu Feb 09 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.1-1
