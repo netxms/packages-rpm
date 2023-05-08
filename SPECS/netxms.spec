@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.3.5
+Version:       4.3.6
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -603,6 +603,16 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon May 08 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.6-1
+- Correctly handle FDB record type "secure"
+- Improved driver for Cambium devices
+- Fixed bug in handling /32 addresses during network discovery
+- Fixed bug in flood notification processing in Telegram driver
+- Fixed server crash caused by timeout during file transfer to agent
+- Fixed bug in SNMP codepage handling
+- Fixed bar gauge dashboard element drawing issue
+- Small fixes and improvements in new management client application
+
 * Fri Apr 21 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.5-1
 - Fixed bug in X.509 certificate subject and issuer decoding
 - Agent tunnel listener will not start if server certificate is not loaded
