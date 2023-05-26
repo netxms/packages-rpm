@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.3.6
+Version:       4.3.7
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -603,6 +603,14 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Fri May 26 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.7-1
+- Fixed bug in reading topology information from LLDPv2 MIB
+- Small fixes and improvements in new management client application
+- Fixed issues:
+-   NX-2253 (Actual repeat count should be passed to event in log file monitoring when reset repeat count is true)
+-   NX-2418 (Log file monitoring does not work properly with symlinks)
+-   NX-2421 (Invalid time format in log parser configuration can cause agent crash)
+
 * Mon May 08 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.6-1
 - Correctly handle FDB record type "secure"
 - Improved driver for Cambium devices
