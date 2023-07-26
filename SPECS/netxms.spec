@@ -47,7 +47,7 @@ BuildRequires: unixODBC-devel
 
 BuildRequires: jemalloc-devel = 5.3.0-1%{?dist}_netxms
 BuildRequires: libosip2-devel = 5.3.0-1%{?dist}_netxms libexosip2-devel = 5.3.0-1%{?dist}_netxms
-BuildRequires: libnxmodbus >= 3.10.1-4%{?dist}
+BuildRequires: libnxmodbus = 3.1.10-4%{?dist}
 
 %description
 
