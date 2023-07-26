@@ -47,6 +47,7 @@ BuildRequires: unixODBC-devel
 
 BuildRequires: jemalloc-devel = 5.3.0-1%{?dist}_netxms
 BuildRequires: libosip2-devel = 5.3.0-1%{?dist}_netxms libexosip2-devel = 5.3.0-1%{?dist}_netxms
+BuildRequires: libnxmodbus >= 3.10.1-4%{?dist}
 
 %description
 
@@ -603,6 +604,70 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Wed Jul 26 2023 Alex Kirhenshtein <alk@netxms.org> - 4.4.1-1
+- Improved support for LLDP-V2-MIB
+- Server can use both LLDP-MIB and LLDP-V2-MIB if supported by device
+- Server saves SNMPv3 context engine ID alongside authoritative engine ID to avoid unnecessary engine ID discovery
+- NXSL function GetDCIValues can be used to retrieve raw DCI values
+- Added method "enableWinPerfCountersCache" to NXSL class "Node"
+- Custom timeouts for external metric providers in agent
+- Fixed incorrect display of line chart series with "Invert values" option
+- Fixed database upgrade procedure (zone UIN update)
+- Fixed memory leak in subagent "netsvc"
+- Fixed bug in NXSL function FormatMetricPrefix
+- Added workaround for "unexpected eof" OpenSSL error reported by web service calls to some servers
+- Minor fixes in asset management
+- Minor fixes and improvements in new management client application
+- Fixed issues:
+-   NX-2407 (Add the ability to duplicate server action in action manager)
+-   NX-2414 (nxdbmgr should ignore data for deleted DCIs if there's record in dci_delete_list for that DCI)
+-   NX-2415 (Legend text color is ignored in the nxmc console)
+-   NX-2419 (When log file monitoring with wildcards is used, data right after file creation might be skipped)
+-   NX-2428 (Cannot import configuration if threshold activation or deactivation event tags are missing or empty)
+-   NX-2434 (Add option to set user, password as a parameters for IMAP and SMTP)
+-   NX-2435 (0 is not shown on Y scale in graphs)
+
+* Wed Jun 28 2023 Alex Kirhenshtein <alk@netxms.org> - 4.4.0-1
+- "Trusted devices" in two-factor authentication
+- Scrollable dashboards
+- Native Modbus TCP support
+- Arguments can be passed to script called via script macro
+- Indirect function calls in NXSL
+- Interface table in agents
+- Linux agent can report interface aliases
+- Improved dashboard elements "Pie Chart" and "Gauge"
+- New macro {node-name} in DCI performance view configuration
+- Added Query table columns for SNMP Table DCI
+- Spanning Tree port state for interfaces collected at status poll
+- System event for STP port state change
+- Improved configuration import
+- Fixed issues:
+-   NX-457 (Support for multiple tile providers)
+-   NX-696 (Condition status reset to UNKNOWN on change)
+-   NX-875 (More info on per-node basis on polls for that node)
+-   NX-935 (Scrollbar in Dashboards)
+-   NX-1014 (Correct names of "Remove" menu items to "Remove from node" or "Remove from template")
+-   NX-1232 (Tool for simplified SNMP tables configuration)
+-   NX-1598 (Rename column "submap_id" in table "object_properties")
+-   NX-1613 (Object state icon not shown in Template -> Remove)
+-   NX-2067 (Add a hotkey to save policies. Ctrl+S)
+-   NX-2244 (Have ability in the UI to jump to specific DCI from check)
+-   NX-2294 (Add server setting to prefer IPv4 address when resolving node hostname)
+-   NX-2295 (Use System.ActiveUserSessions agent list to display "User sessions" in management client)
+-   NX-2317 (Add parameters to threshold activation events with additional information on triggered threshold)
+-   NX-2357 (Create events for invalid object identifiers in EPP rules)
+-   NX-2364 (Add option to request 2FA authorization less frequently)
+-   NX-2370 (Use libedit for shell-style tools)
+-   NX-2372 (Show DCI comments in Data Collection / Last Values view)
+-   NX-2373 (Make DCI comments available in alarms generated from threshold violation events)
+-   NX-2384 (Store and display event message in active threshold)
+-   NX-2391 (Not possible to set correct zone for cluster)
+-   NX-2392 (ARP table view for nodes)
+-   NX-2397 (Cluster that is in another zone still belongs to the zone with Zone UIN=0)
+-   NX-2420 (Add explicit option for log parser to follow symlinks)
+-   NX-2422 (Keep separate session for each node in MIB explorer in new Management Client)
+-   NX-2424 (Add information about user login failure (2FA issue, etc) to audit log)
+
 * Fri May 26 2023 Alex Kirhenshtein <alk@netxms.org> - 4.3.7-1
 - Fixed bug in reading topology information from LLDPv2 MIB
 - Small fixes and improvements in new management client application
