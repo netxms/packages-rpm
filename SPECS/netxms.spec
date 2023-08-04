@@ -375,7 +375,7 @@ This package provides various integration tools (e.g. nxshell).
 %{_bindir}/nxnotify
 %{_bindir}/nxpush
 %{_bindir}/nxshell
-%{_libdir}/netxms/java/jython-standalone-2.7.2.jar
+%{_libdir}/netxms/java/jython-standalone-2.7.3.jar
 %{_libdir}/netxms/java/nxshell-*.jar
 
 
@@ -572,6 +572,7 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_libdir}/netxms/java/commons-compiler-*.jar
 %{_libdir}/netxms/java/commons-daemon-*.jar
 %{_libdir}/netxms/java/commons-digester-*.jar
+%{_libdir}/netxms/java/commons-io-*.jar
 %{_libdir}/netxms/java/commons-logging-*.jar
 %{_libdir}/netxms/java/commons-math3-*.jar
 %{_libdir}/netxms/java/ecj-*.jar
