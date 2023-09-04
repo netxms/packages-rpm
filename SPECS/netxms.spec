@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.4.1
+Version:       4.4.2
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -605,6 +605,29 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon Sep 04 2023 Alex Kirhenshtein <alk@netxms.org> - 4.4.2-1
+- Server checks interface speed during status poll and generates event if it changes
+- Improved Cambium device driver
+- Added driver for Hirschmann switches
+- Implemented implicit import for constants in NXSL
+- NXSL implicit import does not add non-referenced functions and constants from imported module
+- Context action "Change expected interface state" implemented in new GUI client
+- Context action "Clone network map" implemented in new GUI client
+- Masked credentials in "Network Credentials" view
+- Fixed bugs in TCP proxy session closure handling (server and agent side)
+- Fixed bug in parsing XML content returned by web service
+- Fixed template apply/remove in new GUI client
+- Fixed server crash when network map uses physical link with non existing rack
+- Fixed audit log writing on object move
+- Fixed issues:
+-   NX-2410 (Notification driver is locked during retry waiting period)
+-   NX-2432 (Query interface speed when status poll detects that interface goes up)
+-   NX-2441 (Auto-focus on Two-Factor input on WebUI)
+-   NX-2442 (Maintenance predefined time)
+-   NX-2449 (Unexpected SYS_DUPLICATE_IP_ADDRESS generation)
+-   NX-2450 (microhttpd presence is not detected correctly)
+-   NX-2451 (GetDCIValue() should return same data type as set in DCI properties)
+-   NX-2452 (Agent on Windows returns only one software inventory record when multiple versions of same software are installed)
 * Wed Jul 26 2023 Alex Kirhenshtein <alk@netxms.org> - 4.4.1-1
 - Improved support for LLDP-V2-MIB
 - Server can use both LLDP-MIB and LLDP-V2-MIB if supported by device
