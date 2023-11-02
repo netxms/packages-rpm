@@ -477,6 +477,7 @@ fi
 %{_libdir}/netxms/ntcb.nxm
 %{_libdir}/netxms/pdsdrv/*
 %{_libdir}/netxms/redmine.hdlink
+%{_libdir}/netxms/webapi.nxm
 %{_sharedstatedir}/netxms/*
 %{_unitdir}/netxms-server.service
 
