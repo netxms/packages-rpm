@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.4.2
+Version:       4.4.3
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -605,6 +605,32 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Nov 02 2023 Alex Kirhenshtein <alk@netxms.org> - 4.4.3-1
+- Package deployment can be scheduled
+- Server-side macro expansion in package deployment command
+- Use compact JSON format when saving events to database
+- Improved event processing performance
+- Improved NXSL function "random"
+- New event processing macros %d (DCI description), %D (DCI comments), %L (object alias), and %C (object comments)
+- Added driver for FortiGate devices
+- Fixed server crash during execution of delayed EPP action
+- Fixed server crash when processing interfaces with 8 byte MAC address
+- Fixed session disconnect handling in new management client application
+- Fixed bug in physical disk information reading on Windows
+- Fixed bug in SSH key store
+- Improved debug logging
+- Minor fixes and improvements in new management client application
+- Fixed issues:
+-   NX-1063 (Interface icon is incorrect)
+-   NX-2224 (Command history in nxadm)
+-   NX-2446 (Increase timeout for agent tunnel binding)
+-   NX-2463 (Add metric to measure execution time of background queries in dbquery subagent)
+-   NX-2467 (Allow to execute same action multiple times in one EPP rule)
+-   NX-2468 (NetworkService.Status SMTP call to curl_easy_perform failed (56: Command failed: 502))
+-   NX-2469 (Empty "Parameters" line should be interpreted as no arguments in Execute Script)
+-   NX-2471 (Add agent list and table to list physical disks)
+-   NX-2475 (netsvc: ServiceCheck.SMTP() uses VRFY command, which is disabled on most servers)
+
 * Mon Sep 04 2023 Alex Kirhenshtein <alk@netxms.org> - 4.4.2-1
 - Server checks interface speed during status poll and generates event if it changes
 - Improved Cambium device driver
@@ -628,6 +654,7 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 -   NX-2450 (microhttpd presence is not detected correctly)
 -   NX-2451 (GetDCIValue() should return same data type as set in DCI properties)
 -   NX-2452 (Agent on Windows returns only one software inventory record when multiple versions of same software are installed)
+
 * Wed Jul 26 2023 Alex Kirhenshtein <alk@netxms.org> - 4.4.1-1
 - Improved support for LLDP-V2-MIB
 - Server can use both LLDP-MIB and LLDP-V2-MIB if supported by device
