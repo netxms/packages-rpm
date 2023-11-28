@@ -277,10 +277,8 @@ like netxms-reporting and java subagent (netxms-agent-java)
 %{_libdir}/netxms/java/netxms-base-*.jar
 %{_libdir}/netxms/java/netxms-client-*.jar
 %{_libdir}/netxms/java/netxms-java-bridge-*.jar
-%{_libdir}/netxms/java/simple-xml-*.jar
+%{_libdir}/netxms/java/simple-xml-safe-*.jar
 %{_libdir}/netxms/java/slf4j-api-*.jar
-%{_libdir}/netxms/java/stax-*.jar
-%{_libdir}/netxms/java/xpp3-*.jar
 %{_libdir}/netxms/java/logback-classic-*.jar
 %{_libdir}/netxms/java/logback-core-*.jar
 
