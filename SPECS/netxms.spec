@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.4.3
+Version:       4.4.4
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -272,15 +272,23 @@ like netxms-reporting and java subagent (netxms-agent-java)
 
 %files java-base
 %{_libdir}/libnxjava.so.*
+%{_libdir}/netxms/java/SparseBitSet-*.jar
 %{_libdir}/netxms/java/commons-codec-*.jar
+%{_libdir}/netxms/java/commons-collections4-*.jar
+%{_libdir}/netxms/java/commons-compiler-*.jar
+%{_libdir}/netxms/java/commons-io-*.jar
 %{_libdir}/netxms/java/commons-lang3-*.jar
+%{_libdir}/netxms/java/commons-math3-*.jar
+%{_libdir}/netxms/java/janino-*.jar
+%{_libdir}/netxms/java/log4j-api-*.jar
+%{_libdir}/netxms/java/logback-classic-*.jar
+%{_libdir}/netxms/java/logback-core-*.jar
 %{_libdir}/netxms/java/netxms-base-*.jar
 %{_libdir}/netxms/java/netxms-client-*.jar
 %{_libdir}/netxms/java/netxms-java-bridge-*.jar
+%{_libdir}/netxms/java/poi-*.jar
 %{_libdir}/netxms/java/simple-xml-safe-*.jar
 %{_libdir}/netxms/java/slf4j-api-*.jar
-%{_libdir}/netxms/java/logback-classic-*.jar
-%{_libdir}/netxms/java/logback-core-*.jar
 
 
 ### netxms-agent-java
@@ -567,20 +575,15 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_libdir}/netxms/java/checker-qual-*.jar
 %{_libdir}/netxms/java/commons-beanutils-*.jar
 %{_libdir}/netxms/java/commons-collections-*.jar
-%{_libdir}/netxms/java/commons-collections4-*.jar
-%{_libdir}/netxms/java/commons-compiler-*.jar
 %{_libdir}/netxms/java/commons-daemon-*.jar
 %{_libdir}/netxms/java/commons-digester-*.jar
-%{_libdir}/netxms/java/commons-io-*.jar
 %{_libdir}/netxms/java/commons-logging-*.jar
-%{_libdir}/netxms/java/commons-math3-*.jar
 %{_libdir}/netxms/java/ecj-*.jar
 %{_libdir}/netxms/java/error_prone_annotations-*.jar
 %{_libdir}/netxms/java/itext-*.js8.jar
 %{_libdir}/netxms/java/jackson-annotations-*.jar
 %{_libdir}/netxms/java/jackson-core-*.jar
 %{_libdir}/netxms/java/jackson-databind-*.jar
-%{_libdir}/netxms/java/janino-*.jar
 %{_libdir}/netxms/java/jasperreports-*.jar
 %{_libdir}/netxms/java/javax.inject-*.jar
 %{_libdir}/netxms/java/jcl-over-slf4j-*.jar
@@ -594,8 +597,7 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_libdir}/netxms/java/mssql-jdbc-*.jre8.jar
 %{_libdir}/netxms/java/mysql-connector-j-*.jar
 %{_libdir}/netxms/java/nxreportd-*.jar
-%{_libdir}/netxms/java/ojdbc8-*.jar
-%{_libdir}/netxms/java/poi-*.jar
+%{_libdir}/netxms/java/ojdbc10-*.jar
 %{_libdir}/netxms/java/postgresql-*.jar
 %{_libdir}/netxms/java/protobuf-java-*.jar
 %{_libdir}/netxms/java/waffle-jna-*.jar
@@ -604,6 +606,22 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Tue Nov 28 2023 Alex Kirhenshtein <alk@netxms.org> - 4.4.4-1
+- New methods in NXSL class "InetAddress": contains, equals, inRange, sameSubnet
+- Constructor for NXSL class "InetAddress" accepts mask length as second argument
+- Fixed incorrect ICMP polling if ICMP proxy set on node level
+- Improved topology discovery on TP-Link devices
+- Improved driver for DLink devices
+- Added driver for TP-Link devices
+- Added driver for Eltex devices
+- Added driver for Q-tech devices
+- nxencpasswd can read password from terminal
+- GUI clients built with patched version of simple-xml (fixes CVE-2017-1000190)
+- Fixed deadlock after login in legacy web UI
+- Fixed issues:
+-   NX-2431 (Implement agent list Net.IP.RoutingTable for AIX)
+-   NX-2478 (Named function parameters does not work for entry points)
+
 * Thu Nov 02 2023 Alex Kirhenshtein <alk@netxms.org> - 4.4.3-1
 - Package deployment can be scheduled
 - Server-side macro expansion in package deployment command
