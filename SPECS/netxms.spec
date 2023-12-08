@@ -277,7 +277,6 @@ like netxms-reporting and java subagent (netxms-agent-java)
 %{_libdir}/netxms/java/commons-collections4-*.jar
 %{_libdir}/netxms/java/commons-compiler-*.jar
 %{_libdir}/netxms/java/commons-io-*.jar
-%{_libdir}/netxms/java/commons-lang3-*.jar
 %{_libdir}/netxms/java/commons-math3-*.jar
 %{_libdir}/netxms/java/janino-*.jar
 %{_libdir}/netxms/java/log4j-api-*.jar
@@ -568,10 +567,7 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %files reporting
 %{_bindir}/nxreportd
 %{_libdir}/netxms/java/activation-*.jar
-%{_libdir}/netxms/java/bcprov-jdk15on-*.jar
 %{_libdir}/netxms/java/caffeine-*.jar
-%{_libdir}/netxms/java/castor-core-*.jar
-%{_libdir}/netxms/java/castor-xml-*.jar
 %{_libdir}/netxms/java/checker-qual-*.jar
 %{_libdir}/netxms/java/commons-beanutils-*.jar
 %{_libdir}/netxms/java/commons-collections-*.jar
@@ -580,17 +576,15 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_libdir}/netxms/java/commons-logging-*.jar
 %{_libdir}/netxms/java/ecj-*.jar
 %{_libdir}/netxms/java/error_prone_annotations-*.jar
-%{_libdir}/netxms/java/itext-*.js8.jar
 %{_libdir}/netxms/java/jackson-annotations-*.jar
 %{_libdir}/netxms/java/jackson-core-*.jar
 %{_libdir}/netxms/java/jackson-databind-*.jar
+%{_libdir}/netxms/java/jackson-dataformat-xml-*.jar
 %{_libdir}/netxms/java/jasperreports-*.jar
-%{_libdir}/netxms/java/javax.inject-*.jar
 %{_libdir}/netxms/java/jcl-over-slf4j-*.jar
 %{_libdir}/netxms/java/jcommon-*.jar
 %{_libdir}/netxms/java/jfreechart-*.jar
 %{_libdir}/netxms/java/jna-*.jar
-%{_libdir}/netxms/java/joda-time-*.jar
 %{_libdir}/netxms/java/jpathwatch-*.jar
 %{_libdir}/netxms/java/mail-*.jar
 %{_libdir}/netxms/java/mariadb-java-client-*.jar
@@ -598,9 +592,12 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_libdir}/netxms/java/mysql-connector-j-*.jar
 %{_libdir}/netxms/java/nxreportd-*.jar
 %{_libdir}/netxms/java/ojdbc10-*.jar
+%{_libdir}/netxms/java/openpdf-*.jar
 %{_libdir}/netxms/java/postgresql-*.jar
 %{_libdir}/netxms/java/protobuf-java-*.jar
+%{_libdir}/netxms/java/stax2-api-*.jar
 %{_libdir}/netxms/java/waffle-jna-*.jar
+%{_libdir}/netxms/java/woodstox-core-*.jar
 %{_libdir}/netxms/java/xercesImpl-*.jar
 %{_libdir}/netxms/java/xml-apis-*.jar
 %{_unitdir}/netxms-reporting.service
