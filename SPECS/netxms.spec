@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.4.5
+Version:       4.5.0
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -603,6 +603,23 @@ Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon Dec 25 2023 Alex Kirhenshtein <alk@netxms.org> - 4.5.0-1
+- XPath can be used for querying XML-based web services
+- New NXSL operation "?." (safe dereference)
+- New method "join" in NXSL arrays
+- Server-side custom attributes (not visible by clients)
+- Additional argument in NXSL method createSNMPTransport to control if it should fail when node is marked as unreachable via SNMP
+- Updated drivers for Eltex and TP-Link switches
+- Added agent metric Agent.LocalDatabase.FileSize
+- Fixed internal metrics PollTime.\*
+- Fixed issues:
+-   NX-1409 (Implement separate access right for editing object comments)
+-   NX-2412 (Separate access right for editing agent configuration file)
+-   NX-2440 (Wildcard imports in NXSL)
+-   NX-2275 (Option for ignoring interfaces in NOT PRESENT state)
+-   NX-2485 (XPath support in web service queries)
+-   NX-2487 (Any changes to object from UI or via Java API wipe out responsible users list)
+
 * Fri Dec 08 2023 Alex Kirhenshtein <alk@netxms.org> - 4.4.5-1
 - Improved SNMP proxy performance under heavy load
 - Added limit on number of nested NXSL VMs (to prevent accidential infinite loop of script execution)
