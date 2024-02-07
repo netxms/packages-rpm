@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.5.0
+Version:       4.5.1
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -604,6 +604,24 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Wed Feb 07 2024 Alex Kirhenshtein <alk@netxms.org> - 4.5.1-1
+- Driver for Edgecore enterprise switches
+- Driver for HPE Aruba Networking switches and wireless controllers
+- Chart height in performance view automatically adjusted to accomodate large legend
+- New NXSL class "MacAddress"
+- Attribute "state" of NXSL class "AccessPoint" renamed to "apState" (to avoid conflict with attribute "state" from parent class)
+- Context object views can be hidden
+- Configurable timeout for client session first packet
+- Improved VLAN handling by generic driver
+- Updated Eltex driver
+- Fix missing object synchronization for ad-hock maps (drill down)
+- Fixed server crash when interface list cannot be read from SNMP device and option to ignore interfaces in NOT PRESENT state is on
+- Fixed bug in EPP rule copying
+- Fixed line numbering bug in desktop UI script editor
+- Fixed issues:
+-   NX-2491 (Add alarm category attribute to NXSL alarm class)
+-   NX-2493 (Activation / Deactivation event not shown in threshold editor)
+
 * Mon Dec 25 2023 Alex Kirhenshtein <alk@netxms.org> - 4.5.0-1
 - XPath can be used for querying XML-based web services
 - New NXSL operation "?." (safe dereference)
