@@ -586,7 +586,6 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_libdir}/netxms/java/jcommon-*.jar
 %{_libdir}/netxms/java/jfreechart-*.jar
 %{_libdir}/netxms/java/jna-*.jar
-%{_libdir}/netxms/java/jpathwatch-*.jar
 %{_libdir}/netxms/java/mail-*.jar
 %{_libdir}/netxms/java/mariadb-java-client-*.jar
 %{_libdir}/netxms/java/mssql-jdbc-*.jre8.jar
