@@ -551,6 +551,7 @@ Requires(preun): systemd
 Requires(postun): systemd
 Requires(post): systemd
 Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
+Requires: netxms-java-base = %{version}-%{release}
 
 %description reporting
 ...
