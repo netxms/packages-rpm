@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.5.1
+Version:       4.5.2
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -603,6 +603,14 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Feb 08 2024 Victor Kirhenshtein <victor@netxms.org> - 4.5.2-1
+- Fixed server crash on client session disconnect
+- Fixed updated issues in new web UI
+- Cosmetic fixes in UI
+- Fixed issues:
+-   NX-2490 (Server tries to read from tdata_xxxx table when TimescaleDB is used as backend)
+-   NX-2502 (nxagentd uses UDP port 4700 to exchange hearthbeat messages and listens on address 0.0.0.0)
+
 * Wed Feb 07 2024 Alex Kirhenshtein <alk@netxms.org> - 4.5.1-1
 - Driver for Edgecore enterprise switches
 - Driver for HPE Aruba Networking switches and wireless controllers
