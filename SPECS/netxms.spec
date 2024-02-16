@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.5.2
+Version:       4.5.3
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -603,6 +603,13 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Fri Feb 16 2024 Victor Kirhenshtein <victor@netxms.org> - 4.5.3-1
+- Fixed server crash during passive network discovery
+- Fixed bug in dashboard chart data source editor
+- Fixed bug in TCP proxy session setup
+- Fixed issues:
+-   NX-2509 (productVersion does not display value correctly with Ethernet-IP)
+
 * Thu Feb 08 2024 Victor Kirhenshtein <victor@netxms.org> - 4.5.2-1
 - Fixed server crash on client session disconnect
 - Fixed updated issues in new web UI
