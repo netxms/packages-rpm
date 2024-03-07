@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.5.3
+Version:       4.5.4
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -603,6 +603,16 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Mar 07 2024 Victor Kirhenshtein <victor@netxms.org> - 4.5.4-1
+- Improved Juniper driver
+- Improved integration with ticketing system Redmine
+- Fixed build errors on Solaris 11.4 with Solaris Studio 12.6
+- Fixed memory leak in web UI (server side)
+- Fixed some server performance issues
+- Fixed issues:
+-   NX-2492 (Custom attribute inheritance conflict not detected)
+-   NX-2515 (Inherited object custom attributes not deleted from children)
+
 * Fri Feb 16 2024 Victor Kirhenshtein <victor@netxms.org> - 4.5.3-1
 - Fixed server crash during passive network discovery
 - Fixed bug in dashboard chart data source editor
