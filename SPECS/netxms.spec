@@ -603,6 +603,23 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon Apr 01 2024 Victor Kirhenshtein <victor@netxms.org> - 4.5.5-1
+- Fixed scheduled file upload
+- Fixed policy apply on object selection change
+- Fixed custom attribute conflict propagation and conflict removal
+- Fixed agent crash on empty output from external table provider
+- Fixed bug in pin/popup agent file view
+- Updated OPC UA subagent dependencies
+- New agent metrics System.CurrentTime.ISO8601.Local, System.CurrentTime.ISO8601.UTC, and System.TimeZoneOffset
+- Bundled zlib updated to latest version
+- Print exception trace replaced by error logging
+- Disable walk action on root object in mib browser
+- Business service polls can be disabled or will not be executed if object is unmanaged
+- Added peer certificate verification for notification channels
+- Fixed issues:
+-   NX-2511 (In repeating events, you can specify no more than 5 characters, sometimes more is needed)
+-   NX-2516 (CURLAUTH_NEGOTIATE in not available in libCURL 7.29.0)
+
 * Thu Mar 07 2024 Victor Kirhenshtein <victor@netxms.org> - 4.5.4-1
 - Improved Juniper driver
 - Improved integration with ticketing system Redmine
