@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.5.4
+Version:       4.5.5
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
