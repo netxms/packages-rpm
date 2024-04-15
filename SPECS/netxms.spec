@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.5.5
+Version:       4.5.6
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -603,6 +603,18 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon Apr 15 2024 Victor Kirhenshtein <victor@netxms.org> - 4.5.6-1
+- Fixed bug in background task scheduler
+- Fixed bug in reporting access control
+- Fixed minor memory leak in server
+- Fixed event storm detection event generation
+- Fixed incorrect notification popup size calculation in user agent
+- Fixed bug in NXSL function CreateUserAgentNotification
+- Improved housekeeper throttling logic
+- User-defined scripts for housekeeper
+- Object context menu available in alarm view
+- Call for DCI status change added to web API
+
 * Mon Apr 01 2024 Victor Kirhenshtein <victor@netxms.org> - 4.5.5-1
 - Fixed scheduled file upload
 - Fixed policy apply on object selection change
