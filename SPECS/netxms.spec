@@ -142,6 +142,7 @@ chrpath --delete %{buildroot}%{_bindir}/nxlptest
 chrpath --delete %{buildroot}%{_bindir}/nxmibc
 chrpath --delete %{buildroot}%{_bindir}/nxminfo
 chrpath --delete %{buildroot}%{_bindir}/nxnotify
+chrpath --delete %{buildroot}%{_bindir}/nxping
 chrpath --delete %{buildroot}%{_bindir}/nxpush
 chrpath --delete %{buildroot}%{_bindir}/nxscript
 chrpath --delete %{buildroot}%{_bindir}/nxshell
@@ -190,6 +191,7 @@ shared between other packages.
 %{_bindir}/nxcsum
 %{_bindir}/nxencpasswd
 %{_bindir}/nxgenguid
+%{_bindir}/nxping
 %{_libdir}/libnetxms.so.*
 %{_libdir}/libnxclient.so.*
 %{_libdir}/libnxdb.so.*
