@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       4.5.6
+Version:       5.0.5
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -50,7 +50,8 @@ BuildRequires: jemalloc-devel = 5.3.0-1%{?dist}_netxms
 %define configure_jemalloc --with-jemalloc
 %endif
 BuildRequires: libosip2-devel = 5.3.0-1%{?dist}_netxms libexosip2-devel = 5.3.0-1%{?dist}_netxms
-BuildRequires: libnxmodbus = 3.1.10-4%{?dist}
+BuildRequires: libnxmodbus-devel = 3.1.10-4%{?dist}
+BuildRequires: isotree-devel >= 0.6.1-1%{?dist}
 
 %description
 
@@ -385,7 +386,7 @@ This package provides various integration tools (e.g. nxshell).
 %{_bindir}/nxnotify
 %{_bindir}/nxpush
 %{_bindir}/nxshell
-%{_libdir}/netxms/java/jython-standalone-2.7.3.jar
+%{_libdir}/netxms/java/jython-standalone-2.7.4b1.jar
 %{_libdir}/netxms/java/nxshell-*.jar
 
 
@@ -458,8 +459,8 @@ fi
 %{_libdir}/libnxsl.so.*
 %{_libdir}/libnxsrv.so.*
 %{_libdir}/libstrophe.so.*
-%{_libdir}/netxms/jira.hdlink
-%{_libdir}/netxms/leef.nxm
+%{_libdir}/netxms/*.hdlink
+%{_libdir}/netxms/*.nxm
 %{_libdir}/netxms/ncdrv/anysms.ncd
 %{_libdir}/netxms/ncdrv/dbtable.ncd
 %{_libdir}/netxms/ncdrv/dummy.ncd
@@ -484,10 +485,7 @@ fi
 %{_libdir}/netxms/ncdrv/websms.ncd
 %{_libdir}/netxms/ncdrv/xmpp.ncd
 %{_libdir}/netxms/ndd/*
-%{_libdir}/netxms/ntcb.nxm
 %{_libdir}/netxms/pdsdrv/*
-%{_libdir}/netxms/redmine.hdlink
-%{_libdir}/netxms/webapi.nxm
 %{_sharedstatedir}/netxms/*
 %{_unitdir}/netxms-server.service
 
@@ -608,6 +606,107 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Fri Jun 28 2024 Alex Kirhenshtein <alk@netxms.org> - 5.0.5-1
+- L2 network map seeds with no SNMP or L2 data will not prevent network map from update
+- Server performance improvements
+- Server actions of types "agent command" and "SSH command" executed asynchronously (partial fix for NX-2541)
+- Fixed server crash during LDAP synchronization
+- Subnets bound to containers correctly displayed in infrastructure perspective
+- Predefined maps with default size and background image resized automatically to be no less than image size
+
+* Tue Jun 11 2024 Alex Kirhenshtein <alk@netxms.org> - 5.0.4-1
+- New SNMP DCI option "Interpret raw value as IPv6 address"
+- Added driver for GE MDS Orbit devices
+- Added driver for EtherWan switches
+- Added driver for Siemens RuggedCom switches
+- Mikrotik driver reports RSSI for wireless clients
+- RSSI is displayed in "Wireless Stations" view
+- Added "move object" item to object context menu
+- Optional context selector for dashboards in dashboard perspective
+- Seed node propery page removed for custom network maps
+- Fixed server crash when accessing alarm category list from NXSL
+- Fixed drawing issues of line charts with logarithmic scale
+- Fixed incorrect line numbers in NXSL error messages
+- Fixed bug in "Go to object" action in UI
+- Fixed bug in D-Link driver
+- Fixed interface utilization information sychronization
+- Fixed network map color source selection
+- Fixed historical line chart pop-out on web
+- Fixed save of network map object position
+- Fixed tables display glitch on Windows
+- Fixed data type of configuration variable "Objects.NetworkMaps.UpdateInterval"
+- Fixed issues:
+-   NX-2489 (Read list of performance counters only when needed)
+-   NX-2536 (SNMP DCI "interpret raw value as MAC address" does not support EUI-64)
+-   NX-2537 (Double links on maps)
+
+* Wed May 15 2024 Alex Kirhenshtein <alk@netxms.org> - 5.0.3-1
+- Notification channel driver "Shell" escapes single quote character during exec-type command line expansion
+- Priority inclusion rules in UI element filter
+- Macro expansion in API call executeLibraryScript works for all object classes
+- Improved handling of large number of simultaneous ICMP ping requests
+- Fixed bug in database upgrade procedure
+- Fixed deadlock in web UI
+- Fixed issues:
+-   NX-2521 (ICMP.PacketLoss internal DCI collects 0 after server restart)
+-   NX-2529 (Option to enable/disable Version Number on Web interface)
+
+* Tue May 07 2024 Alex Kirhenshtein <alk@netxms.org> - 5.0.2-1
+- Fixed bug in database upgrade procedure
+- Fixed "pin to pinboard" in UI
+
+* Fri May 03 2024 Alex Kirhenshtein <alk@netxms.org> - 5.0.1-1
+- Fixed bug in database upgrade procedure
+- Added CSV export in alarm viewer and agent tunnel manager
+
+* Wed May 01 2024 Alex Kirhenshtein <alk@netxms.org> - 5.0.0-1
+- Improved network maps
+- Added network map link styling script
+- Delegate access option that allows read access to network maps without full read access to objects on a map
+- Reworked monitoring of wireless access points and controllers
+- Major overhaul of sensor objects
+- Many NXSL function deprecated in favor of object methods
+- Improved NXSL classes and functions for date/time handling
+- Add option to check alarm details from alarm log view
+- Log parser rules can define metrics that are populated from match data
+- Special NXSL return codes for data collection and transformation scripts (DataCollection::ERROR, DataCollection::NOT_SUPPORTED, DataCollection::NO_SUCH_INSTANCE)
+- New NXSL function FindAccessPointByMACAddress
+- New NXSL function GetMappingTableKeys
+- "Stop" function in script executor view
+- Desktop client can reconnect automatically after short connectivity loss
+- New agent metric File.Hash.SHA256
+- New agent list and table Net.IP.Neighbors
+- Index property displayed in MIB browser
+- Root object can be set for object query
+- Improved SNMP trap processing performance
+- New log parser file option "removeEscapeSequences"
+- Added peer certififcate verification issue tracker integration
+- Housekeeper scripts (NXSL and SQL)
+- Improved REST API
+- Introduces new object class "Collector"
+- Downtime log controlled by EPP
+- Fixed issues:
+-   NX-797 (Automatic reconnect of management console)
+-   NX-1790 (Drag-n-dropped object are positioned to wrong place when map is scrolled down or right)
+-   NX-1870 (Representation of float DCI that gets string data as input)
+-   NX-1935 (Introduce hook script on map regeneration with ability to set link names)
+-   NX-2006 (Remove example event templates (code 4000-4011) from database)
+-   NX-2076 (Raw value should be always displayed as string)
+-   NX-2292 (Automatic maps should not include nodes that are connected through a node that was excluded by filter script)
+-   NX-2323 (Make parameters in all events named)
+-   NX-2343 (Several changes in NXSL syntax in v 5.0)
+-   NX-2375 (Use "varchar(max)" instead of "text" on Microsoft SQL Server)
+-   NX-2403 (Add support for AES-192 and AES-256 in SNMPv3)
+-   NX-2444 (On demand background external metrics)
+-   NX-2455 (Ability to check TLS.Certificate.\* for protocols with STARTTLS command)
+-   NX-2481 (Add ability to manually poll network map generation)
+-   NX-2507 (Add ability to cancel timers from NXSL)
+-   NX-2520 (Remove "Channel name" selector from "Send notification" dialog)
+-   NX-2523 (New agent metric Process.MemoryUsage (percentage of memory used by process))
+-   NX-2524 (Option to disable threshold without deleting it)
+-   NX-2525 (Add the ability to specify multiplier values in threshold)
+-   NX-2526 (When editing a template with a DCI without instance to use instance - DCI becomes unsupported)
+
 * Mon Apr 15 2024 Victor Kirhenshtein <victor@netxms.org> - 4.5.6-1
 - Fixed bug in background task scheduler
 - Fixed bug in reporting access control
