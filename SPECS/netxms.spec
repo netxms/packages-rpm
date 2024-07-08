@@ -50,7 +50,7 @@ BuildRequires: jemalloc-devel = 5.3.0-1%{?dist}_netxms
 %define configure_jemalloc --with-jemalloc
 %endif
 BuildRequires: libosip2-devel = 5.3.0-1%{?dist}_netxms libexosip2-devel = 5.3.0-1%{?dist}_netxms
-BuildRequires: libnxmodbus-devel = 3.1.10-4%{?dist}
+BuildRequires: libnxmodbus-devel = 3.1.10-5%{?dist}
 BuildRequires: isotree-devel >= 0.6.1-1%{?dist}
 
 %description
