@@ -45,7 +45,10 @@ BuildRequires: postgresql-devel
 BuildRequires: sqlite-devel
 BuildRequires: unixODBC-devel
 
+%ifnarch aarch64
 BuildRequires: jemalloc-devel = 5.3.0-1%{?dist}_netxms
+%define configure_jemalloc --with-jemalloc
+%endif
 BuildRequires: libosip2-devel = 5.3.0-1%{?dist}_netxms libexosip2-devel = 5.3.0-1%{?dist}_netxms
 BuildRequires: libnxmodbus = 3.1.10-4%{?dist}
 
@@ -81,7 +84,7 @@ fi
    --with-mariadb-compat-headers \
    --with-zeromq \
    --with-oracle \
-   --with-jemalloc \
+   %{?configure_jemalloc} \
    --with-asterisk
 
 #sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
