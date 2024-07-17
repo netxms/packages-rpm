@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.0.5
+Version:       5.0.6
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -606,6 +606,15 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Wed Jul 17 2024 Alex Kirhenshtein <alk@netxms.org> - 5.0.6-1
+- Added notification channel driver for Mattermost
+- Topic support in notification channel driver for Telegram
+- Fixed incorrect client IP address reported iby Windows agent in table System.ActiveUserSessions
+- Fixed bug in output of nxget -U
+- Fixed web UI crash when opening dashboard in kiosk mode
+- Fixed issues:
+-   NX-2550 (Errors in desktop client log (Widget is disposed))
+
 * Fri Jun 28 2024 Alex Kirhenshtein <alk@netxms.org> - 5.0.5-1
 - L2 network map seeds with no SNMP or L2 data will not prevent network map from update
 - Server performance improvements
