@@ -467,13 +467,14 @@ fi
 %{_libdir}/libstrophe.so.*
 %{_libdir}/netxms/*.hdlink
 %{_libdir}/netxms/*.nxm
+# % {_libdir}/netxms/ncdrv/mqtt.ncd
 %{_libdir}/netxms/ncdrv/anysms.ncd
 %{_libdir}/netxms/ncdrv/dbtable.ncd
 %{_libdir}/netxms/ncdrv/dummy.ncd
 %{_libdir}/netxms/ncdrv/googlechat.ncd
 %{_libdir}/netxms/ncdrv/gsm.ncd
 %{_libdir}/netxms/ncdrv/kannel.ncd
-# % {_libdir}/netxms/ncdrv/mqtt.ncd
+%{_libdir}/netxms/ncdrv/mattermost.ncd
 %{_libdir}/netxms/ncdrv/msteams.ncd
 %{_libdir}/netxms/ncdrv/mymobile.ncd
 %{_libdir}/netxms/ncdrv/nexmo.ncd
