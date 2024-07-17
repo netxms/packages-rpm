@@ -95,10 +95,12 @@ fi
 [ -e /usr/lib/jvm/java-11 ] && export JAVA_HOME=/usr/lib/jvm/java-11
 [ -e /usr/lib/jvm/java-17 ] && export JAVA_HOME=/usr/lib/jvm/java-17
 
+export MAVEN_OPTS=-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+
 cp build/netxms-build-tag.properties src/java-common/netxms-base/src/main/resources/
-mvn --batch-mode -f src/pom.xml versions:set -DnewVersion=$(grep NETXMS_VERSION= build/netxms-build-tag.properties | cut -d = -f 2) -DprocessAllModules=true
-mvn --batch-mode -f src/client/nxmc/java/pom.xml versions:set -DnewVersion=$(grep NETXMS_VERSION= build/netxms-build-tag.properties | cut -d = -f 2)
-mvn --batch-mode -f src/pom.xml install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
+mvn -B -f src/pom.xml versions:set -DnewVersion=$(grep NETXMS_VERSION= build/netxms-build-tag.properties | cut -d = -f 2) -DprocessAllModules=true
+mvn -B -f src/client/nxmc/java/pom.xml versions:set -DnewVersion=$(grep NETXMS_VERSION= build/netxms-build-tag.properties | cut -d = -f 2)
+mvn -B -f src/pom.xml install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
 
 make %{?_smp_mflags}
 
