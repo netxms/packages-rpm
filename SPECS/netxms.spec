@@ -451,7 +451,7 @@ fi
 %{_bindir}/nxsnmp*
 %{_bindir}/nxupload
 %{_bindir}/nxwsget
-%{_datadir}/netxms/mibs/*.txt
+%{_datadir}/netxms/mibs/*.mib
 %{_datadir}/netxms/oui/*.csv
 %{_datadir}/netxms/radius.dict
 %{_datadir}/netxms/sql/*.sql
