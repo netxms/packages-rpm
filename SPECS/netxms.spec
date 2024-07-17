@@ -91,6 +91,9 @@ fi
 #sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 #sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 
+[ -e /usr/lib/jvm/java-11 ] && export JAVA_HOME=/usr/lib/jvm/java-11
+[ -e /usr/lib/jvm/java-17 ] && export JAVA_HOME=/usr/lib/jvm/java-17
+
 cp build/netxms-build-tag.properties src/java-common/netxms-base/src/main/resources/
 mvn -f src/pom.xml versions:set -DnewVersion=$(grep NETXMS_VERSION= build/netxms-build-tag.properties | cut -d = -f 2) -DprocessAllModules=true
 mvn -f src/client/nxmc/java/pom.xml versions:set -DnewVersion=$(grep NETXMS_VERSION= build/netxms-build-tag.properties | cut -d = -f 2)
