@@ -21,6 +21,7 @@ BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: maven
 BuildRequires: chrpath
+BuildRequires: perl
 
 BuildRequires: expat-devel
 BuildRequires: jansson-devel
