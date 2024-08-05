@@ -2,7 +2,7 @@
 Summary:       NetXMS umbrella package
 Name:          netxms
 Version:       5.0.6
-Release:       1%{?dist}
+Release:       2%{?dist}
 License:       GPL
 URL:           https://netxms.org
 Group:         Admin
@@ -26,6 +26,7 @@ BuildRequires: perl
 BuildRequires: expat-devel
 BuildRequires: jansson-devel
 BuildRequires: (java-17-openjdk-devel or java-11-openjdk-devel)
+BuildRequires: jq-devel
 BuildRequires: libcurl-devel
 BuildRequires: libmicrohttpd-devel
 BuildRequires: libssh-devel
@@ -608,6 +609,9 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon Aug 05 2024 Alex Kirhenshtein <alk@netxms.org> - 5.0.6-2
+- libjq added to dependencies
+
 * Wed Jul 17 2024 Alex Kirhenshtein <alk@netxms.org> - 5.0.6-1
 - Added notification channel driver for Mattermost
 - Topic support in notification channel driver for Telegram
