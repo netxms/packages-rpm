@@ -388,7 +388,7 @@ This package provides various integration tools (e.g. nxshell).
 %{_bindir}/nxnotify
 %{_bindir}/nxpush
 %{_bindir}/nxshell
-%{_libdir}/netxms/java/jython-standalone-2.7.4b1.jar
+%{_libdir}/netxms/java/jython-standalone-*.jar
 %{_libdir}/netxms/java/nxshell-*.jar
 
 
@@ -594,10 +594,10 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_libdir}/netxms/java/jna-*.jar
 %{_libdir}/netxms/java/mail-*.jar
 %{_libdir}/netxms/java/mariadb-java-client-*.jar
-%{_libdir}/netxms/java/mssql-jdbc-*.jre8.jar
+%{_libdir}/netxms/java/mssql-jdbc-*.jar
 %{_libdir}/netxms/java/mysql-connector-j-*.jar
 %{_libdir}/netxms/java/nxreportd-*.jar
-%{_libdir}/netxms/java/ojdbc10-*.jar
+%{_libdir}/netxms/java/ojdbc*-*.jar
 %{_libdir}/netxms/java/openpdf-*.jar
 %{_libdir}/netxms/java/postgresql-*.jar
 %{_libdir}/netxms/java/protobuf-java-*.jar
