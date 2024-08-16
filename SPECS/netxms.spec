@@ -179,6 +179,8 @@ chrpath --delete %{buildroot}%{_libdir}/netxms/pdsdrv/*.pdsd
 %exclude %{_libdir}/*.la
 %exclude %{_libdir}/*.so
 %exclude %{_libdir}/*.so
+%exclude %{_libdir}/netxms/java/hamcrest-core-*.jar
+%exclude %{_libdir}/netxms/java/junit-*.jar
 %exclude %{_libdir}/netxms/ncdrv/mqtt.ncd
 %exclude %{_libdir}/netxms/spe.nxm
 
@@ -285,11 +287,13 @@ like netxms-reporting and java subagent (netxms-agent-java)
 %{_libdir}/netxms/java/commons-collections4-*.jar
 %{_libdir}/netxms/java/commons-compiler-*.jar
 %{_libdir}/netxms/java/commons-io-*.jar
+%{_libdir}/netxms/java/commons-lang3-*.jar
 %{_libdir}/netxms/java/commons-math3-*.jar
 %{_libdir}/netxms/java/janino-*.jar
 %{_libdir}/netxms/java/log4j-api-*.jar
 %{_libdir}/netxms/java/logback-classic-*.jar
 %{_libdir}/netxms/java/logback-core-*.jar
+%{_libdir}/netxms/java/mjson-*.jar
 %{_libdir}/netxms/java/netxms-base-*.jar
 %{_libdir}/netxms/java/netxms-client-*.jar
 %{_libdir}/netxms/java/netxms-java-bridge-*.jar
