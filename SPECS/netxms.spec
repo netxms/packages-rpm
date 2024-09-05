@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.0.7
+Version:       5.0.8
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -613,6 +613,21 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Sep 05 2024 Alex Kirhenshtein <alk@netxms.org> - 5.0.8-1
+-  Fixed error in web console on package deployment
+-  Implemented refresh for Event Processing Policy view
+-  Fixed Arp Cache view refresh when data is not available
+-  Implemented find mac in Web APIs
+-  NXSL function "trace" handles objects and arrays in a same way as "print"
+-  New methods "print" and "trace" in NXSL class "Table"
+-  Added workaround for incorrect LLDP information returned by Alpha Bridge switches
+-  Fixed bug in network map link styling script processing
+-  Fixed issues:
+-    NX-1311 (Table DCIs ignoring table configuration)
+-    NX-2567 (ExternalMetricProvider does not work on Windows)
+-    NX-2570 (Use monotonic clock instead of system time for calculating agent uptime)
+-    NX-2572 (Problem creating PostgreSQL database during installation on Windows)
+
 * Thu Aug 15 2024 Alex Kirhenshtein <alk@netxms.org> - 5.0.7-1
 - Server configuration option to enable agent tunnel binding using only tunnel's source IP address
 - Fixed incorrect Windows Remote Desktop session color depth reported by agent
