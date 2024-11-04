@@ -30,6 +30,7 @@ BuildRequires: jq-devel
 BuildRequires: libcurl-devel
 BuildRequires: libmicrohttpd-devel
 BuildRequires: libssh-devel
+BuildRequires: libstrophe-devel
 BuildRequires: libvirt-devel
 BuildRequires: lm_sensors-devel
 BuildRequires: mosquitto-devel
@@ -464,7 +465,6 @@ fi
 %{_libdir}/libnxdbmgr.so.*
 %{_libdir}/libnxsl.so.*
 %{_libdir}/libnxsrv.so.*
-%{_libdir}/libstrophe.so.*
 %{_libdir}/netxms/*.hdlink
 %{_libdir}/netxms/*.nxm
 # % {_libdir}/netxms/ncdrv/mqtt.ncd
