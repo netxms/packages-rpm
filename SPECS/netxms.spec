@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.1.0
+Version:       5.1.1
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -613,6 +613,30 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Wed Nov 20 2024 Alex Kirhenshtein <alk@netxms.org> - 5.1.1-1
+- Improved server performance
+- Improved wireless controller bridge for HFCL
+- MS SQL database driver no longer requires SQL Server Native Client (can use SQL Server ODBC driver v13, v17, or v18 instead)
+- Added driver for Huawei LAN switches
+- Updated driver for Dell switches
+- Updated driver for Qtech switches
+- Added internal metrics Server.ObjectCount.AccessPoints and Server.ObjectCount.Interfaces
+- New NXSL functions Math::Average, Math::MeanAbsoluteDeviation, and Math::StandardDeviation
+- nxdbmgr can do in-place conversion from standard PostgreSQL schema to TimescaleDB
+- Fixed server crash on receiving SNMP trap
+- Fixed bug in database initialization script
+- Fixed task scheduler performance issues
+- Removed "Delete" button form object upper bar
+- Fixed issues:
+-   NX-2629 (Can not clone an object tool)
+-   NX-2630 (Not all the Markdowns are functioning)
+-   NX-2631 (In-place migration from standard PostgreSQL to TimescaleDB)
+-   NX-2632 (Inconsistency in asset management schema enum field definition)
+-   NX-2633 (Text not fully displayed in button)
+-   NX-2637 (Circuit class functionality)
+-   NX-2639 (Incorrect log message for Mattermost driver)
+-   NX-2642 (Add alarm_state_changes and certificate_action_log tables to nxdbmgr -Z all)
+
 * Sat Nov 02 2024 Alex Kirhenshtein <alk@netxms.org> - 5.1.0-1
 -  New automatic map type "hybrid topology"
 -  New object class "Circuit"
