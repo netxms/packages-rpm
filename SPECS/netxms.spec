@@ -36,6 +36,9 @@ BuildRequires: lm_sensors-devel
 BuildRequires: mosquitto-devel
 BuildRequires: openldap-devel
 BuildRequires: openssl-devel
+%if 0%{?fedora} == 41
+BuildRequires: openssl-devel-engine
+%endif
 BuildRequires: pcre-devel
 BuildRequires: readline-devel
 BuildRequires: systemd-devel
