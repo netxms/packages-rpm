@@ -77,7 +77,7 @@ steps:
       - /build.sh release-$V
       - cp netxms/netxms-$V.tar.gz SOURCES/
   - name: build
-    image: ghcr.io/netxms/builder-rpm:latest
+    image: ghcr.io/netxms/builder-rpm:1.10
     privileged: true
     volumes:
       - name: result
@@ -133,6 +133,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: b81e4337fdfcbcaa884d757c5a46cb7f2f01bc62d2b15c9f6f45714f64124250
+hmac: 4581cacc513509719efb364ddab34e774d409bb7d643305a237d558d7134caa4
 
 ...
