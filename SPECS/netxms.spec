@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.1.1
+Version:       5.1.2
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -616,6 +616,30 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon Dec 16 2024 Alex Kirhenshtein <alk@netxms.org> - 5.1.2-1
+- Server performance and memory usage optimization when polling multiple SNMP devices
+- Limit routing table scans during SNMP device configuration poll
+- Optimized memory usage in InfluxDB driver
+- Server startup time improved
+- Added server configuration option "Client.MinVersion"
+- Improved Markdown viewer
+- InfluxDB driver options for validation and correction of DCI values being sent
+- Fixed issues:
+-   NX-2635 (Predefined graphs perspective not working in web UI)
+-   NX-2640 (Add more detailed stats on pollers to debug console)
+-   NX-2647 (On node deletion interfaces under circuit objects are not deleted)
+-   NX-2649 (Issues with "move to another container" context menu on interfaces)
+-   NX-2650 (Add new hotkey in "execute server script" for "clear output+run script")
+-   NX-2653 (Can not pin Data Collection tab which is in edit mode)
+-   NX-2657 (IllegalStateException in nxmc log)
+-   NX-2660 (Add method to read little-endian 4 byte float value from ByteStream)
+-   NX-2661 (Issues with loading image of DCI image element of map)
+-   NX-2669 (Add internal table with node's interfaces)
+-   NX-2672 (Kiosk mode issues)
+-   NX-2673 (Table DCI column querying not working, if metric has no leading dot)
+-   NX-2675 (Add NXSL methods to handle markdown comments correctly)
+-   NX-2676 (Issues with comment tab creation and modification on object)
+
 * Wed Nov 20 2024 Alex Kirhenshtein <alk@netxms.org> - 5.1.1-1
 - Improved server performance
 - Improved wireless controller bridge for HFCL
