@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.1.2
+Version:       5.1.3
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -616,6 +616,14 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon Dec 16 2024 Alex Kirhenshtein <alk@netxms.org> - 5.1.3-1
+- Fixed critical bug in SNMP trap receiver
+- Server checks for other possible SNMP credentials during configuration poll if node marked as SNMP unreachable
+- Image attributes in Markdown viewer
+- Fixed bug in counter reset detection
+- Fixed issues:
+-   NX-2685 (nxshell asks for password while using properties file)
+
 * Mon Dec 16 2024 Alex Kirhenshtein <alk@netxms.org> - 5.1.2-1
 - Server performance and memory usage optimization when polling multiple SNMP devices
 - Limit routing table scans during SNMP device configuration poll
