@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.1.3
+Version:       5.1.4
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -616,6 +616,29 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon Mar 03 2025 Alex Kirhenshtein <alk@netxms.org> - 5.1.4-1
+- Agent uses Windows Installer API instead of launching msiexec.exe for installing .msi and .msp packages
+- New Windows agent metric System.IsRestartPending
+- Improved server performance when launching multiple external actions
+- MIB Explorer added to "Tools" perspective
+- Fixed incorrect parsing of 32 bit agent installer names when adding package to package manager
+- Changed IPv4 address parser - now it only accepts canonical form (4 decimal numbers separated by dots)
+- Correct handling of network mask /31 on peer-to-peer interfaces
+- Node sub objects like Interface will not be shown on Infrastructure perspective if they do not have parent shown in the same tree
+- Added dBm and rpm DCI units to no multipliers list
+- Fixed tab priority for multiple built in views
+- Fixed problem when newly added DCI were not shown on Network Map (links, DCI containers)
+- Fixed broken autobind during node configuration poll
+- Fixed issues:
+-   NX-2645 (Remember perspective splitter position)
+-   NX-2684 (Remove hardcoded license id from the nxlicmgr)
+-   NX-2690 (Migration from Timescale to regular Postgres fails on win\_event\_log table)
+-   NX-2696 (View options in Data Collection does not show actual state of Use Multipliers checkbox)
+-   NX-2699 (Show value of os.name in nxmc's About dialog)
+-   NX-2701 (Automatic DB unlock fails because GetLocalIpAddr() may return different address)
+-   NX-2705 (NXSL split string with trim option)
+-   NX-2711 (scheduled_tasks column is out of range for type integer)
+
 * Mon Dec 16 2024 Alex Kirhenshtein <alk@netxms.org> - 5.1.3-1
 - Fixed critical bug in SNMP trap receiver
 - Server checks for other possible SNMP credentials during configuration poll if node marked as SNMP unreachable
