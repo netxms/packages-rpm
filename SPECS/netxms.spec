@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.1.4
+Version:       5.1.5
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -616,6 +616,17 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Wed Mar 26 2025 Alex Kirhenshtein <alk@netxms.org> - 5.1.5-1
+- VNC detection during configuration poll can be disabled
+- System access rights included into user ACL report
+- Fixed bugs in NXSL script conversion to V5 format
+- Fixed file handle leak in SSH subagent
+- Fixed bug in configuration export
+- Fixed issues:
+-   NX-2712 (Scripted thresholds triggers activation event repeatedly)
+-   NX-2714 (Status of interface not propagated to circuit)
+-   NX-2726 (Web API call causes server crash)
+
 * Mon Mar 03 2025 Alex Kirhenshtein <alk@netxms.org> - 5.1.4-1
 - Agent uses Windows Installer API instead of launching msiexec.exe for installing .msi and .msp packages
 - New Windows agent metric System.IsRestartPending
