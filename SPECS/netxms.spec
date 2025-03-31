@@ -247,6 +247,7 @@ Most of the subagents which does not require additional dependences are included
 %{_libdir}/libappagent.so.*
 %{_libdir}/libnxagent.so.*
 %{_libdir}/libnxlp.so.*
+%{_libdir}/libnxsde.so.*
 %{_libdir}/netxms/bind9.nsm
 %{_libdir}/netxms/dbquery.nsm
 %{_libdir}/netxms/devemu.nsm
@@ -293,6 +294,7 @@ like netxms-reporting and java subagent (netxms-agent-java)
 %{_libdir}/netxms/java/commons-io-*.jar
 %{_libdir}/netxms/java/commons-lang3-*.jar
 %{_libdir}/netxms/java/commons-math3-*.jar
+%{_libdir}/netxms/java/gson-*.jar
 %{_libdir}/netxms/java/janino-*.jar
 %{_libdir}/netxms/java/log4j-api-*.jar
 %{_libdir}/netxms/java/logback-classic-*.jar
