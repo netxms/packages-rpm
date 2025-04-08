@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.2.0
+Version:       5.2.1
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -618,6 +618,20 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Apr 08 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.1-1
+- NXSL function PostEvent accepts any event source object
+- Added option to set in maintenance all objects under Wireless Domain
+- InfluxDB and Clickhouse drivers can be configured to use custom attributes of DCI's template
+- Fixed bug in driver for Cambium CnPilot devices
+- Fixed database connection leak during package deployment
+- Fixed issues:
+-   NX-2600 (Threshold for missing table instances never deactivated)
+-   NX-2723 (Add Web API endpoint for object maintenance)
+-   NX-2729 (Display hints for hook scripts in script library)
+-   NX-2734 (When exporting event processing policy rule, automatically add referenced actions)
+-   NX-2735 (Cannot delete user from object access control list)
+-   NX-2740 (Modbus DCI becomes unsupported when proxy is unreachable)
+
 * Thu Mar 27 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.0-1
 - User-defined tags on data collection items
 - Network maps can be shown in object's context in a same way as dashboards
