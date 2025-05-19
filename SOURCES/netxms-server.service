@@ -1,6 +1,7 @@
 [Unit]
 Description=NetXMS core server
-# StartLimitIntervalSec=0 # since systemd v230
+After=network.target
+StartLimitIntervalSec=0
 
 [Service]
 Type=simple
@@ -11,7 +12,7 @@ LimitCORE=infinity
 Restart=on-failure
 RestartSec=30
 TimeoutSec=900
-StartLimitInterval=0 # depricated in v230
+UMask=0077
 
 [Install]
 WantedBy=multi-user.target
