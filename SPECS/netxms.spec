@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.2.1
+Version:       5.2.2
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -287,7 +287,6 @@ like netxms-reporting and java subagent (netxms-agent-java)
 
 %files java-base
 %{_libdir}/libnxjava.so.*
-%{_libdir}/netxms/java/SparseBitSet-*.jar
 %{_libdir}/netxms/java/commons-codec-*.jar
 %{_libdir}/netxms/java/commons-collections4-*.jar
 %{_libdir}/netxms/java/commons-compiler-*.jar
@@ -299,13 +298,13 @@ like netxms-reporting and java subagent (netxms-agent-java)
 %{_libdir}/netxms/java/log4j-api-*.jar
 %{_libdir}/netxms/java/logback-classic-*.jar
 %{_libdir}/netxms/java/logback-core-*.jar
-%{_libdir}/netxms/java/mjson-*.jar
 %{_libdir}/netxms/java/netxms-base-*.jar
 %{_libdir}/netxms/java/netxms-client-*.jar
 %{_libdir}/netxms/java/netxms-java-bridge-*.jar
 %{_libdir}/netxms/java/poi-*.jar
 %{_libdir}/netxms/java/simple-xml-safe-*.jar
 %{_libdir}/netxms/java/slf4j-api-*.jar
+%{_libdir}/netxms/java/SparseBitSet-*.jar
 
 
 ### netxms-agent-java
@@ -583,7 +582,6 @@ Requires: netxms-java-base = %{version}-%{release}
 %files reporting
 %{_bindir}/nxreportd
 %{_libdir}/netxms/java/activation-*.jar
-%{_libdir}/netxms/java/caffeine-*.jar
 %{_libdir}/netxms/java/checker-qual-*.jar
 %{_libdir}/netxms/java/commons-beanutils-*.jar
 %{_libdir}/netxms/java/commons-collections-*.jar
@@ -597,12 +595,11 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_libdir}/netxms/java/jackson-databind-*.jar
 %{_libdir}/netxms/java/jackson-dataformat-xml-*.jar
 %{_libdir}/netxms/java/jasperreports-*.jar
-%{_libdir}/netxms/java/jcl-over-slf4j-*.jar
 %{_libdir}/netxms/java/jcommon-*.jar
 %{_libdir}/netxms/java/jfreechart-*.jar
-%{_libdir}/netxms/java/jna-*.jar
 %{_libdir}/netxms/java/mail-*.jar
 %{_libdir}/netxms/java/mariadb-java-client-*.jar
+%{_libdir}/netxms/java/mjson-*.jar
 %{_libdir}/netxms/java/mssql-jdbc-*.jar
 %{_libdir}/netxms/java/mysql-connector-j-*.jar
 %{_libdir}/netxms/java/nxreportd-*.jar
@@ -611,13 +608,27 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_libdir}/netxms/java/postgresql-*.jar
 %{_libdir}/netxms/java/protobuf-java-*.jar
 %{_libdir}/netxms/java/stax2-api-*.jar
-%{_libdir}/netxms/java/waffle-jna-*.jar
 %{_libdir}/netxms/java/woodstox-core-*.jar
 %{_libdir}/netxms/java/xercesImpl-*.jar
 %{_libdir}/netxms/java/xml-apis-*.jar
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon May 19 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.2-1
+- Fixed insert into table "notification\_log" for TimescaleDB
+- Improved client performance, by disabling alarm refresh if tab is not active
+- Fixed missing DCI on network map links when new DCI's are added on alreay opened map
+- Added job progress indication within views
+- Fixed issues:
+-   NX-2733 (Do not show zone column in discovery targets if zoning is off)
+-   NX-2742 (Add NXSL node object method for enabling/disabling SM-CLP polling)
+-   NX-2751 (Delete scheduled tasks on node deletion)
+-   NX-2752 (Add ICMP response time jitter internal DCI for ICMP response statistic collection)
+-   NX-2754 (Separate error code for situation when TCP proxy is not enabled in agent config)
+-   NX-2755 (NXSL Interface utilization values returned as int, without decimal point)
+-   NX-2764 (Add PostgreSQL 17 support in monitoring subagent (pgi\_stat\_checkpointer))
+-   NX-2765 (Increase command length in package manager)
+
 * Thu Apr 08 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.1-1
 - NXSL function PostEvent accepts any event source object
 - Added option to set in maintenance all objects under Wireless Domain
