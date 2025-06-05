@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.2.2
+Version:       5.2.3
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -614,8 +614,20 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Jun 05 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.3-1
+- Default timeout for service checks via netsvc subagent set to 1 second
+- Fixed alarm severity text for Grafana API
+- Forced plain text web service requests are cached separately
+- Fixed issues:
+-   NX-2766 (Template macros are not expanded in instance data filed in DCIs Instance discovery)
+-   NX-2768 (Changes to VNC properties not logged to audit log)
+-   NX-2770 (Object query result view pinning does not work)
+-   NX-2777 (No favicon in new Web UI)
+-   NX-2781 (Send all parameters of default email notification channel to reporting server)
+-   #140 (SQL errors after converting database to TimescaleDB)
+
 * Mon May 19 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.2-1
-- Fixed insert into table "notification\_log" for TimescaleDB
+- Fixed insert into table "notification_log" for TimescaleDB
 - Improved client performance, by disabling alarm refresh if tab is not active
 - Fixed missing DCI on network map links when new DCI's are added on alreay opened map
 - Added job progress indication within views
@@ -626,7 +638,7 @@ Requires: netxms-java-base = %{version}-%{release}
 -   NX-2752 (Add ICMP response time jitter internal DCI for ICMP response statistic collection)
 -   NX-2754 (Separate error code for situation when TCP proxy is not enabled in agent config)
 -   NX-2755 (NXSL Interface utilization values returned as int, without decimal point)
--   NX-2764 (Add PostgreSQL 17 support in monitoring subagent (pgi\_stat\_checkpointer))
+-   NX-2764 (Add PostgreSQL 17 support in monitoring subagent (pgi_stat_checkpointer))
 -   NX-2765 (Increase command length in package manager)
 
 * Thu Apr 08 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.1-1
