@@ -25,7 +25,7 @@ BuildRequires: perl
 
 BuildRequires: expat-devel
 BuildRequires: jansson-devel
-BuildRequires: (java-17-openjdk-devel or java-11-openjdk-devel)
+BuildRequires: (java-21-openjdk-devel or java-17-openjdk-devel or java-11-openjdk-devel)
 BuildRequires: jq-devel
 BuildRequires: libcurl-devel
 BuildRequires: libmicrohttpd-devel
