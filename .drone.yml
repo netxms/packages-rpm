@@ -21,17 +21,30 @@ steps:
       - "[ -z $V ] && echo Cannot detect release, check spec file && exit 1"
       - /build.sh release-$V
       - cp netxms/netxms-$V.tar.gz SOURCES/
-  - name: build
-    image: ghcr.io/netxms/builder-rpm:1.14
+  - name: build-epel
+    image: ghcr.io/netxms/builder-rpm:1.15
     privileged: true
     volumes:
       - name: result
         path: /result
       - name: cache
         path: /var/cache/mock
+      - name: sources
+        path: /drone/src/SOURCES
     commands:
-      - /build.sh
-      - cp /var/lib/mock/*/result/*.rpm /result/
+      - /build.sh --target epel
+  - name: build-fedora
+    image: ghcr.io/netxms/builder-rpm:1.15
+    privileged: true
+    volumes:
+      - name: result
+        path: /result
+      - name: cache
+        path: /var/cache/mock
+      - name: sources
+        path: /drone/src/SOURCES
+    commands:
+      - /build.sh --target fedora
   - name: upload
     image: ghcr.io/alkk/drone-rsync:latest
     volumes:
@@ -52,6 +65,9 @@ steps:
       destination: /staging/rpm
       delete: true
       extra: --verbose --chmod=Dg+w,Fg+w
+    depends_on:
+      - build-epel
+      - build-fedora
 
 ---
 kind: pipeline
@@ -76,17 +92,30 @@ steps:
       - "[ -z $V ] && echo Cannot detect release, check spec file && exit 1"
       - /build.sh release-$V
       - cp netxms/netxms-$V.tar.gz SOURCES/
-  - name: build
-    image: ghcr.io/netxms/builder-rpm:1.14
+  - name: build-epel
+    image: ghcr.io/netxms/builder-rpm:1.15
     privileged: true
     volumes:
       - name: result
         path: /result
       - name: cache
         path: /var/cache/mock
+      - name: sources
+        path: /drone/src/SOURCES
     commands:
-      - /build.sh
-      - cp /var/lib/mock/*/result/*.rpm /result/
+      - /build.sh --target epel
+  - name: build-fedora
+    image: ghcr.io/netxms/builder-rpm:1.15
+    privileged: true
+    volumes:
+      - name: result
+        path: /result
+      - name: cache
+        path: /var/cache/mock
+      - name: sources
+        path: /drone/src/SOURCES
+    commands:
+      - /build.sh --target fedora
   - name: upload
     image: ghcr.io/alkk/drone-rsync:latest
     volumes:
@@ -107,6 +136,9 @@ steps:
       destination: /staging/rpm
       delete: true
       extra: --verbose --chmod=Dg+w,Fg+w
+    depends_on:
+      - build-epel
+      - build-fedora
 
 ---
 kind: pipeline
@@ -133,6 +165,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 0750a7bb021dab3ea76b4fb804800537581398ac826303f058f6d3875e9a263d
+hmac: 28ad713d06036be6183ecc5cae9b5c59909ee12dd3dd4286aa3c38150175ec7c
 
 ...
