@@ -30,7 +30,9 @@ BuildRequires: jq-devel
 BuildRequires: libcurl-devel
 BuildRequires: libmicrohttpd-devel
 BuildRequires: libssh-devel
+%if 0%{?rhel} != 10
 BuildRequires: libstrophe-devel
+%endif
 BuildRequires: libvirt-devel
 BuildRequires: lm_sensors-devel
 BuildRequires: mosquitto-devel
@@ -494,7 +496,9 @@ fi
 %{_libdir}/netxms/ncdrv/textfile.ncd
 %{_libdir}/netxms/ncdrv/twilio.ncd
 %{_libdir}/netxms/ncdrv/websms.ncd
+%if 0%{?rhel} != 10
 %{_libdir}/netxms/ncdrv/xmpp.ncd
+%endif
 %{_libdir}/netxms/ndd/*
 %{_libdir}/netxms/pdsdrv/*
 %{_sharedstatedir}/netxms/*
