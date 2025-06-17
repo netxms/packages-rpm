@@ -14,7 +14,7 @@ volumes:
       path: /cache/builder-rpm
 
 steps:
-  - name: make dist
+  - name: make-dist
     image: ghcr.io/alkk/netxms-make-dist:latest
     commands:
       - V=$(fgrep 'Version:' SPECS/netxms.spec|cut -d':' -f2|tr -d [:space:])
@@ -33,6 +33,8 @@ steps:
         path: /drone/src/SOURCES
     commands:
       - /build.sh --target epel
+    depends_on:
+      - make-dist
   - name: build-fedora
     image: ghcr.io/netxms/builder-rpm:1.15
     privileged: true
@@ -45,6 +47,8 @@ steps:
         path: /drone/src/SOURCES
     commands:
       - /build.sh --target fedora
+    depends_on:
+      - make-dist
   - name: upload
     image: ghcr.io/alkk/drone-rsync:latest
     volumes:
@@ -85,7 +89,7 @@ volumes:
       path: /cache/builder-rpm
 
 steps:
-  - name: make dist
+  - name: make-dist
     image: ghcr.io/alkk/netxms-make-dist:latest
     commands:
       - V=$(fgrep 'Version:' SPECS/netxms.spec|cut -d':' -f2|tr -d [:space:])
@@ -104,6 +108,8 @@ steps:
         path: /drone/src/SOURCES
     commands:
       - /build.sh --target epel
+    depends_on:
+      - make-dist
   - name: build-fedora
     image: ghcr.io/netxms/builder-rpm:1.15
     privileged: true
@@ -116,6 +122,8 @@ steps:
         path: /drone/src/SOURCES
     commands:
       - /build.sh --target fedora
+    depends_on:
+      - make-dist
   - name: upload
     image: ghcr.io/alkk/drone-rsync:latest
     volumes:
@@ -165,6 +173,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 28ad713d06036be6183ecc5cae9b5c59909ee12dd3dd4286aa3c38150175ec7c
+hmac: da92dad510d01b23299ddb2e14d5e8de66201fb6d99359d1d9e5254165ebbda1
 
 ...
