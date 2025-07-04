@@ -41,7 +41,7 @@ BuildRequires: openssl-devel
 %if 0%{?fedora} == 41
 BuildRequires: openssl-devel-engine
 %endif
-BuildRequires: pcre-devel
+BuildRequires: (pcre2-devel or pcre-devel)
 BuildRequires: readline-devel
 BuildRequires: systemd-devel
 BuildRequires: zeromq-devel
