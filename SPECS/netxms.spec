@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.2.3
+Version:       5.2.4
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -618,6 +618,26 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Jul 10 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.4-1
+  * System event is generated when responsible user for object added or removed
+  * Support for custom OUI database entries
+  * Fixed bug in loading NXSL "stdlib" script
+  * Add BOM sequence skip for structured data extractors (including web service extractor)
+  * Network map fixes: refresh while drag, jumping labels on links and not saved object location after 'align to grid' action
+  * NXSL function JsonParse sets global variables $jsonErrorMessage, $jsonErrorLine, and $jsonErrorColumn after parsing error
+  * NXSL function JsonParse accepts optional second argument to control interpretation of integers as floating point numbers
+  * Configurable data collection scheduling mode that requires connectivity before scheduling DCI for collection
+  * Fixed issues:
+  *   NX-2737 (Switch from obsolete SQLite shared cache mode to WAL mode)
+  *   NX-2783 (Network discovery view shows "Invalid thread access" error on web)
+  *   NX-2788 (Changing Objects.Nodes.SyncNamesWithDNS requires server restart, while it should not)
+  *   NX-2790 (Interface Overview view should have node name when interface is under a circuit)
+  *   NX-2795 (Selection on map is frequently lost)
+  *   NX-2797 (Hide passwords in server configuration variables view)
+  *   NX-2802 (Show units for server configuration variables)
+  *   NX-2806 (Data collection scheduling mode that requires connectivity before scheduling DCI for collection)
+  *   NX-2807 (EPP export does not escape < and > in XML attributes)
+
 * Thu Jun 05 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.3-1
 - Default timeout for service checks via netsvc subagent set to 1 second
 - Fixed alarm severity text for Grafana API
