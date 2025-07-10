@@ -2,3 +2,4 @@
 /dist/
 /SOURCES/netxms-*.gz
 .DS_Store
+__pycache__/
