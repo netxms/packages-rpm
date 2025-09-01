@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.2.4
+Version:       5.2.5
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -618,6 +618,24 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon Sep 01 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.5-1
+  * Agent configuration file options can be passed from command line
+  * New AIX agent metrics: System.Memory.Physical.Client, System.Memory.Physical.ClientPerc, System.Memory.Physical.Computational, System.Memory.Physical.ComputationalPerc
+  * User ACL reports generated in XLSX format
+  * Improved driver for Ubiquity AirMax devices
+  * Running configuration logged after log rotation
+  * Configurable maximum size for cached routing tables
+  * New metric USB.ConnectedCount in WinNT subagent
+  * Fixed incorrect object status calculation after restarting server with resolved alarms
+  * Fixed bug in network map display in dashboard widget
+  * Fixed bug in calculation of physical CPU usage on AIX
+  * Fixed missing agent database table file\_integrity
+  * Fixed issues:
+  *   NX-2794 (Add more info to log message: Potential node x.x.x.x in zone x rejected (IP address is known as cluster resource address))
+  *   NX-2819 (DCI data recalculation not working for TimescaleDB)
+  *   NX-2822 (Alarms not appearing if nxmc has reconnected)
+  *   NX-2825 (Tables missing PK, this breaks master-master replication (at least in Postgres))
+
 * Thu Jul 10 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.4-1
   * System event is generated when responsible user for object added or removed
   * Support for custom OUI database entries
