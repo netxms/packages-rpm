@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.2.5
+Version:       5.2.6
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -618,6 +618,16 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Wed Sep 17 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.6-1
+  * Added database manager lock to prevent starting background upgrade when it is already running
+  * Post-upgrade welcome page can be disabled in client preferences
+  * Fixed bug in handling of duplicate samples sent by agent in cache mode
+  * Fixed bug in upgrading PostgreSQL database with duplicate data records
+  * Fixed issues:
+  *   NX-2832 (Filter not working in Business Service Checks view)
+  *   NX-2833 (Line chart stacking does not work for data sources with Invert values on)
+  *   NX-2835 (Add option to disable welcome screen message)
+
 * Mon Sep 01 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.5-1
   * Agent configuration file options can be passed from command line
   * New AIX agent metrics: System.Memory.Physical.Client, System.Memory.Physical.ClientPerc, System.Memory.Physical.Computational, System.Memory.Physical.ComputationalPerc
