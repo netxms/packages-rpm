@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.2.6
+Version:       5.2.7
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -618,6 +618,24 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Nov 06 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.7-1
+  * Subagent for monitoring Redis database
+  * Optimizations in server process memory usage
+  * Fixed bug that cause completed system scheduled tasks not being deleted from database
+  * Fixed incorrect behavior of NXSL functions Math::Min and Math::Max when first argument is an array
+  * Fixed server crash on zero period query for business service uptime
+  * Fixed incorrect VLAN list retrieval on some Juniper switches
+  * Fixed issues:
+  *   NX-2594 (Possible server deadlock in network discovery)
+  *   NX-2652 (Improve overview page for interfaces)
+  *   NX-2813 (duplicate key value violates unique constraint "interface\_vlan\_list\_pkey")
+  *   NX-2836 (Unbind not working from Agent Tunnels view)
+  *   NX-2837 (Cannot read threshold summary: incompatible operation in Thresholds view on rack)
+  *   NX-2850 (Tab keyboard button not working in script editor in WEB UI)
+  *   NX-2853 (Add option to merge separators for agent external table)
+  *   NX-2856 (Business service availability report crash server process)
+  *   NX-2859 (Add internal table with notification channels)
+
 * Wed Sep 17 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.6-1
   * Added database manager lock to prevent starting background upgrade when it is already running
   * Post-upgrade welcome page can be disabled in client preferences
