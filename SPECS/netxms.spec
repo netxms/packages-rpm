@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       5.2.7
+Version:       5.2.8
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -618,6 +618,19 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Dec 04 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.8-1
+  * Structure of idata and tdata tables on PostgreSQL reverted to previous schema
+  * nxadm command line option to check if server process is running and has completed initialization
+  * Fixed bug in reading physical disk information on Windows
+  * Fixed command injection vulnerability in PhysicalDisk.* metrics
+  * Fixed issues:
+  *   NX-2656 (Improve UX of the notification popup - X should close message, not the whole dialog)
+  *   NX-2801 (New version of JQ library on Windows)
+  *   NX-2827 (Allow editing of tools added to Object Tools dashboard element)
+  *   NX-2872 (%d format string incorrectly handled in chart legend)
+  *   NX-2875 (PhysicalDisk.SmartAttr() metric not working)
+  *   NX-2876 (Incorrect value for System.CPU.Count on Windows machines with more than 64 logical processors)
+
 * Thu Nov 06 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.7-1
   * Subagent for monitoring Redis database
   * Optimizations in server process memory usage
