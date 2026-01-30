@@ -724,7 +724,7 @@ Requires: netxms-java-base = %{version}-%{release}
 -   NX-2764 (Add PostgreSQL 17 support in monitoring subagent (pgi_stat_checkpointer))
 -   NX-2765 (Increase command length in package manager)
 
-* Thu Apr 08 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.1-1
+* Tue Apr 08 2025 Alex Kirhenshtein <alk@netxms.org> - 5.2.1-1
 - NXSL function PostEvent accepts any event source object
 - Added option to set in maintenance all objects under Wireless Domain
 - InfluxDB and Clickhouse drivers can be configured to use custom attributes of DCI's template
