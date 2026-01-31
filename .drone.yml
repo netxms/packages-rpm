@@ -22,7 +22,7 @@ steps:
       - /build.sh release-$V
       - cp netxms/netxms-$V.tar.gz SOURCES/
   - name: build-epel
-    image: ghcr.io/netxms/builder-rpm:1.16
+    image: ghcr.io/netxms/builder-rpm:latest
     privileged: true
     volumes:
       - name: result
@@ -36,7 +36,7 @@ steps:
     depends_on:
       - make-dist
   - name: build-fedora
-    image: ghcr.io/netxms/builder-rpm:1.16
+    image: ghcr.io/netxms/builder-rpm:latest
     privileged: true
     volumes:
       - name: result
@@ -97,7 +97,7 @@ steps:
       - /build.sh release-$V
       - cp netxms/netxms-$V.tar.gz SOURCES/
   - name: build-epel
-    image: ghcr.io/netxms/builder-rpm:1.16
+    image: ghcr.io/netxms/builder-rpm:latest
     privileged: true
     volumes:
       - name: result
@@ -111,7 +111,7 @@ steps:
     depends_on:
       - make-dist
   - name: build-fedora
-    image: ghcr.io/netxms/builder-rpm:1.16
+    image: ghcr.io/netxms/builder-rpm:latest
     privileged: true
     volumes:
       - name: result
@@ -173,6 +173,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 6bc6270d5c732dd88ffd376a4722701199b0c70877c363475e17b2a2df4daa63
+hmac: e0d9b3ab8e8857b072fe89f63cf956651805f2839cfce558bbbcec0f427c64e9
 
 ...
