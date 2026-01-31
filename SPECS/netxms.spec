@@ -100,6 +100,8 @@ fi
 
 [ -e /usr/lib/jvm/java-11 ] && export JAVA_HOME=/usr/lib/jvm/java-11
 [ -e /usr/lib/jvm/java-17 ] && export JAVA_HOME=/usr/lib/jvm/java-17
+[ -e /usr/lib/jvm/java-21 ] && export JAVA_HOME=/usr/lib/jvm/java-21
+[ -e /usr/lib/jvm/java-25 ] && export JAVA_HOME=/usr/lib/jvm/java-25
 
 export MAVEN_OPTS="$MAVEN_OPTS -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
 
