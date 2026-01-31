@@ -30,7 +30,7 @@ BuildRequires: jq-devel
 BuildRequires: libcurl-devel
 BuildRequires: libmicrohttpd-devel
 BuildRequires: libssh-devel
-%if 0%{?rhel} != 10
+%if 0%{?rhel} < 10
 BuildRequires: libstrophe-devel
 %endif
 BuildRequires: libvirt-devel
@@ -47,7 +47,9 @@ BuildRequires: systemd-devel
 BuildRequires: zeromq-devel
 BuildRequires: zlib-devel
 
+%if 0%{?fedora} < 43
 BuildRequires: (oracle-instantclient-devel or oracle-instantclient19.10-devel)
+%endif
 BuildRequires: mariadb-connector-c-devel
 BuildRequires: postgresql-devel
 BuildRequires: sqlite-devel
@@ -88,7 +90,9 @@ fi
    --with-mariadb \
    --with-mariadb-compat-headers \
    --with-zeromq \
+%if 0%{?fedora} < 43
    --with-oracle \
+%endif
    --with-asterisk
 
 #sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
@@ -326,6 +330,8 @@ This pacakge provides bridge to java monitoring plugins like JMX or OPCUA.
 
 
 ### netxms-agent-oracle
+%if 0%{?fedora} < 43
+
 %package agent-oracle
 Summary: Agent extension (subagent) for monitoring Oracle databases
 Requires: netxms-dbdrv-oracle = %{version}-%{release}
@@ -335,6 +341,8 @@ This package extends agent to collect health metrics and statistics from one of 
 
 %files agent-oracle
 %{_libdir}/netxms/oracle.nsm
+
+%endif
 
 ### netxms-agent-mariadb
 %package agent-mariadb
@@ -410,7 +418,11 @@ Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
 Requires(post): systemd
+%if 0%{?fedora} < 43
 Requires: (netxms-dbdrv-pgsql = %{version}-%{release} or netxms-dbdrv-mariadb = %{version}-%{release} or netxms-dbdrv-oracle = %{version}-%{release} or netxms-dbdrv-sqlite3 = %{version}-%{release} or netxms-dbdrv-odbc = %{version}-%{release})
+%else
+Requires: (netxms-dbdrv-pgsql = %{version}-%{release} or netxms-dbdrv-mariadb = %{version}-%{release} or netxms-dbdrv-sqlite3 = %{version}-%{release} or netxms-dbdrv-odbc = %{version}-%{release})
+%endif
 Requires: netxms-agent = %{version}-%{release}
 
 %description server
@@ -550,6 +562,8 @@ Summary: Middleware for interfacing with any compatible database engine via ODBC
 
 
 ### netxms-dbdrv-oracle
+%if 0%{?fedora} < 43
+
 %package dbdrv-oracle
 Summary: Middleware for interfacing with Oracle database engine
 Requires: (oracle-instantclient-basic or oracle-instantclient-basiclite or oracle-instantclient19.10-basic or oracle-instantclient19.10-basiclite)
@@ -560,6 +574,7 @@ Requires: (oracle-instantclient-basic or oracle-instantclient-basiclite or oracl
 %files dbdrv-oracle
 %{_libdir}/netxms/dbdrv/oracle.ddr
 
+%endif
 
 ### netxms-reporting
 %package reporting
