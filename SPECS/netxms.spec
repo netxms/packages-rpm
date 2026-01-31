@@ -158,6 +158,7 @@ chrpath --delete %{buildroot}%{_bindir}/nxget
 chrpath --delete %{buildroot}%{_bindir}/nxhwid
 chrpath --delete %{buildroot}%{_bindir}/nxlptest
 chrpath --delete %{buildroot}%{_bindir}/nxmibc
+chrpath --delete %{buildroot}%{_bindir}/nxmibdump
 chrpath --delete %{buildroot}%{_bindir}/nxminfo
 chrpath --delete %{buildroot}%{_bindir}/nxnotify
 chrpath --delete %{buildroot}%{_bindir}/nxping
@@ -194,7 +195,6 @@ chrpath --delete %{buildroot}%{_libdir}/netxms/pdsdrv/*.pdsd
 %exclude %{_libdir}/netxms/java/hamcrest-core-*.jar
 %exclude %{_libdir}/netxms/java/junit-*.jar
 %exclude %{_libdir}/netxms/ncdrv/mqtt.ncd
-%exclude %{_libdir}/netxms/spe.nxm
 
 %doc
 
@@ -256,6 +256,7 @@ Most of the subagents which does not require additional dependences are included
 %{_libdir}/libnxagent.so.*
 %{_libdir}/libnxlp.so.*
 %{_libdir}/libnxsde.so.*
+%{_libdir}/netxms/aifileops.nsm
 %{_libdir}/netxms/bind9.nsm
 %{_libdir}/netxms/dbquery.nsm
 %{_libdir}/netxms/devemu.nsm
@@ -470,6 +471,7 @@ fi
 %{_bindir}/nxethernetip
 %{_bindir}/nxget
 %{_bindir}/nxmibc
+%{_bindir}/nxmibdump
 %{_bindir}/nxminfo
 %{_bindir}/nxscript
 %{_bindir}/nxsnmp*
@@ -477,9 +479,12 @@ fi
 %{_bindir}/nxwsget
 %{_datadir}/netxms/mibs/*.mib
 %{_datadir}/netxms/oui/*.csv
+%{_datadir}/netxms/prompts/*
 %{_datadir}/netxms/radius.dict
+%{_datadir}/netxms/skills/*
 %{_datadir}/netxms/sql/*.sql
 %{_datadir}/netxms/templates/*.xml
+%{_datadir}/netxms/templates/*.json
 %{_libdir}/libethernetip.so.*
 %{_libdir}/libnxcore.so.*
 %{_libdir}/libnxdbmgr.so.*
