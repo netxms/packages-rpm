@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       6.0.0
+Version:       6.0.1
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -640,6 +640,17 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon Feb 09 2026 Alex Kirhenshtein <alk@netxms.org> - 6.0.1-1
+  * Improved database upgrade procedure (no long data conversion during upgrade)
+  * Agent environment can be set from server using custom attributes
+  * Fixed object names not resolved on "Dashboards and Maps" property page (showing object IDs instead of names)
+  * Fixed missing action list loading in Event Processing Policy editor
+  * Fixed business service uptime calculation for business services containing other business services
+  * Fixed database upgrade procedure failure on Microsoft SQL Server
+  * Added support for Anthropic API for AI agent
+  * Implemented changes proposed in PR #155 (IP address wipe on DNS resolution failure and DNS resolution conflict detection)
+  * Fixed NumberFormatException in legacy REST API when setting object flags with high bit (values >= 0x80000000)
+
 * Tue Feb 03 2026 Alex Kirhenshtein <alk@netxms.org> - 6.0.0-1
   * Integrated AI assistant and AI agent
   * AI-powered anomaly detection
