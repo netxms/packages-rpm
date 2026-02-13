@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       6.0.1
+Version:       6.0.2
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -640,6 +640,21 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Fri Feb 13 2026 Alex Kirhenshtein <alk@netxms.org> - 6.0.2-1
+  * Added wireless controller bridge for UniFi controllers (PR #255)
+  * Small fixes in background conversion of collected data
+  * Improved AI assistant guardrails
+  * Added internal metrics for monitoring AI providers usage
+  * Added TLS support in web API using monitored reproxy process
+  * Fixed issues:
+  *   NX-1658 (Drag and Drop confirmation prompt)
+  *   NX-2495 (Do not treat disk I/O error as file rotation in log file monitoring)
+  *   NX-2900 (Business Service check script editor should have hint)
+  *   NX-2907 (ssh.nsm can not be loaded on Windows)
+  *   NX-2913 (Cluster DCI is not populated to nodes under cluster)
+  *   NX-2919 (Push DCI from agent log parsing may come in wrong order)
+  *   NX-2925 (Proxy selector should show only relevant objects)
+
 * Mon Feb 09 2026 Alex Kirhenshtein <alk@netxms.org> - 6.0.1-1
   * Improved database upgrade procedure (no long data conversion during upgrade)
   * Agent environment can be set from server using custom attributes
