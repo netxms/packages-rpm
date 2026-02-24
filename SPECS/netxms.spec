@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       6.0.2
+Version:       6.0.3
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -640,6 +640,18 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Tue Feb 24 2026 Alex Kirhenshtein <alk@netxms.org> - 6.0.3-1
+  * Added wireless controller bridge for Aruba Instant controllers (PR #257)
+  * Improved interactive SSH mode support
+  * Improved web API
+  * Windows agent renames in-use files during upload if they cannot be replaced
+  * Fixed incorrect handling of empty tool call list in LLM response
+  * Fixed bug in database schema upgrade on Microsoft SQL Server
+  * Fixed issues:
+  *   NX-2369 (Option to add number of items in a container)
+  *   NX-2867 (Disable "Create database and database user before initialization" if SQLite selected in Windows installer)
+  *   NX-2922 (New agent actions: enable / disable ExternalMetricProvider)
+
 * Fri Feb 13 2026 Alex Kirhenshtein <alk@netxms.org> - 6.0.2-1
   * Added wireless controller bridge for UniFi controllers (PR #255)
   * Small fixes in background conversion of collected data
