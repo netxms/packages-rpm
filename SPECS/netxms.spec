@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       6.0.3
+Version:       6.0.4
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -640,6 +640,19 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Wed Mar 04 2026 Alex Kirhenshtein <alk@netxms.org> - 6.0.4-1
+  * File delivery policy deployment uses separate agent connection to avoid interference with data collection
+  * NXSL removes trailing zeroes from floating point value representation (unless explicitly set as string)
+  * Database manager supports parallel table migration
+  * Internal node name resolver cache in syslog processor
+  * Fixed issues:
+  *   #2378 / NX-2171 (In Configuration-\>Object Tools-\>General-\>Icon, give more info about image size accepted)
+  *   #2920 / NX-2717 (Custom attribute conflict is not resolved back to normal)
+  *   #3128 / NX-2928 (Add --resolve parameter option to NetworkService.Status)
+  *   #3129 / NX-2929 (Left column of elements not displayed in interface Overview tab)
+  *   NX-2932 (File deployment from multiple policies should be serialized)
+  *   NX-2933 (External metric provider may leave orphaned processes on Windows)
+
 * Tue Feb 24 2026 Alex Kirhenshtein <alk@netxms.org> - 6.0.3-1
   * Added wireless controller bridge for Aruba Instant controllers (PR #257)
   * Improved interactive SSH mode support
