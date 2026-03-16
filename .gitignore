@@ -3,3 +3,6 @@
 /SOURCES/netxms-*.gz
 .DS_Store
 __pycache__/
+
+# ralphex progress logs
+.ralphex/progress/
