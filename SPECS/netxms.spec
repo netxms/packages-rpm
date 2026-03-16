@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       6.0.4
+Version:       6.0.5
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -640,6 +640,19 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon Mar 16 2026 Alex Kirhenshtein <alk@netxms.org> - 6.0.5-1
+  * Fixed error in log view after console reconnect
+  * Fixed incorrect gap detection on line charts
+  * Fixed bug in handling permanent authentication token expiration time
+  * Fixed server crash during dashboard template processing
+  * Added -Z/-L mappings for AI, deployment, downtime, and incident log tables in nxdbmgr
+  * Fixed issues:
+  *   #1052 / NX-842 (Ability to switch bar chart from lef-to-right rendering to right-to-left)
+  *   #2561 / NX-2355 (An IP address from a Cluster object does not appear on a map in the address map)
+  *   #3033 / NX-2831 (Custom attribute value lost on child object)
+  *   #3050 / NX-2848 (Issues pinning views on WEB UI)
+  *   #3139 (serial\_number field on nodes table too small)
+
 * Wed Mar 04 2026 Alex Kirhenshtein <alk@netxms.org> - 6.0.4-1
   * File delivery policy deployment uses separate agent connection to avoid interference with data collection
   * NXSL removes trailing zeroes from floating point value representation (unless explicitly set as string)
