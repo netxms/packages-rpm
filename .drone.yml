@@ -255,4 +255,8 @@ depends_on:
   - build-amd64
   - build-arm64
 
+---
+kind: signature
+hmac: 249495f4b2c553757745fb9d6a477b4e01e37272b217b5ece9576cf000ff2951
+
 ...
