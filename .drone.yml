@@ -223,7 +223,9 @@ steps:
         from_secret: deploy_user
       key:
         from_secret: deploy_key
-      source: RPMS/
+      source:
+        - RPMS/x86_64/
+        - RPMS/aarch64/
       destination: /staging/rpm
       delete: true
       extra: --verbose --chmod=Dg+w,Fg+w
