@@ -7,8 +7,6 @@ platform:
   arch: amd64
 
 volumes:
-  - name: result
-    temp: {}
   - name: m2-repo-ol8
     host:
       path: /cache/m2-repo/ol8
@@ -33,66 +31,64 @@ steps:
       - "[ -z $V ] && echo Cannot detect release, check spec file && exit 1"
       - /build.sh release-$V
       - cp netxms/netxms-$V.tar.gz SOURCES/
+      - rm -rf netxms
   - name: build-ol8
-    image: oraclelinux:8
+    image: ghcr.io/netxms/builder-rpm:epel8
     volumes:
-      - name: result
-        path: /result
       - name: m2-repo-ol8
         path: /m2-repo
     commands:
-      - scripts/build-rpm.sh epel 8
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-el8
+      - rpmbuild --define "_builddir $(pwd)/BUILD-el8" -ba SPECS/netxms.spec
     depends_on:
       - make-dist
   - name: build-ol9
-    image: oraclelinux:9
+    image: ghcr.io/netxms/builder-rpm:epel9
     volumes:
-      - name: result
-        path: /result
       - name: m2-repo-ol9
         path: /m2-repo
     commands:
-      - scripts/build-rpm.sh epel 9
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-el9
+      - rpmbuild --define "_builddir $(pwd)/BUILD-el9" -ba SPECS/netxms.spec
     depends_on:
       - make-dist
   - name: build-ol10
-    image: oraclelinux:10
+    image: ghcr.io/netxms/builder-rpm:epel10
     volumes:
-      - name: result
-        path: /result
       - name: m2-repo-ol10
         path: /m2-repo
     commands:
-      - scripts/build-rpm.sh epel 10
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-el10
+      - rpmbuild --define "_builddir $(pwd)/BUILD-el10" -ba SPECS/netxms.spec
     depends_on:
       - make-dist
   - name: build-fedora42
-    image: fedora:42
+    image: ghcr.io/netxms/builder-rpm:fedora42
     volumes:
-      - name: result
-        path: /result
       - name: m2-repo-fedora42
         path: /m2-repo
     commands:
-      - scripts/build-rpm.sh fedora 42
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-fc42
+      - rpmbuild --define "_builddir $(pwd)/BUILD-fc42" -ba SPECS/netxms.spec
     depends_on:
       - make-dist
   - name: build-fedora43
-    image: fedora:43
+    image: ghcr.io/netxms/builder-rpm:fedora43
     volumes:
-      - name: result
-        path: /result
       - name: m2-repo-fedora43
         path: /m2-repo
     commands:
-      - scripts/build-rpm.sh fedora 43
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-fc43
+      - rpmbuild --define "_builddir $(pwd)/BUILD-fc43" -ba SPECS/netxms.spec
     depends_on:
       - make-dist
   - name: upload
     image: ghcr.io/alkk/drone-rsync:latest
-    volumes:
-      - name: result
-        path: /result
     settings:
       host:
         from_secret: deploy_target
@@ -104,7 +100,7 @@ steps:
         from_secret: deploy_user
       key:
         from_secret: deploy_key
-      source: /result/*.rpm
+      source: RPMS/
       destination: /staging/rpm
       delete: true
       extra: --verbose --chmod=Dg+w,Fg+w
@@ -124,8 +120,6 @@ platform:
   arch: arm64
 
 volumes:
-  - name: result
-    temp: {}
   - name: m2-repo-ol8
     host:
       path: /cache/m2-repo/ol8
@@ -150,66 +144,64 @@ steps:
       - "[ -z $V ] && echo Cannot detect release, check spec file && exit 1"
       - /build.sh release-$V
       - cp netxms/netxms-$V.tar.gz SOURCES/
+      - rm -rf netxms
   - name: build-ol8
-    image: oraclelinux:8
+    image: ghcr.io/netxms/builder-rpm:epel8
     volumes:
-      - name: result
-        path: /result
       - name: m2-repo-ol8
         path: /m2-repo
     commands:
-      - scripts/build-rpm.sh epel 8
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-el8
+      - rpmbuild --define "_builddir $(pwd)/BUILD-el8" -ba SPECS/netxms.spec
     depends_on:
       - make-dist
   - name: build-ol9
-    image: oraclelinux:9
+    image: ghcr.io/netxms/builder-rpm:epel9
     volumes:
-      - name: result
-        path: /result
       - name: m2-repo-ol9
         path: /m2-repo
     commands:
-      - scripts/build-rpm.sh epel 9
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-el9
+      - rpmbuild --define "_builddir $(pwd)/BUILD-el9" -ba SPECS/netxms.spec
     depends_on:
       - make-dist
   - name: build-ol10
-    image: oraclelinux:10
+    image: ghcr.io/netxms/builder-rpm:epel10
     volumes:
-      - name: result
-        path: /result
       - name: m2-repo-ol10
         path: /m2-repo
     commands:
-      - scripts/build-rpm.sh epel 10
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-el10
+      - rpmbuild --define "_builddir $(pwd)/BUILD-el10" -ba SPECS/netxms.spec
     depends_on:
       - make-dist
   - name: build-fedora42
-    image: fedora:42
+    image: ghcr.io/netxms/builder-rpm:fedora42
     volumes:
-      - name: result
-        path: /result
       - name: m2-repo-fedora42
         path: /m2-repo
     commands:
-      - scripts/build-rpm.sh fedora 42
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-fc42
+      - rpmbuild --define "_builddir $(pwd)/BUILD-fc42" -ba SPECS/netxms.spec
     depends_on:
       - make-dist
   - name: build-fedora43
-    image: fedora:43
+    image: ghcr.io/netxms/builder-rpm:fedora43
     volumes:
-      - name: result
-        path: /result
       - name: m2-repo-fedora43
         path: /m2-repo
     commands:
-      - scripts/build-rpm.sh fedora 43
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-fc43
+      - rpmbuild --define "_builddir $(pwd)/BUILD-fc43" -ba SPECS/netxms.spec
     depends_on:
       - make-dist
   - name: upload
     image: ghcr.io/alkk/drone-rsync:latest
-    volumes:
-      - name: result
-        path: /result
     settings:
       host:
         from_secret: deploy_target
@@ -221,7 +213,7 @@ steps:
         from_secret: deploy_user
       key:
         from_secret: deploy_key
-      source: /result/*.rpm
+      source: RPMS/
       destination: /staging/rpm
       delete: true
       extra: --verbose --chmod=Dg+w,Fg+w
@@ -257,6 +249,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 249495f4b2c553757745fb9d6a477b4e01e37272b217b5ece9576cf000ff2951
+hmac: 7414601c5f975943f4298eb7933de97a7ee3ecc240b309f28bc9577407e7938b
 
 ...
