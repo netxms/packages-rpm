@@ -30,16 +30,16 @@ Replace the mock-based RPM builder container (ghcr.io/netxms/builder-rpm) with d
 
 Build script that handles the full RPM build workflow in a native distro container. Accepts distro type (epel/fedora) and version as arguments.
 
-- [ ] Script skeleton with argument parsing (distro type + version)
-- [ ] EPEL/repo setup for OracleLinux:
+- [x] Script skeleton with argument parsing (distro type + version)
+- [x] EPEL/repo setup for OracleLinux:
   - OL8/9: install oracle-epel-release, enable codeready_builder repo
   - OL10: install oracle-epel-release, enable codeready_builder repo
-- [ ] Add NetXMS custom repos (devel + release) for build dependencies (libosip2-devel, libnxmodbus-devel, isotree-devel, etc.)
-- [ ] Run `dnf update -y` to update base image packages
-- [ ] Install rpm-build and run `dnf builddep -y SPECS/netxms.spec` for build dependencies
-- [ ] Download and install Apache Maven 3.9.12 (matching current builder-rpm setup), set up PATH and m2 cache at /m2-repo if available
-- [ ] Create rpmbuild directory structure (BUILD, RPMS, SRPMS) and run `rpmbuild --define "_topdir $(pwd)" -ba SPECS/netxms.spec`
-- [ ] Copy resulting RPMs from RPMS/*/ to /result/
+- [x] Add NetXMS custom repos (devel + release) for build dependencies (libosip2-devel, libnxmodbus-devel, isotree-devel, etc.)
+- [x] Run `dnf update -y` to update base image packages
+- [x] Install rpm-build and run `dnf builddep -y SPECS/netxms.spec` for build dependencies
+- [x] Download and install Apache Maven 3.9.12 (matching current builder-rpm setup), set up PATH and m2 cache at /m2-repo if available
+- [x] Create rpmbuild directory structure (BUILD, RPMS, SRPMS) and run `rpmbuild --define "_topdir $(pwd)" -ba SPECS/netxms.spec`
+- [x] Copy resulting RPMs from RPMS/*/ to /result/
 
 ### Task 2: Rewrite .drone.yml with parallel distro builds
 
