@@ -41,6 +41,7 @@ steps:
       - dnf builddep -y SPECS/netxms.spec
       - mkdir -p BUILD-el8
       - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-el8" -ba SPECS/netxms.spec
+      - rm -rf BUILD-el8
     depends_on:
       - make-dist
   - name: build-ol9
@@ -52,6 +53,7 @@ steps:
       - dnf builddep -y SPECS/netxms.spec
       - mkdir -p BUILD-el9
       - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-el9" -ba SPECS/netxms.spec
+      - rm -rf BUILD-el9
     depends_on:
       - make-dist
   - name: build-ol10
@@ -63,6 +65,7 @@ steps:
       - dnf builddep -y SPECS/netxms.spec
       - mkdir -p BUILD-el10
       - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-el10" -ba SPECS/netxms.spec
+      - rm -rf BUILD-el10
     depends_on:
       - make-dist
   - name: build-fedora42
@@ -74,6 +77,7 @@ steps:
       - dnf builddep -y SPECS/netxms.spec
       - mkdir -p BUILD-fc42
       - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc42" -ba SPECS/netxms.spec
+      - rm -rf BUILD-fc42
     depends_on:
       - make-dist
   - name: build-fedora43
@@ -85,6 +89,7 @@ steps:
       - dnf builddep -y SPECS/netxms.spec
       - mkdir -p BUILD-fc43
       - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc43" -ba SPECS/netxms.spec
+      - rm -rf BUILD-fc43
     depends_on:
       - make-dist
   - name: upload
@@ -154,6 +159,7 @@ steps:
       - dnf builddep -y SPECS/netxms.spec
       - mkdir -p BUILD-el8
       - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-el8" -ba SPECS/netxms.spec
+      - rm -rf BUILD-el8
     depends_on:
       - make-dist
   - name: build-ol9
@@ -165,6 +171,7 @@ steps:
       - dnf builddep -y SPECS/netxms.spec
       - mkdir -p BUILD-el9
       - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-el9" -ba SPECS/netxms.spec
+      - rm -rf BUILD-el9
     depends_on:
       - make-dist
   - name: build-ol10
@@ -176,6 +183,7 @@ steps:
       - dnf builddep -y SPECS/netxms.spec
       - mkdir -p BUILD-el10
       - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-el10" -ba SPECS/netxms.spec
+      - rm -rf BUILD-el10
     depends_on:
       - make-dist
   - name: build-fedora42
@@ -187,6 +195,7 @@ steps:
       - dnf builddep -y SPECS/netxms.spec
       - mkdir -p BUILD-fc42
       - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc42" -ba SPECS/netxms.spec
+      - rm -rf BUILD-fc42
     depends_on:
       - make-dist
   - name: build-fedora43
@@ -198,6 +207,7 @@ steps:
       - dnf builddep -y SPECS/netxms.spec
       - mkdir -p BUILD-fc43
       - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc43" -ba SPECS/netxms.spec
+      - rm -rf BUILD-fc43
     depends_on:
       - make-dist
   - name: upload
