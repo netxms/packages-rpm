@@ -15,6 +15,10 @@ case "$DISTRO_TYPE" in
 esac
 
 if [ "$DISTRO_TYPE" = "epel" ]; then
+   # OL10+ ships dnf5 with config-manager/builddep built-in; OL8/9 need dnf-plugins-core
+   if [ "$DISTRO_VERSION" -lt 10 ]; then
+      dnf install -y dnf-plugins-core
+   fi
    dnf install -y oracle-epel-release-el${DISTRO_VERSION}
    if [ "$DISTRO_VERSION" -ge 10 ]; then
       dnf config-manager setopt "ol${DISTRO_VERSION}_codeready_builder.enabled=1"
@@ -43,7 +47,7 @@ dnf install -y rpm-build
 dnf builddep -y SPECS/netxms.spec
 
 MAVEN_VERSION=3.9.12
-curl -fsSL "https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" \
+curl -fsSL "https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" \
    | tar xzf - -C /opt
 export PATH="/opt/apache-maven-${MAVEN_VERSION}/bin:$PATH"
 
