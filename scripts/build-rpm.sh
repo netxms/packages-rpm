@@ -14,14 +14,7 @@ case "$DISTRO_TYPE" in
    *) echo "Unknown distro type: $DISTRO_TYPE (expected epel or fedora)"; exit 1 ;;
 esac
 
-# Remove any .rpmmacros leaked into workspace by prior Drone steps
-rm -f .rpmmacros
-
 if [ "$DISTRO_TYPE" = "epel" ]; then
-   # Explicitly set %{dist} macro - shared Drone workspace may leak macros
-   # from the make-dist step (Fedora-based) via HOME pointing to workspace
-   printf "%%dist .el%s\n%%rhel %s\n" "$DISTRO_VERSION" "$DISTRO_VERSION" > /etc/rpm/macros.dist
-
    if [ "$DISTRO_VERSION" -ge 10 ]; then
       dnf install -y dnf5-plugins || dnf install -y dnf-plugins-core
    else
