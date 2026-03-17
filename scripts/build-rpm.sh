@@ -15,9 +15,10 @@ case "$DISTRO_TYPE" in
 esac
 
 if [ "$DISTRO_TYPE" = "epel" ]; then
-   # OL10+ ships dnf5 with config-manager/builddep built-in; OL8/9 need dnf-plugins-core
    if [ "$DISTRO_VERSION" -lt 10 ]; then
       dnf install -y dnf-plugins-core
+   else
+      dnf install -y dnf5-plugins
    fi
    dnf install -y oracle-epel-release-el${DISTRO_VERSION}
    if [ "$DISTRO_VERSION" -ge 10 ]; then
@@ -25,6 +26,8 @@ if [ "$DISTRO_TYPE" = "epel" ]; then
    else
       dnf config-manager --enable ol${DISTRO_VERSION}_codeready_builder
    fi
+elif [ "$DISTRO_TYPE" = "fedora" ]; then
+   dnf install -y dnf5-plugins
 fi
 
 cat > /etc/yum.repos.d/netxms.repo <<EOF
