@@ -65,7 +65,7 @@ Replace mock-based build steps with 5 parallel native-image build steps per arch
 
 ### Task 3: Validate
 
-- [ ] Verify .drone.yml syntax with `drone lint` or manual review
-- [ ] Verify all Docker image names exist (oraclelinux:8, oraclelinux:9, oraclelinux:10, fedora:42, fedora:43)
-- [ ] Verify NetXMS repo URLs for all distro/version/arch combinations
-- [ ] Review spec file conditionals work correctly with direct rpmbuild on each distro
+- [x] Verify .drone.yml syntax with `drone lint` or manual review
+- [x] Verify all Docker image names exist (oraclelinux:8, oraclelinux:9, oraclelinux:10, fedora:42, fedora:43)
+- [x] Verify NetXMS repo URLs for all distro/version/arch combinations
+- [x] Review spec file conditionals work correctly with direct rpmbuild on each distro
