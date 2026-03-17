@@ -50,18 +50,27 @@ dnf install -y rpm-build
 dnf builddep -y SPECS/netxms.spec
 
 MAVEN_VERSION=3.9.12
+MAVEN_SHA512="0a1be79f02466533fc1a80abbef8796e4f737c46c6574ede5658b110899942a94db634477dfd3745501c80aef9aac0d4f841d38574373f7e2d24cce89d694f70"
+MAVEN_TGZ="/tmp/apache-maven-${MAVEN_VERSION}-bin.tar.gz"
 curl -fsSL "https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" \
-   | tar xzf - -C /opt
+   -o "$MAVEN_TGZ"
+echo "$MAVEN_SHA512  $MAVEN_TGZ" | sha512sum -c -
+tar xzf "$MAVEN_TGZ" -C /opt
+rm -f "$MAVEN_TGZ"
 export PATH="/opt/apache-maven-${MAVEN_VERSION}/bin:$PATH"
 
-mkdir -p BUILD RPMS SRPMS
-rpmbuild --define "_topdir $(pwd)" -ba SPECS/netxms.spec
+RPMBUILD_DIR="$(pwd)/rpmbuild-${DISTRO_TYPE}-${DISTRO_VERSION}"
+mkdir -p "$RPMBUILD_DIR"/{BUILD,RPMS,SRPMS}
+rpmbuild --define "_topdir $RPMBUILD_DIR" \
+   --define "_sourcedir $(pwd)/SOURCES" \
+   --define "_specdir $(pwd)/SPECS" \
+   -ba SPECS/netxms.spec
 
-rpm_count=$(find RPMS/ -name '*.rpm' | wc -l)
+rpm_count=$(find "$RPMBUILD_DIR/RPMS/" -name '*.rpm' | wc -l)
 if [ "$rpm_count" -eq 0 ]; then
    echo "ERROR: rpmbuild produced no RPMs"
    exit 1
 fi
 
 mkdir -p /result
-find RPMS/ -name '*.rpm' -exec cp {} /result/ \;
+find "$RPMBUILD_DIR/RPMS/" -name '*.rpm' -exec cp {} /result/ \;
