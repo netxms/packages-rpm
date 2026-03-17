@@ -28,11 +28,7 @@ if [ "$DISTRO_TYPE" = "epel" ]; then
       dnf install -y dnf-plugins-core
    fi
    dnf install -y oracle-epel-release-el${DISTRO_VERSION}
-   if [ "$DISTRO_VERSION" -ge 10 ]; then
-      dnf config-manager setopt "ol${DISTRO_VERSION}_codeready_builder.enabled=1"
-   else
-      dnf config-manager --enable ol${DISTRO_VERSION}_codeready_builder
-   fi
+   dnf config-manager --set-enabled ol${DISTRO_VERSION}_codeready_builder
 elif [ "$DISTRO_TYPE" = "fedora" ]; then
    dnf install -y dnf5-plugins
 fi
@@ -40,13 +36,13 @@ fi
 cat > /etc/yum.repos.d/netxms.repo <<EOF
 [netxms-devel]
 name=NetXMS Development Packages
-baseurl=https://packages.netxms.org/devel/${DISTRO_TYPE}/${DISTRO_VERSION}/\$basearch/
+baseurl=https://packages.netxms.org/devel/${DISTRO_TYPE}/${DISTRO_VERSION}/\$basearch/stable/
 gpgcheck=0
 enabled=1
 
 [netxms-release]
 name=NetXMS Release Packages
-baseurl=https://packages.netxms.org/${DISTRO_TYPE}/${DISTRO_VERSION}/\$basearch/
+baseurl=https://packages.netxms.org/${DISTRO_TYPE}/${DISTRO_VERSION}/\$basearch/stable/
 gpgcheck=0
 enabled=1
 EOF
