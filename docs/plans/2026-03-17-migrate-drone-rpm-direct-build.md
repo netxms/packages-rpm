@@ -48,7 +48,7 @@ Build script that handles the full RPM build workflow in a native distro contain
 
 Replace mock-based build steps with 5 parallel native-image build steps per architecture.
 
-- [ ] Rewrite build-amd64 pipeline:
+- [x] Rewrite build-amd64 pipeline:
   - Keep make-dist step unchanged (ghcr.io/alkk/netxms-make-dist:latest)
   - Replace build-epel and build-fedora with 5 parallel build steps:
     - build-ol8: image oraclelinux:8, runs `scripts/build-rpm.sh epel 8`
@@ -59,9 +59,9 @@ Replace mock-based build steps with 5 parallel native-image build steps per arch
   - All build steps depend on make-dist, no privileged mode
   - Keep result temp volume, replace mock cache volume with m2-repo host volume (/cache/m2-repo)
   - Update upload step to depend on all 5 build steps
-- [ ] Rewrite build-arm64 pipeline with identical structure (different platform arch)
-- [ ] Keep notify pipeline and telegram notification unchanged
-- [ ] Remove signature block (will need re-signing after changes)
+- [x] Rewrite build-arm64 pipeline with identical structure (different platform arch)
+- [x] Keep notify pipeline and telegram notification unchanged
+- [x] Remove signature block (will need re-signing after changes)
 
 ### Task 3: Validate
 
