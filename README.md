@@ -6,10 +6,21 @@ Packages are built by NetXMS team and published on https://packages.netxms.org/.
 
 ## Build
 
-```sh
-# Build RPMs
-docker run --cap-add=SYS_ADMIN -it --rm -v $(pwd):/build -v $(pwd)/result:/result ghcr.io/netxms/builder-rpm:latest
+RPMs are built using `rpmbuild` inside native distro containers.
 
-# Same, but cache dependencies between builds
-docker run --cap-add=SYS_ADMIN -it --rm -v $(pwd)/cache:/var/cache/mock -v $(pwd):/build -v $(pwd)/result:/result ghcr.io/netxms/builder-rpm:latest
+```sh
+# Build RPMs for OracleLinux 9
+docker run --rm -v $(pwd):/build -w /build -v /tmp/result:/result oraclelinux:9 \
+  scripts/build-rpm.sh epel 9
+
+# Build RPMs for Fedora 43
+docker run --rm -v $(pwd):/build -w /build -v /tmp/result:/result fedora:43 \
+  scripts/build-rpm.sh fedora 43
+
+# Cache Maven repository between builds
+docker run --rm -v $(pwd):/build -w /build -v /tmp/result:/result \
+  -v $(pwd)/m2-cache:/m2-repo oraclelinux:9 \
+  scripts/build-rpm.sh epel 9
 ```
+
+Supported targets: `epel 8`, `epel 9`, `epel 10`, `fedora 42`, `fedora 43`.

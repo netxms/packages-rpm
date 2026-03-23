@@ -7,11 +7,21 @@ platform:
   arch: amd64
 
 volumes:
-  - name: result
-    temp: {}
-  - name: cache
+  - name: m2-repo-ol8
     host:
-      path: /cache/builder-rpm
+      path: /cache/m2-repo/ol8
+  - name: m2-repo-ol9
+    host:
+      path: /cache/m2-repo/ol9
+  - name: m2-repo-ol10
+    host:
+      path: /cache/m2-repo/ol10
+  - name: m2-repo-fedora42
+    host:
+      path: /cache/m2-repo/fedora42
+  - name: m2-repo-fedora43
+    host:
+      path: /cache/m2-repo/fedora43
 
 steps:
   - name: make-dist
@@ -21,39 +31,69 @@ steps:
       - "[ -z $V ] && echo Cannot detect release, check spec file && exit 1"
       - /build.sh release-$V
       - cp netxms/netxms-$V.tar.gz SOURCES/
-  - name: build-epel
-    image: ghcr.io/netxms/builder-rpm:latest
-    privileged: true
+      - rm -rf netxms
+  - name: build-ol8
+    image: ghcr.io/netxms/builder-rpm:epel8
     volumes:
-      - name: result
-        path: /result
-      - name: cache
-        path: /var/cache/mock
-      - name: sources
-        path: /drone/src/SOURCES
+      - name: m2-repo-ol8
+        path: /m2-repo
     commands:
-      - /build.sh --target epel
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-el8
+      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-el8" -ba SPECS/netxms.spec
+      - rm -rf BUILD-el8
     depends_on:
       - make-dist
-  - name: build-fedora
-    image: ghcr.io/netxms/builder-rpm:latest
-    privileged: true
+  - name: build-ol9
+    image: ghcr.io/netxms/builder-rpm:epel9
     volumes:
-      - name: result
-        path: /result
-      - name: cache
-        path: /var/cache/mock
-      - name: sources
-        path: /drone/src/SOURCES
+      - name: m2-repo-ol9
+        path: /m2-repo
     commands:
-      - /build.sh --target fedora
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-el9
+      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-el9" -ba SPECS/netxms.spec
+      - rm -rf BUILD-el9
+    depends_on:
+      - make-dist
+  - name: build-ol10
+    image: ghcr.io/netxms/builder-rpm:epel10
+    volumes:
+      - name: m2-repo-ol10
+        path: /m2-repo
+    commands:
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-el10
+      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-el10" -ba SPECS/netxms.spec
+      - rm -rf BUILD-el10
+    depends_on:
+      - make-dist
+  - name: build-fedora42
+    image: ghcr.io/netxms/builder-rpm:fedora42
+    volumes:
+      - name: m2-repo-fedora42
+        path: /m2-repo
+    commands:
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-fc42
+      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc42" -ba SPECS/netxms.spec
+      - rm -rf BUILD-fc42
+    depends_on:
+      - make-dist
+  - name: build-fedora43
+    image: ghcr.io/netxms/builder-rpm:fedora43
+    volumes:
+      - name: m2-repo-fedora43
+        path: /m2-repo
+    commands:
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-fc43
+      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc43" -ba SPECS/netxms.spec
+      - rm -rf BUILD-fc43
     depends_on:
       - make-dist
   - name: upload
     image: ghcr.io/alkk/drone-rsync:latest
-    volumes:
-      - name: result
-        path: /result
     settings:
       host:
         from_secret: deploy_target
@@ -65,13 +105,16 @@ steps:
         from_secret: deploy_user
       key:
         from_secret: deploy_key
-      source: /result/*.rpm
+      source: RPMS/
       destination: /staging/rpm
       delete: true
       extra: --verbose --chmod=Dg+w,Fg+w
     depends_on:
-      - build-epel
-      - build-fedora
+      - build-ol8
+      - build-ol9
+      - build-ol10
+      - build-fedora42
+      - build-fedora43
 
 ---
 kind: pipeline
@@ -82,11 +125,21 @@ platform:
   arch: arm64
 
 volumes:
-  - name: result
-    temp: {}
-  - name: cache
+  - name: m2-repo-ol8
     host:
-      path: /cache/builder-rpm
+      path: /cache/m2-repo/ol8
+  - name: m2-repo-ol9
+    host:
+      path: /cache/m2-repo/ol9
+  - name: m2-repo-ol10
+    host:
+      path: /cache/m2-repo/ol10
+  - name: m2-repo-fedora42
+    host:
+      path: /cache/m2-repo/fedora42
+  - name: m2-repo-fedora43
+    host:
+      path: /cache/m2-repo/fedora43
 
 steps:
   - name: make-dist
@@ -96,39 +149,69 @@ steps:
       - "[ -z $V ] && echo Cannot detect release, check spec file && exit 1"
       - /build.sh release-$V
       - cp netxms/netxms-$V.tar.gz SOURCES/
-  - name: build-epel
-    image: ghcr.io/netxms/builder-rpm:latest
-    privileged: true
+      - rm -rf netxms
+  - name: build-ol8
+    image: ghcr.io/netxms/builder-rpm:epel8
     volumes:
-      - name: result
-        path: /result
-      - name: cache
-        path: /var/cache/mock
-      - name: sources
-        path: /drone/src/SOURCES
+      - name: m2-repo-ol8
+        path: /m2-repo
     commands:
-      - /build.sh --target epel
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-el8
+      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-el8" -ba SPECS/netxms.spec
+      - rm -rf BUILD-el8
     depends_on:
       - make-dist
-  - name: build-fedora
-    image: ghcr.io/netxms/builder-rpm:latest
-    privileged: true
+  - name: build-ol9
+    image: ghcr.io/netxms/builder-rpm:epel9
     volumes:
-      - name: result
-        path: /result
-      - name: cache
-        path: /var/cache/mock
-      - name: sources
-        path: /drone/src/SOURCES
+      - name: m2-repo-ol9
+        path: /m2-repo
     commands:
-      - /build.sh --target fedora
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-el9
+      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-el9" -ba SPECS/netxms.spec
+      - rm -rf BUILD-el9
+    depends_on:
+      - make-dist
+  - name: build-ol10
+    image: ghcr.io/netxms/builder-rpm:epel10
+    volumes:
+      - name: m2-repo-ol10
+        path: /m2-repo
+    commands:
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-el10
+      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-el10" -ba SPECS/netxms.spec
+      - rm -rf BUILD-el10
+    depends_on:
+      - make-dist
+  - name: build-fedora42
+    image: ghcr.io/netxms/builder-rpm:fedora42
+    volumes:
+      - name: m2-repo-fedora42
+        path: /m2-repo
+    commands:
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-fc42
+      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc42" -ba SPECS/netxms.spec
+      - rm -rf BUILD-fc42
+    depends_on:
+      - make-dist
+  - name: build-fedora43
+    image: ghcr.io/netxms/builder-rpm:fedora43
+    volumes:
+      - name: m2-repo-fedora43
+        path: /m2-repo
+    commands:
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-fc43
+      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc43" -ba SPECS/netxms.spec
+      - rm -rf BUILD-fc43
     depends_on:
       - make-dist
   - name: upload
     image: ghcr.io/alkk/drone-rsync:latest
-    volumes:
-      - name: result
-        path: /result
     settings:
       host:
         from_secret: deploy_target
@@ -140,13 +223,18 @@ steps:
         from_secret: deploy_user
       key:
         from_secret: deploy_key
-      source: /result/*.rpm
+      source:
+        - RPMS/x86_64/
+        - RPMS/aarch64/
       destination: /staging/rpm
       delete: true
       extra: --verbose --chmod=Dg+w,Fg+w
     depends_on:
-      - build-epel
-      - build-fedora
+      - build-ol8
+      - build-ol9
+      - build-ol10
+      - build-fedora42
+      - build-fedora43
 
 ---
 kind: pipeline
@@ -173,6 +261,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: e0d9b3ab8e8857b072fe89f63cf956651805f2839cfce558bbbcec0f427c64e9
+hmac: c991c72117fb6f9996f1f68013358cb0df36b21e5cfe66cccf6e7cd6c90895e9
 
 ...

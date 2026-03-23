@@ -25,7 +25,7 @@ BuildRequires: perl
 
 BuildRequires: expat-devel
 BuildRequires: jansson-devel
-BuildRequires: (java-21-openjdk-devel or java-17-openjdk-devel or java-11-openjdk-devel)
+BuildRequires: (java-25-openjdk-devel or java-21-openjdk-devel or java-17-openjdk-devel or java-11-openjdk-devel)
 BuildRequires: jq-devel
 BuildRequires: libcurl-devel
 BuildRequires: libmicrohttpd-devel
@@ -288,7 +288,7 @@ This package allows you to collect health metrics and statistics from Asterisk i
 ### netxms-java-base
 %package java-base
 Summary: Common java libraries used by the NetXMS components
-Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
+Requires: (java-25-openjdk-headless or java-21-openjdk-headless or java-17-openjdk-headless or java-11-openjdk-headless)
 
 %description java-base
 This package provides java libraries which are shared by various components
@@ -590,7 +590,6 @@ Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
 Requires(post): systemd
-Requires: (java-17-openjdk-headless or java-11-openjdk-headless)
 Requires: netxms-java-base = %{version}-%{release}
 
 %description reporting
