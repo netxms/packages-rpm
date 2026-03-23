@@ -35,6 +35,7 @@ BuildRequires: libstrophe-devel
 %endif
 BuildRequires: libvirt-devel
 BuildRequires: lm_sensors-devel
+BuildRequires: mongo-c-driver-devel
 BuildRequires: mosquitto-devel
 BuildRequires: openldap-devel
 BuildRequires: openssl-devel
@@ -93,6 +94,7 @@ fi
 %if 0%{?fedora} < 43
    --with-oracle \
 %endif
+   --with-mongodb \
    --with-asterisk
 
 #sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
@@ -358,6 +360,17 @@ This package extends agent to collect health metrics and statistics from one of 
 %files agent-mariadb
 %{_libdir}/netxms/mariadb.nsm
 %{_libdir}/netxms/mysql.nsm
+
+
+### netxms-agent-mongodb
+%package agent-mongodb
+Summary: Agent extension (subagent) for monitoring MongoDB
+
+%description agent-mongodb
+This package extends agent to collect health metrics and statistics from one or more MongoDB instances.
+
+%files agent-mongodb
+%{_libdir}/netxms/mongodb.nsm
 
 
 ### netxms-agent-pgsql
