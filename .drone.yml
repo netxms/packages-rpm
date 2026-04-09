@@ -127,19 +127,19 @@ platform:
 volumes:
   - name: m2-repo-ol8
     host:
-      path: /cache/m2-repo/ol8
+      path: /tmp/cache/m2-repo/ol8
   - name: m2-repo-ol9
     host:
-      path: /cache/m2-repo/ol9
+      path: /tmp/cache/m2-repo/ol9
   - name: m2-repo-ol10
     host:
-      path: /cache/m2-repo/ol10
+      path: /tmp/cache/m2-repo/ol10
   - name: m2-repo-fedora42
     host:
-      path: /cache/m2-repo/fedora42
+      path: /tmp/cache/m2-repo/fedora42
   - name: m2-repo-fedora43
     host:
-      path: /cache/m2-repo/fedora43
+      path: /tmp/cache/m2-repo/fedora43
 
 steps:
   - name: make-dist
@@ -261,6 +261,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 7f26143cb2ddd9f97c960d7bebe809dee30477bc8dff055dcfdba439b218d114
+hmac: ca74b8e9fb0c62ab59f49683237984c03856293868ba7329f3b79b0ce7740029
 
 ...
