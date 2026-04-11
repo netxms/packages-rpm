@@ -2,7 +2,7 @@
 Summary:       NetXMS umbrella package
 Name:          netxms
 Version:       6.1.0
-Release:       1%{?dist}
+Release:       2%{?dist}
 License:       GPL
 URL:           https://netxms.org
 Group:         Admin
@@ -219,6 +219,7 @@ shared between other packages.
 %{_bindir}/nxencpasswd
 %{_bindir}/nxgenguid
 %{_bindir}/nxping
+%{_libdir}/libethernetip.so.*
 %{_libdir}/libnetxms.so.*
 %{_libdir}/libnxclient.so.*
 %{_libdir}/libnxdb.so.*
@@ -503,7 +504,6 @@ fi
 %{_datadir}/netxms/sql/*.sql
 %{_datadir}/netxms/templates/*.xml
 %{_datadir}/netxms/templates/*.json
-%{_libdir}/libethernetip.so.*
 %{_libdir}/libnxcore.so.*
 %{_libdir}/libnxdbmgr.so.*
 %{_libdir}/libnxsl.so.*
@@ -657,6 +657,9 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Sat Apr 11 2026 Alex Kirhenshtein <alk@netxms.org> - 6.1.0-2
+  * libethernetip moved to netxsm-base (now used by both server and agent)
+
 * Thu Apr 09 2026 Alex Kirhenshtein <alk@netxms.org> - 6.1.0-1
   * Metric data ingestion from OTLP (Open Telemetry Protocol)
   * Integration with Oxidized (network device backup system)
