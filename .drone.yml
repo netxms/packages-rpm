@@ -108,7 +108,7 @@ steps:
       source:
         - RPMS/x86_64/
       destination: /staging/rpm
-      delete: true
+      delete: false
       extra: --verbose --chmod=Dg+w,Fg+w
     depends_on:
       - build-ol8
@@ -227,7 +227,7 @@ steps:
       source:
         - RPMS/aarch64/
       destination: /staging/rpm
-      delete: true
+      delete: false
       extra: --verbose --chmod=Dg+w,Fg+w
     depends_on:
       - build-ol8
