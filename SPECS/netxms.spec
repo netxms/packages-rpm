@@ -1,8 +1,8 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       6.1.0
-Release:       2%{?dist}
+Version:       6.1.1
+Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
 Group:         Admin
@@ -517,6 +517,7 @@ fi
 %{_libdir}/netxms/ncdrv/googlechat.ncd
 %{_libdir}/netxms/ncdrv/gsm.ncd
 %{_libdir}/netxms/ncdrv/kannel.ncd
+%{_libdir}/netxms/ncdrv/matrix.ncd
 %{_libdir}/netxms/ncdrv/mattermost.ncd
 %{_libdir}/netxms/ncdrv/msteams.ncd
 %{_libdir}/netxms/ncdrv/mymobile.ncd
@@ -657,6 +658,25 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Apr 16 2026 Alex Kirhenshtein <alk@netxms.org> - 6.1.1-1
+  * Notification channel driver for Matrix
+  * Improved status poll implementation when poll count for status change is greater than 1
+  * Fixed bug in context menu display in alarm view, data collection view, and other table views
+  * Fixed background colors in alarm view
+  * Fixed issues:
+  *   #2471 / NX-2264 (In rack view, tooltip is shown for chassis, not for its elements)
+  *   #2560 / NX-2354 (Agent file policy are not propagated to cluster member nodes)
+  *   #2978 / NX-2776 (Add additional parameters to events created from synchronized Windows Events)
+  *   #3018 / NX-2816 (L2 topology map is built with same interface used multiple times)
+  *   #3036 / NX-2834 (Do not display value in percent in bar chart legend)
+  *   #3126 / NX-2926 (Logwatch last read location is incorrectly saved for Windows agent)
+  *   #3166 (Escape special characters in Prometheus metric argument values)
+  *   #3173 (Set restrictive file permissions on auto-generated cert/key files)
+  *   #3175 (CTabFolder high CPU consumption in Infrastructure and Entire Network)
+  *   #3176 (Support for installed product list retrieval on apk-based distributions)
+  *   #3189 (Incorrect current value in chart legend)
+  *   #3190 (Multiple Asterisk subagent metrics fail on newer Asterisk versions)
+
 * Sat Apr 11 2026 Alex Kirhenshtein <alk@netxms.org> - 6.1.0-2
   * libethernetip moved to netxsm-base (now used by both server and agent)
 
