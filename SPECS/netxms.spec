@@ -14,6 +14,7 @@ Source102:     netxms-reporting.service
 
 Source200:     netxmsd.conf
 Source201:     nxagentd.conf
+Source202:     nxsagent.desktop
 
 Requires:      systemd
 
@@ -29,7 +30,10 @@ BuildRequires: (java-25-openjdk-devel or java-21-openjdk-devel or java-17-openjd
 BuildRequires: jq-devel
 BuildRequires: libcurl-devel
 BuildRequires: libmicrohttpd-devel
+BuildRequires: libpng-devel
 BuildRequires: libssh-devel
+BuildRequires: libX11-devel
+BuildRequires: libXext-devel
 %if 0%{?rhel} < 10
 BuildRequires: libstrophe-devel
 %endif
@@ -136,6 +140,9 @@ install -m644 %{SOURCE102} %{buildroot}%{_unitdir}/netxms-reporting.service
 install -p -m644 %{SOURCE200} %{buildroot}%{_sysconfdir}/netxmsd.conf
 install -p -m644 %{SOURCE201} %{buildroot}%{_sysconfdir}/nxagentd.conf
 
+install -m755 -d %{buildroot}%{_sysconfdir}/xdg/autostart
+install -p -m644 %{SOURCE202} %{buildroot}%{_sysconfdir}/xdg/autostart/nxsagent.desktop
+
 pushd %{buildroot}%{_libdir}/netxms
    ln -s mysql.nsm mariadb.nsm
 popd
@@ -170,6 +177,7 @@ chrpath --delete %{buildroot}%{_bindir}/nxminfo
 chrpath --delete %{buildroot}%{_bindir}/nxnotify
 chrpath --delete %{buildroot}%{_bindir}/nxping
 chrpath --delete %{buildroot}%{_bindir}/nxpush
+chrpath --delete %{buildroot}%{_bindir}/nxsagent
 chrpath --delete %{buildroot}%{_bindir}/nxscript
 chrpath --delete %{buildroot}%{_bindir}/nxshell
 chrpath --delete %{buildroot}%{_bindir}/nxsnmpget
@@ -401,6 +409,32 @@ You can both subscribe to topics and publish.
 
 %files agent-mqtt
 %{_libdir}/netxms/mqtt.nsm
+
+
+### netxms-agent-session
+%package agent-session
+Summary: NetXMS session agent
+
+%description agent-session
+This package provides nxsagent, the NetXMS session agent that runs in a user
+desktop session and provides screenshot capture and other user-context features.
+Supports both X11 and Wayland (via GNOME Shell D-Bus) sessions.
+
+%files agent-session
+%{_bindir}/nxsagent
+%config(noreplace) %{_sysconfdir}/xdg/autostart/nxsagent.desktop
+
+
+### netxms-agent-fbdev
+%package agent-fbdev
+Summary: Agent extension (subagent) for framebuffer screenshot capture
+
+%description agent-fbdev
+This subagent provides screenshot capture from the Linux framebuffer device
+(/dev/fb*) for headless systems.
+
+%files agent-fbdev
+%{_libdir}/netxms/fbdev.nsm
 
 
 ### netxms-agent-vmgr
