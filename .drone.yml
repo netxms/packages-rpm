@@ -108,7 +108,6 @@ steps:
       source:
         - RPMS/x86_64/
       destination: /staging/rpm
-      delete: false
       extra: --verbose --chmod=Dg+w,Fg+w
     depends_on:
       - build-ol8
@@ -227,7 +226,6 @@ steps:
       source:
         - RPMS/aarch64/
       destination: /staging/rpm
-      delete: false
       extra: --verbose --chmod=Dg+w,Fg+w
     depends_on:
       - build-ol8
@@ -261,6 +259,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: ea5ec329f7df5656fc16787a8427738252e948340f270cbbdf5ef4100145d82c
+hmac: 2ce2b1f9d15c73bd4c4fcdd50a0795e7cac5b0b8a03316178c217b31afaf1bc8
 
 ...
