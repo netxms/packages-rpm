@@ -107,7 +107,7 @@ steps:
         from_secret: deploy_key
       source:
         - RPMS/x86_64/
-      destination: /staging/rpm
+      destination: /rpm
       extra: --verbose --chmod=Dg+w,Fg+w
     depends_on:
       - build-ol8
@@ -225,7 +225,7 @@ steps:
         from_secret: deploy_key
       source:
         - RPMS/aarch64/
-      destination: /staging/rpm
+      destination: /rpm
       extra: --verbose --chmod=Dg+w,Fg+w
     depends_on:
       - build-ol8
@@ -259,6 +259,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 2ce2b1f9d15c73bd4c4fcdd50a0795e7cac5b0b8a03316178c217b31afaf1bc8
+hmac: 3db68247368be2fc149eddb1657abb7807773a9e36955d79a53878883f91411e
 
 ...
