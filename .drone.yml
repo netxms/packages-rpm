@@ -16,12 +16,12 @@ volumes:
   - name: m2-repo-ol10
     host:
       path: /cache/m2-repo/ol10
-  - name: m2-repo-fedora42
-    host:
-      path: /cache/m2-repo/fedora42
   - name: m2-repo-fedora43
     host:
       path: /cache/m2-repo/fedora43
+  - name: m2-repo-fedora44
+    host:
+      path: /cache/m2-repo/fedora44
 
 steps:
   - name: make-dist
@@ -68,18 +68,6 @@ steps:
       - rm -rf BUILD-el10
     depends_on:
       - make-dist
-  - name: build-fedora42
-    image: ghcr.io/netxms/builder-rpm:fedora42
-    volumes:
-      - name: m2-repo-fedora42
-        path: /m2-repo
-    commands:
-      - dnf builddep -y SPECS/netxms.spec
-      - mkdir -p BUILD-fc42
-      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc42" -ba SPECS/netxms.spec
-      - rm -rf BUILD-fc42
-    depends_on:
-      - make-dist
   - name: build-fedora43
     image: ghcr.io/netxms/builder-rpm:fedora43
     volumes:
@@ -90,6 +78,18 @@ steps:
       - mkdir -p BUILD-fc43
       - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc43" -ba SPECS/netxms.spec
       - rm -rf BUILD-fc43
+    depends_on:
+      - make-dist
+  - name: build-fedora44
+    image: ghcr.io/netxms/builder-rpm:fedora44
+    volumes:
+      - name: m2-repo-fedora44
+        path: /m2-repo
+    commands:
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-fc44
+      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc44" -ba SPECS/netxms.spec
+      - rm -rf BUILD-fc44
     depends_on:
       - make-dist
   - name: upload
@@ -113,8 +113,8 @@ steps:
       - build-ol8
       - build-ol9
       - build-ol10
-      - build-fedora42
       - build-fedora43
+      - build-fedora44
 
 ---
 kind: pipeline
@@ -134,12 +134,12 @@ volumes:
   - name: m2-repo-ol10
     host:
       path: /tmp/cache/m2-repo/ol10
-  - name: m2-repo-fedora42
-    host:
-      path: /tmp/cache/m2-repo/fedora42
   - name: m2-repo-fedora43
     host:
       path: /tmp/cache/m2-repo/fedora43
+  - name: m2-repo-fedora44
+    host:
+      path: /tmp/cache/m2-repo/fedora44
 
 steps:
   - name: make-dist
@@ -186,18 +186,6 @@ steps:
       - rm -rf BUILD-el10
     depends_on:
       - make-dist
-  - name: build-fedora42
-    image: ghcr.io/netxms/builder-rpm:fedora42
-    volumes:
-      - name: m2-repo-fedora42
-        path: /m2-repo
-    commands:
-      - dnf builddep -y SPECS/netxms.spec
-      - mkdir -p BUILD-fc42
-      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc42" -ba SPECS/netxms.spec
-      - rm -rf BUILD-fc42
-    depends_on:
-      - make-dist
   - name: build-fedora43
     image: ghcr.io/netxms/builder-rpm:fedora43
     volumes:
@@ -208,6 +196,18 @@ steps:
       - mkdir -p BUILD-fc43
       - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc43" -ba SPECS/netxms.spec
       - rm -rf BUILD-fc43
+    depends_on:
+      - make-dist
+  - name: build-fedora44
+    image: ghcr.io/netxms/builder-rpm:fedora44
+    volumes:
+      - name: m2-repo-fedora44
+        path: /m2-repo
+    commands:
+      - dnf builddep -y SPECS/netxms.spec
+      - mkdir -p BUILD-fc44
+      - rpmbuild --define "_topdir $(pwd)" --define "_builddir $(pwd)/BUILD-fc44" -ba SPECS/netxms.spec
+      - rm -rf BUILD-fc44
     depends_on:
       - make-dist
   - name: upload
@@ -231,8 +231,8 @@ steps:
       - build-ol8
       - build-ol9
       - build-ol10
-      - build-fedora42
       - build-fedora43
+      - build-fedora44
 
 ---
 kind: pipeline
@@ -259,6 +259,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 3db68247368be2fc149eddb1657abb7807773a9e36955d79a53878883f91411e
+hmac: d8240f0027e18676736808eb0577141ce8de19eee0b31746c522fadaa711dad5
 
 ...
