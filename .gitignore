@@ -1,6 +1,8 @@
 /cache/
 /dist/
+/RPMS/
 /SOURCES/netxms-*.gz
+/SRPMS/
 .DS_Store
 __pycache__/
 
