@@ -64,7 +64,6 @@ BuildRequires: sqlite-devel
 BuildRequires: unixODBC-devel
 
 BuildRequires: libnxmodbus-devel = 3.1.10-5%{?dist}
-BuildRequires: isotree-devel >= 0.6.1-1%{?dist}
 
 %description
 
@@ -103,8 +102,7 @@ fi
 %if 0%{?fedora} < 43
    --with-oracle \
 %endif
-   --with-mongodb \
-   --with-asterisk
+   --with-mongodb
 
 #sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 #sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
