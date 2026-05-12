@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       6.1.1
+Version:       6.1.2
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -692,6 +692,33 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Tue May 12 2026 Alex Kirhenshtein <alk@netxms.org> - 6.1.2-1
+  * Script entry point can be specified in "execute NXSL script" actions
+  * Improved performance of data migration when upgrading from versions before 6.0
+  * File manager subagent supports `nofollow` (do not follow symlinks) option for configured roots
+  * Notification channel drivers that accepts endpoint URLs in configuration or as recipient explicitly forbids any protocols besides http(s)
+  * Fixed intermittent SNMP proxy failures
+  * Fixed regression in SNMP walk that broke handling of buggy agents returning table rows in random order
+  * Fixed pre-authentication buffer overflow in SNMPv3 USM parser
+  * Fixed bug in updating instance discovery DCIs from templates
+  * Fixed pre-authentication OOB read in NXCP binary message parser
+  * Fixed the SHA-1 + AES-192/256 and SHA-224 + AES-256 key extension bug in SNMP library
+  * Fixed default object tool Connect SSH
+  * Fixed issues with language switch in nxmc
+  * Updated Brazilian Portuguese translation
+  * Added cisco performance monitoring template
+  * Fixed issues:
+  *   #2290 / NX-2081 (Allow to go to object details from event log source with right click option)
+  *   #3195 (Slow query from idata tables on MySQL)
+  *   #3199 (Add agent metric to read smartctl raw values)
+  *   #3200 (Port in Ports view should be selected when right-clicking it)
+  *   #3208 (Add Nodes via ARP Cache Tab)
+  *   #3211 (Set browser document title for RWT shells)
+  *   #3212 (filemgr subagent: path-traversal weaknesses in CheckFullPath / GetRealPath)
+  *   #3219 (Legacy web API: java.lang.NoClassDefFoundError: jakarta/servlet/ServletContext)
+  *   #3222 (Dragging of tabs to currenly hidden docking area)
+  *   #3223 (Allow dragging tabs from main area to docking areas)
+
 * Thu Apr 16 2026 Alex Kirhenshtein <alk@netxms.org> - 6.1.1-1
   * Notification channel driver for Matrix
   * Improved status poll implementation when poll count for status change is greater than 1
