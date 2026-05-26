@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       6.1.2
+Version:       6.1.3
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -690,6 +690,88 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Tue May 26 2026 Alex Kirhenshtein <alk@netxms.org> - 6.1.3-1
+  * Improved AI assistant access to DCI thresholds
+  * Improved AI assistant access to alarms
+  * AI assistant can initiate polls
+  * Improved Qtech driver
+  * Improved Cisco SB driver
+  * Added driver for Lenovo switches
+  * Added driver for BDCOM switches
+  * Added driver for Bulat switches
+  * Added driver for Origo switches
+  * Server no longer attempts to retry agent package deployment after non-transient errors
+  * Configurable page size in log viewer
+  * Fixed small issues in SNMP printer template
+  * Fixed issues:
+  *   #3202 (Problems with audit log filtering condition)
+  *   #3205 (Cropped login form on first run of nxmc on RPi)
+  *   #3230 (New and changed device drivers)
+  *   #3232 (Disabled push DCI continues accepting newly pushed data)
+  *   #3233 (Commands on Overview Windows are shown like gray rectangles)
+  *   #3234 (.apkg package fails to install under dash due to bash-only [[ ]])
+  *   #3235 (Display switch IP address in IP/MAC search results)
+  *   #3236 (Server name is shown in black in GUI header)
+  *   #3237 (Agent should verify installer signature when upgrading itself on Windows)
+  *   #3238 (Server crash on shutdown due to use-after-free in the notification channel worker thread)
+  *   #3239 (Filter values are not set when popping out log viewer)
+  *   #3240 (Windows agent breaks Store app launches by loading UsrClass.dat of logged-on users)
+  *   #3245 (AI assistant: add composite 'operational-status' triage tool)
+  *   #3246 (Threshold line not shown on chart if threshold value is bigger then maxint)
+  *   #3247 (Thresholds values should be inverted on chart if "invert values" is selected for a data source)
+  *   #3248 (Filter in Status Map dashboard element is slow)
+  *   #3250 (Agent tunnel bind fails with error 923 on OpenSSL 3.5.x)
+  *   #3253 (Empty f-string in NXSL script result in data stack underflow)
+  *   #3255 (Node without IP address and connected by agent tunnel only never marked as unreachable or down)
+  *   #3260 (C:\ in file manager incorrectly expanded to C:\Windows\system32)
+  *   #3267 (Script contents are deleted when dragging "Execute script" view from one docking area to another)
+  *   #3270 ("Do not show this message again" in "This DCI was added by instance discovery" dialog is not persisted across console restarts)
+  *   #3272 (No option to configure automatic column resize in DCI summary tables)
+  *   #3275 (Package deployment jobs should be cancelled if corresponding package is deleted from server)
+  *   #3276 (Send updates to Package deployment jobs view)
+  *   #3279 (Cannot upload file to server from nxmc if web server is running on Windows)
+
+* Tue May 26 2026 Alex Kirhenshtein <alk@netxms.org> - 6.1.3-1
+  * Improved AI assistant access to DCI thresholds
+  * Improved AI assistant access to alarms
+  * AI assistant can initiate polls
+  * Improved Qtech driver
+  * Improved Cisco SB driver
+  * Added driver for Lenovo switches
+  * Added driver for BDCOM switches
+  * Added driver for Bulat switches
+  * Added driver for Origo switches
+  * Server no longer attempts to retry agent package deployment after non-transient errors
+  * Configurable page size in log viewer
+  * Fixed small issues in SNMP printer template
+  * Fixed issues:
+  *   #3202 (Problems with audit log filtering condition)
+  *   #3205 (Cropped login form on first run of nxmc on RPi)
+  *   #3230 (New and changed device drivers)
+  *   #3232 (Disabled push DCI continues accepting newly pushed data)
+  *   #3233 (Commands on Overview Windows are shown like gray rectangles)
+  *   #3234 (.apkg package fails to install under dash due to bash-only [[ ]])
+  *   #3235 (Display switch IP address in IP/MAC search results)
+  *   #3236 (Server name is shown in black in GUI header)
+  *   #3237 (Agent should verify installer signature when upgrading itself on Windows)
+  *   #3238 (Server crash on shutdown due to use-after-free in the notification channel worker thread)
+  *   #3239 (Filter values are not set when popping out log viewer)
+  *   #3240 (Windows agent breaks Store app launches by loading UsrClass.dat of logged-on users)
+  *   #3245 (AI assistant: add composite 'operational-status' triage tool)
+  *   #3246 (Threshold line not shown on chart if threshold value is bigger then maxint)
+  *   #3247 (Thresholds values should be inverted on chart if "invert values" is selected for a data source)
+  *   #3248 (Filter in Status Map dashboard element is slow)
+  *   #3250 (Agent tunnel bind fails with error 923 on OpenSSL 3.5.x)
+  *   #3253 (Empty f-string in NXSL script result in data stack underflow)
+  *   #3255 (Node without IP address and connected by agent tunnel only never marked as unreachable or down)
+  *   #3260 (C:\ in file manager incorrectly expanded to C:\Windows\system32)
+  *   #3267 (Script contents are deleted when dragging "Execute script" view from one docking area to another)
+  *   #3270 ("Do not show this message again" in "This DCI was added by instance discovery" dialog is not persisted across console restarts)
+  *   #3272 (No option to configure automatic column resize in DCI summary tables)
+  *   #3275 (Package deployment jobs should be cancelled if corresponding package is deleted from server)
+  *   #3276 (Send updates to Package deployment jobs view)
+  *   #3279 (Cannot upload file to server from nxmc if web server is running on Windows)
+
 * Tue May 12 2026 Alex Kirhenshtein <alk@netxms.org> - 6.1.2-1
   * Script entry point can be specified in "execute NXSL script" actions
   * Improved performance of data migration when upgrading from versions before 6.0
