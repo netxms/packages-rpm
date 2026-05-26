@@ -48,7 +48,7 @@ def update_rpm_spec_changelog(spec_file: str, version: str, changes: List[str]):
     if re.search(changelog_pattern, content):
         updated_content = re.sub(
             changelog_pattern,
-            r'\1' + new_entry,
+            lambda m: m.group(1) + new_entry,
             content,
             count=1
         )
