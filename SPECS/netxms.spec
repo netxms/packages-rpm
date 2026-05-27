@@ -205,8 +205,6 @@ chrpath --delete %{buildroot}%{_libdir}/netxms/pdsdrv/*.pdsd
 %exclude %{_libdir}/*.la
 %exclude %{_libdir}/*.so
 %exclude %{_libdir}/*.so
-%exclude %{_libdir}/netxms/java/hamcrest-core-*.jar
-%exclude %{_libdir}/netxms/java/junit-*.jar
 %exclude %{_libdir}/netxms/ncdrv/mqtt.ncd
 
 %doc
@@ -658,7 +656,6 @@ Requires: netxms-java-base = %{version}-%{release}
 %files reporting
 %{_bindir}/nxreportd
 %{_libdir}/netxms/java/activation-*.jar
-%{_libdir}/netxms/java/checker-qual-*.jar
 %{_libdir}/netxms/java/commons-beanutils-*.jar
 %{_libdir}/netxms/java/commons-collections-*.jar
 %{_libdir}/netxms/java/commons-daemon-*.jar
