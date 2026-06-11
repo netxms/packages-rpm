@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       6.1.3
+Version:       6.1.4
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -687,6 +687,17 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Thu Jun 11 2026 Alex Kirhenshtein <alk@netxms.org> - 6.1.4-1
+  * Improved data migration performance when upgrading from 5.x and earlier versions to 6.1
+  * Fixed bug in stacked chart drawing (manifested as unresponsive client)
+  * Fixed issues:
+  *   #3284 (nxdbmgr: migration fails on empty items.transformed\_datatype with PostgreSQL)
+  *   #3290 (Text in Status Explanation unreadable due to it's color)
+  *   #3291 (Fixed time frame setting not preserved when chart view is pinned or moved between areas)
+  *   #3298 (DCI image map element tooltip shows only DCI name, not current value)
+  *   #3306 (Agent list instance discovery not working via gateway node on sensor)
+  *   #3309 (Add /health endpoint in nxmc/web)
+
 * Tue May 26 2026 Alex Kirhenshtein <alk@netxms.org> - 6.1.3-1
   * Improved AI assistant access to DCI thresholds
   * Improved AI assistant access to alarms
