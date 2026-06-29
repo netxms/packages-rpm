@@ -281,6 +281,7 @@ Most of the subagents which does not require additional dependences are included
 %{_libdir}/netxms/sms.nsm
 %{_libdir}/netxms/ssh.nsm
 %{_libdir}/netxms/ups.nsm
+%{_datadir}/netxms/extensions/
 %{_unitdir}/netxms-agent.service
 
 
