@@ -157,7 +157,6 @@ chrpath --delete %{buildroot}%{_bindir}/nxaevent
 chrpath --delete %{buildroot}%{_bindir}/nxagentd
 chrpath --delete %{buildroot}%{_bindir}/nxalarm
 chrpath --delete %{buildroot}%{_bindir}/nxap
-chrpath --delete %{buildroot}%{_bindir}/nxappget
 chrpath --delete %{buildroot}%{_bindir}/nxapush
 chrpath --delete %{buildroot}%{_bindir}/nxcsum
 chrpath --delete %{buildroot}%{_bindir}/nxdbmgr
@@ -260,12 +259,10 @@ Most of the subagents which does not require additional dependences are included
 %{_bindir}/nxaevent
 %{_bindir}/nxagentd
 %{_bindir}/nxagentd-generate-tunnel-config
-%{_bindir}/nxappget
 %{_bindir}/nxapush
 %{_bindir}/nxhwid
 %{_bindir}/nxlptest
 %{_bindir}/nxtftp
-%{_libdir}/libappagent.so.*
 %{_libdir}/libnxagent.so.*
 %{_libdir}/libnxlp.so.*
 %{_libdir}/libnxsde.so.*
