@@ -2,7 +2,7 @@
 Summary:       NetXMS umbrella package
 Name:          netxms
 Version:       6.2.0
-Release:       1%{?dist}
+Release:       2%{?dist}
 License:       GPL
 URL:           https://netxms.org
 Group:         Admin
@@ -145,6 +145,16 @@ install -p -m644 %{SOURCE202} %{buildroot}%{_sysconfdir}/xdg/autostart/nxsagent.
 pushd %{buildroot}%{_libdir}/netxms
    ln -s mysql.nsm mariadb.nsm
 popd
+
+# TEMPORARY: ship stock image-library files into the data directory.
+# 6.2.0 moved the image library into the database and dropped the "make install"
+# rule that placed these files in /var/lib/netxms/images/. But database upgrade
+# step 62.13 still migrates on-disk images into the images table, and a
+# 6.1.x -> 6.2.0 RPM upgrade removes the package-owned copies before nxdbmgr
+# runs, so the upgrade fails with "Cannot read image file". Keep shipping them
+# until the migration is made self-sufficient. See netxms/netxms#3359.
+install -m755 -d %{buildroot}%{_sharedstatedir}/netxms/images
+install -m644 images/????????-????-????-????-???????????? %{buildroot}%{_sharedstatedir}/netxms/images/
 
 #rm -f %{buildroot}%{_libdir}/*.la
 
