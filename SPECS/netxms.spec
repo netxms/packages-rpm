@@ -275,7 +275,6 @@ Most of the subagents which does not require additional dependences are included
 %{_libdir}/netxms/linux.nsm
 %{_libdir}/netxms/lmsensors.nsm
 %{_libdir}/netxms/logwatch.nsm
-%{_libdir}/netxms/mssql.nsm
 %{_libdir}/netxms/netsvc.nsm
 %{_libdir}/netxms/ping.nsm
 %{_libdir}/netxms/sms.nsm
@@ -294,6 +293,18 @@ This package allows you to collect health metrics and statistics from Asterisk i
 
 %files agent-asterisk
 %{_libdir}/netxms/asterisk.nsm
+
+
+### netxms-agent-mssql
+%package agent-mssql
+Summary: Agent extension (subagent) for monitoring Microsoft SQL Server
+Requires: netxms-dbdrv-odbc = %{version}-%{release}
+
+%description agent-mssql
+This package extends agent to collect health metrics and statistics from one or more Microsoft SQL Server instances.
+
+%files agent-mssql
+%{_libdir}/netxms/mssql.nsm
 
 
 ### netxms-java-base
