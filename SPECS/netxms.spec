@@ -204,7 +204,6 @@ chrpath --delete %{buildroot}%{_libdir}/netxms/pdsdrv/*.pdsd
 %exclude %{_includedir}/netxms-build-tag.h
 %exclude %{_libdir}/*.la
 %exclude %{_libdir}/*.so
-%exclude %{_libdir}/*.so
 %exclude %{_libdir}/netxms/ncdrv/mqtt.ncd
 
 %doc
@@ -276,6 +275,7 @@ Most of the subagents which does not require additional dependences are included
 %{_libdir}/netxms/linux.nsm
 %{_libdir}/netxms/lmsensors.nsm
 %{_libdir}/netxms/logwatch.nsm
+%{_libdir}/netxms/mssql.nsm
 %{_libdir}/netxms/netsvc.nsm
 %{_libdir}/netxms/ping.nsm
 %{_libdir}/netxms/sms.nsm
@@ -561,13 +561,14 @@ fi
 %{_libdir}/netxms/ncdrv/text2reach.ncd
 %{_libdir}/netxms/ncdrv/textfile.ncd
 %{_libdir}/netxms/ncdrv/twilio.ncd
+%{_libdir}/netxms/ncdrv/webhook.ncd
 %{_libdir}/netxms/ncdrv/websms.ncd
 %if 0%{?rhel} != 10
 %{_libdir}/netxms/ncdrv/xmpp.ncd
 %endif
-%{_libdir}/netxms/ndd/*
-%{_libdir}/netxms/pdsdrv/*
-%{_sharedstatedir}/netxms/*
+%{_libdir}/netxms/ndd/
+%{_libdir}/netxms/pdsdrv/
+%{_sharedstatedir}/netxms/
 %{_unitdir}/netxms-server.service
 
 
