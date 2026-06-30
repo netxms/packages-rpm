@@ -96,7 +96,7 @@ fi
    --with-libjq \
    --with-mariadb \
    --with-mariadb-compat-headers \
-%if 0%{?rhel} >= 10
+%if 0%{?rhel} >= 10 || 0%{?fedora}
    --with-otel \
 %endif
    --with-zeromq \
