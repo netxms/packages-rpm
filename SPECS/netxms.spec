@@ -48,7 +48,7 @@ BuildRequires: openssl-devel
 BuildRequires: openssl-devel-engine
 %endif
 BuildRequires: (pcre2-devel or pcre-devel)
-%if 0%{?rhel} >= 10
+%if 0%{?rhel} >= 10 || 0%{?fedora}
 BuildRequires: protobuf-devel
 %endif
 BuildRequires: readline-devel
