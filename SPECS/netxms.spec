@@ -1,8 +1,8 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       6.2.1
-Release:       2%{?dist}
+Version:       6.2.2
+Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
 Group:         Admin
@@ -280,12 +280,14 @@ Most of the subagents which does not require additional dependences are included
 %{_libdir}/netxms/dbquery.nsm
 %{_libdir}/netxms/devemu.nsm
 %{_libdir}/netxms/ds18x20.nsm
+%{_libdir}/netxms/entsoe.nsm
 %{_libdir}/netxms/filemgr.nsm
 %{_libdir}/netxms/gps.nsm
 %{_libdir}/netxms/linux.nsm
 %{_libdir}/netxms/lmsensors.nsm
 %{_libdir}/netxms/logwatch.nsm
 %{_libdir}/netxms/netsvc.nsm
+%{_libdir}/netxms/openmeteo.nsm
 %{_libdir}/netxms/ping.nsm
 %{_libdir}/netxms/sms.nsm
 %{_libdir}/netxms/ssh.nsm
@@ -677,6 +679,7 @@ Requires: netxms-java-base = %{version}-%{release}
 %files reporting
 %{_bindir}/nxreportd
 %{_libdir}/netxms/java/activation-*.jar
+%{_libdir}/netxms/java/checker-qual-*.jar
 %{_libdir}/netxms/java/commons-beanutils-*.jar
 %{_libdir}/netxms/java/commons-collections-*.jar
 %{_libdir}/netxms/java/commons-daemon-*.jar
@@ -708,6 +711,74 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Mon Jul 27 2026 Alex Kirhenshtein <alk@netxms.org> - 6.2.2-1
+  * Added subagent for reading electricity grid data (including carbon intensity) from ENTSO-E Transparency Platform
+  * Added subagent for reading weather and solar forecast data from open-meteo.com
+  * Device configuration backup support for HPE ProCurve, HPE Comware, and Aruba switches
+  * New "scripted gauge" dashboard element
+  * Agent checks available disk space before starting upgrade
+  * Number of attempts to deploy a software package is now limited
+  * Agent connect timeout on the server side is now configurable
+  * Number of crash dumps kept on disk can be limited
+  * File manager improvements: folders expand on double-click, view state preserved on manual refresh
+  * Fixed remotely triggerable stack buffer overflow, heap over-read, and memory leak in NTCB module packet parser
+  * Fixed authenticated memory corruption in client session (CMD\_MODIFY\_NODE\_DCI)
+  * Fixed agent communication freeze caused by socket descriptor reuse race in communication channel close
+  * Fixed thread pool starvation that could make agent unresponsive when all worker threads are blocked
+  * Fixed deadlock in logwatch subagent
+  * Fixed creation of duplicate ::/64 subnets on every configuration poll
+  * Updated bundled libcurl in Windows installers to 8.21.0 (fixes CVE-2026-8927)
+  * Fixed issues:
+  *   #3277 (Limit number of attempts to deploy a software package)
+  *   #3388 (NXSL DateTime: fields not normalized after change; out-of-range month breaks formatting)
+  *   #3390 (Web UI: "Restart agent" button in agent restart notification throws "display must not be null")
+  *   #3392 (logwatch subagent deadlock)
+  *   #3393 (Unable to query Table DCI columns when using source node override)
+  *   #3394 (Make interface class SetPeer method available through API)
+  *   #3396 (Expand folders in File Manager on double-click)
+  *   #3397 (ENTSO-E Transparency Platform subagent for grid carbon-intensity data)
+  *   #3398 (Update bundled libcurl.dll in Windows installers to 8.21.0 (CVE-2026-8927))
+  *   #3400 (Map tile cache not invalidated when tile server URL changes (stale/missing tiles))
+  *   #3401 (File manager view should preserve state on manual refresh)
+  *   #3402 (Package deployment manager loads all jobs into memory at startup regardless of status)
+  *   #3403 (nxmc: external browser never opens on macOS)
+  *   #3405 (nxmc: unhelpful error when client and server protocol versions differ)
+  *   #3407 (ai\_task\_execution\_log is never cleaned by housekeeper (unbounded growth))
+  *   #3408 (open-meteo.com subagent for weather/solar forecast data)
+  *   #3410 (Default zone (object ID 4) is never persisted, loadCommonProperties() fails on every startup)
+  *   #3411 (SQL error when creating new node on Oracle DB)
+  *   #3414 (Agent connections freeze until server restart due to socket descriptor reuse race in comm channel close)
+  *   #3419 (Summary table selector should show menu path if title is empty)
+  *   #3420 (Per-tag debug level specified from command line should override level specified in config file)
+  *   #3421 (Add device configuration backup support to HPE/Aruba drivers (ProCurve, Comware, ArubaOS))
+  *   #3424 (nxsl: Data stack underflow)
+  *   #3426 (Create limit for crash dumps)
+  *   #3427 ("Cannot start Java application" when exiting Management Client on Windows)
+  *   #3430 (Missing "Go to object" from object query table as a Dashboard element)
+  *   #3431 (Make agent connect timeout configurable)
+  *   #3433 (Check free space on file system before agent update)
+  *   #3436 (Thread pool does not grow when all workers are blocked; agent becomes unresponsive on COMM pool starvation)
+  *   #3438 (False "system restart detected" in status poll forces interface resync, bypassing disabled configuration poll)
+  *   #3440 (FindRemoteAccessPoint() called with chassis ID subtype instead of chassis ID)
+  *   #3441 (Node can be reported as its own root cause when interface peer resolves to the node itself)
+  *   #3443 (Config import silently turns EPP rule into catch-all when referenced event template is missing)
+  *   #3445 (SPARC: object index forEach stops after first element (enumeratorWrapper discards callback result))
+  *   #3446 (Client session: indeterminate mapId/mapIndex/mapCount in CMD\_MODIFY\_NODE\_DCI (authenticated memory corruption))
+  *   #3449 (Stop and restart of external subagent process does not stop loaded subagents correctly)
+  *   #3450 (Race condition in external subagent request ID generation)
+  *   #3451 (NTCB module: remotely triggerable stack buffer overflow, heap over-read and unbounded leak in packet parser)
+  *   #3452 (libethernetip: CIP byte order, unaligned reads, and truncated Identity serial number)
+  *   #3453 ("Hide in view mode" option missing for table DCIs)
+  *   #3455 (Scripted gauge dashboard element)
+  *   #3456 (FileDeliveryPolicy with empty content logs "XML parser error ... no element found" on every config poll)
+  *   #3457 (getPerfTabDCIList: getPerfTabSettings() != nullptr guard is always true)
+  *   #3460 (MikroTik driver advertises HostMib.Memory metrics that getMetric cannot serve)
+  *   #3461 (Network map layout changes are not saved until another action is performed)
+  *   #3462 (Incorrect layout option selection when opening a Network Map)
+  *   #3463 (Duplicate ::/64 subnets created on every configuration poll)
+  *   #3465 (nxmc: -server= cannot carry an IPv6 address with a port)
+  *   #3468 ("Use server time zone" option is not applied on management client startup)
+
 * Tue Jul 07 2026 Alex Kirhenshtein <alk@netxms.org> - 6.2.1-1
   * Added NXSL method Node::setVNCPassword() to set VNC password
   * Support for environment files in agent configuration; potentially sensitive environment variables are masked in configuration dump
