@@ -287,11 +287,11 @@ Most of the subagents which does not require additional dependences are included
 %{_libdir}/netxms/lmsensors.nsm
 %{_libdir}/netxms/logwatch.nsm
 %{_libdir}/netxms/netsvc.nsm
-%{_libdir}/netxms/openmeteo.nsm
 %{_libdir}/netxms/ping.nsm
 %{_libdir}/netxms/sms.nsm
 %{_libdir}/netxms/ssh.nsm
 %{_libdir}/netxms/ups.nsm
+%{_libdir}/netxms/weather.nsm
 %{_datadir}/netxms/extensions/
 %{_unitdir}/netxms-agent.service
 
