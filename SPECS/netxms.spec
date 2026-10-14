@@ -197,7 +197,7 @@ chrpath --delete %{buildroot}%{_bindir}/nxwsget
 
 # remove rpath from libs
 chrpath --delete %{buildroot}%{_libdir}/lib*.so*
-chrpath --delete %{buildroot}%{_libdir}/netxms/*.nxm %{buildroot}%{_libdir}/netxms/*.nsm %{buildroot}%{_libdir}/netxms/*.hdlink
+chrpath --delete %{buildroot}%{_libdir}/netxms/*.nxm %{buildroot}%{_libdir}/netxms/*.nsm
 chrpath --delete %{buildroot}%{_libdir}/netxms/dbdrv/*.ddr
 chrpath --delete %{buildroot}%{_libdir}/netxms/ncdrv/*.ncd
 chrpath --delete %{buildroot}%{_libdir}/netxms/ndd/*.ndd
@@ -236,6 +236,7 @@ shared between other packages.
 %{_libdir}/libnetxms.so.*
 %{_libdir}/libnxclient.so.*
 %{_libdir}/libnxdb.so.*
+%{_libdir}/libnxnetconf.so.*
 %{_libdir}/libnxsnmp.so.*
 
 
@@ -286,6 +287,7 @@ Most of the subagents which does not require additional dependences are included
 %{_libdir}/netxms/linux.nsm
 %{_libdir}/netxms/lmsensors.nsm
 %{_libdir}/netxms/logwatch.nsm
+%{_libdir}/netxms/netconf.nsm
 %{_libdir}/netxms/netsvc.nsm
 %{_libdir}/netxms/ping.nsm
 %{_libdir}/netxms/sms.nsm
@@ -470,19 +472,17 @@ KVM, Hypervisor.framework, QEMU, Xen, Virtuozzo, VMWare ESX, LXC, BHyve and more
 ### netxms-client
 %package client
 Summary: Integration and diagnostics tools for the NetXMSX server.
-Requires: netxms-java-base = %{version}-%{release}
 
 %description client
 This package provides various integration tools (e.g. nxshell).
 
 %files client
+%{_bindir}/nxai
 %{_bindir}/nxalarm
 %{_bindir}/nxevent
 %{_bindir}/nxnotify
 %{_bindir}/nxpush
 %{_bindir}/nxshell
-%{_libdir}/netxms/java/jython-standalone-*.jar
-%{_libdir}/netxms/java/nxshell-*.jar
 
 
 ### netxms-server
@@ -560,7 +560,6 @@ fi
 %{_libdir}/libnxdbmgr.so.*
 %{_libdir}/libnxsl.so.*
 %{_libdir}/libnxsrv.so.*
-%{_libdir}/netxms/*.hdlink
 %{_libdir}/netxms/*.nxm
 # % {_libdir}/netxms/ncdrv/mqtt.ncd
 %{_libdir}/netxms/ncdrv/anysms.ncd
