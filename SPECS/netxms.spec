@@ -1,7 +1,7 @@
 # vim: ts=3 sw=3 expandtab
 Summary:       NetXMS umbrella package
 Name:          netxms
-Version:       7.0.3
+Version:       7.0.4
 Release:       1%{?dist}
 License:       GPL
 URL:           https://netxms.org
@@ -710,6 +710,27 @@ Requires: netxms-java-base = %{version}-%{release}
 %{_unitdir}/netxms-reporting.service
 
 %changelog
+* Wed Nov 18 2026 Alex Kirhenshtein <alk@netxms.org> - 7.0.4-1
+  * Server UDP receivers (syslog, SNMP trap receiver, built-in SNMP agent) bind every address from ListenAddress list instead of falling back to loopback
+  * SNMPv3: agents that silently drop requests outside of time window are no longer left unreachable after server restart or device reboot
+  * Fixed loss of SNMP responses larger than 2048 bytes on UDP transport
+  * Fixed certificate login validation
+  * NXCP security fixes: validation of encrypted and compressed message sizes
+  * DCI data export includes inventory of metric owners (objects.csv with object class, hardware type, vendor, model, SNMP object ID, etc.)
+  * make install removes obsolete network device drivers left over from older releases
+  * Fixed false OSPF neighbor change detection
+  * Fixed issues:
+  *   #3889 (netxmsd 7.0.2 SIGSEGV in NXSL method dispatch from script DCI shortly after startup)
+  *   #3921 (Scheduled maintenance exit is ignored for containers, children stay in maintenance)
+  *   #3923 (UltraVNC screen blanking in Remote Control)
+  *   #3926 (EPP rule editor: "Perform AI-based incident analysis" option on Incident page does not follow "Create incident" state)
+  *   #3927 (TimescaleDB aggregation backfill fails on valid String DCI values: installed numeric filter contains unescaped dot)
+  *   #3933 (Server crash: unbounded recursion in Component::buildTree on malformed ENTITY-MIB data)
+  *   #3938 (SNMPv3 agents that silently drop out-of-time-window requests stay unreachable after server restart or device reboot)
+  *   #3943 (Certificate login validation fixes)
+  *   #3944 (Server: SNMP trap, syslog and SNMP agent listeners ignore ListenAddress list, bind to loopback)
+  *   #3945 (nxmc floor plan editor: cancelled Add element keeps the element; object switch drops unsaved edits)
+
 * Wed Nov 11 2026 Alex Kirhenshtein <alk@netxms.org> - 7.0.3-1
   * New server configuration variable Agent.TLS.ReverseTunnels (disabled/allowed/preferred) for controlling use of TLS tunels to agents
   * Modbus: unit ID from DCI metric and from Modbus sensor is honored; DCIs on sensors are collected with sensor's unit ID
