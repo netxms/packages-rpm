@@ -83,6 +83,7 @@ fi
 
 %configure \
    --enable-release-build \
+   --disable-mib-compilation \
    --with-server \
    --with-agent \
    --with-client \
@@ -505,6 +506,9 @@ Requires: netxms-agent = %{version}-%{release}
 %post server
 %systemd_post netxms-server.service
 
+# compile MIBs (user uploaded MIBs first so they override bundled modules with the same name)
+%{_bindir}/nxmibc -a -z -d %{_sharedstatedir}/netxms/mibs -d %{_datadir}/netxms/mibs -o %{_sharedstatedir}/netxms/netxms.cmib > /dev/null 2>&1 || :
+
 if [ $1 -eq 1 ]; then
    cat <<__END
 NetXMS server is installed but currently stopped.
@@ -592,6 +596,7 @@ fi
 %{_libdir}/netxms/ndd/
 %{_libdir}/netxms/pdsdrv/
 %{_sharedstatedir}/netxms/
+%ghost %{_sharedstatedir}/netxms/netxms.cmib
 %{_unitdir}/netxms-server.service
 
 
